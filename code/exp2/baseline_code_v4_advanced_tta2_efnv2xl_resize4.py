@@ -514,9 +514,9 @@ assert len(pred_df) == len(sample_submission_df)
 
 output_path = "./output"
 os.makedirs(output_path, exist_ok=True)
-pred_df.to_csv(f"{output_path}/pred_advanced_tta2_efnv2xl_resize.csv", index=False)
+pred_df.to_csv(f"{output_path}/pred_advanced_tta2_efnv2xl_resize4.csv", index=False)
 
-log.info(f"\n✅ Prediction completed and saved to {output_path}/pred_advanced_tta2_efnv2xl_resize.csv")
+log.info(f"\n✅ Prediction completed and saved to {output_path}/pred_advanced_tta2_efnv2xl_resize4.csv")
 log.info(f"Best validation F1 score: {best_val_f1:.4f}")
 
 # 메모리 정리

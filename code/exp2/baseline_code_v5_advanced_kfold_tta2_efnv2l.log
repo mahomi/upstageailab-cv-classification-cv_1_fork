@@ -1,34 +1,427 @@
-[25-07-04 17:48:42] [INFO] 완전한 재현성 설정이 활성화되었습니다.
-[25-07-04 17:48:42] [INFO] 🌱 Random seed set to 42
-[25-07-04 17:48:42] [INFO] 💻 Using device: cuda
-[25-07-04 17:48:42] [INFO] 📂 Total training samples: 1570
-[25-07-04 17:48:42] [INFO] 📊 Class distribution: {0: 100, 1: 46, 2: 100, 3: 100, 4: 100, 5: 100, 6: 100, 7: 100, 8: 100, 9: 100, 10: 100, 11: 100, 12: 100, 13: 74, 14: 50, 15: 100, 16: 100}
-[25-07-04 17:48:42] [INFO] 
+[25-07-05 05:36:09] [INFO] 완전한 재현성 설정이 활성화되었습니다.
+[25-07-05 05:36:09] [INFO] 🌱 Random seed set to 42
+[25-07-05 05:36:09] [INFO] 💻 Using device: cuda
+[25-07-05 05:36:09] [INFO] 📂 Total training samples: 1570
+[25-07-05 05:36:09] [INFO] 📊 Class distribution: {0: 100, 1: 46, 2: 100, 3: 100, 4: 100, 5: 100, 6: 100, 7: 100, 8: 100, 9: 100, 10: 100, 11: 100, 12: 100, 13: 74, 14: 50, 15: 100, 16: 100}
+[25-07-05 05:36:09] [INFO] 
 🔄 Starting 5-Fold Cross Validation Training...
-[25-07-04 17:48:42] [INFO] 
+[25-07-05 05:36:09] [INFO] 
 ============================================================
-[25-07-04 17:48:42] [INFO] 🔥 FOLD 1/5
-[25-07-04 17:48:42] [INFO] ============================================================
-[25-07-04 17:48:42] [INFO] 📚 Train samples: 1256
-[25-07-04 17:48:42] [INFO] 📝 Validation samples: 314
-[25-07-04 17:49:30] [INFO] 🏗️ Model: tf_efficientnetv2_l
-[25-07-04 17:49:30] [INFO] 🔢 Number of parameters: 117,256,049
-[25-07-04 17:49:30] [INFO] 🚀 Starting Fold 1 training...
-[25-07-04 17:49:30] [INFO] 
+[25-07-05 05:36:09] [INFO] 🔥 FOLD 1/5
+[25-07-05 05:36:09] [INFO] ============================================================
+[25-07-05 05:36:09] [INFO] 📚 Train samples: 1256
+[25-07-05 05:36:09] [INFO] 📝 Validation samples: 314
+[25-07-05 05:36:26] [INFO] 🏗️ Model: tf_efficientnetv2_l
+[25-07-05 05:36:26] [INFO] 🔢 Number of parameters: 117,256,049
+[25-07-05 05:36:26] [INFO] 🚀 Starting Fold 1 training...
+[25-07-05 05:36:26] [INFO] 
 --- Fold 1 | Epoch 1/20 ---
-[25-07-04 17:56:12] [INFO] 💾 Fold 1 Best model updated! F1: 0.8265
-[25-07-04 17:56:12] [INFO] train_loss: 2.6138 | train_acc: 0.5255 | train_f1: 0.4982 | val_loss: 1.2454 | val_acc: 0.8503 | val_f1: 0.8265 | lr: 0.000099
-[25-07-04 17:56:12] [INFO] 
+[25-07-05 05:41:12] [INFO] 💾 Fold 1 Best model updated! F1: 0.8648
+[25-07-05 05:41:12] [INFO] train_loss: 2.2536 | train_acc: 0.5955 | train_f1: 0.5667 | val_loss: 1.1364 | val_acc: 0.8790 | val_f1: 0.8648 | lr: 0.000099
+[25-07-05 05:41:12] [INFO] 
 --- Fold 1 | Epoch 2/20 ---
-[25-07-04 18:02:51] [INFO] 💾 Fold 1 Best model updated! F1: 0.8561
-[25-07-04 18:02:51] [INFO] train_loss: 1.2100 | train_acc: 0.7914 | train_f1: 0.7756 | val_loss: 0.9970 | val_acc: 0.8822 | val_f1: 0.8561 | lr: 0.000098
-[25-07-04 18:02:51] [INFO] 
+[25-07-05 05:44:55] [INFO] 💾 Fold 1 Best model updated! F1: 0.8701
+[25-07-05 05:44:55] [INFO] train_loss: 1.0323 | train_acc: 0.8686 | train_f1: 0.8512 | val_loss: 0.9448 | val_acc: 0.8854 | val_f1: 0.8701 | lr: 0.000098
+[25-07-05 05:44:55] [INFO] 
 --- Fold 1 | Epoch 3/20 ---
-[25-07-04 18:08:53] [INFO] 💾 Fold 1 Best model updated! F1: 0.8946
-[25-07-04 18:08:53] [INFO] train_loss: 1.0429 | train_acc: 0.8599 | train_f1: 0.8486 | val_loss: 0.9287 | val_acc: 0.9045 | val_f1: 0.8946 | lr: 0.000095
-[25-07-04 18:08:53] [INFO] 
+[25-07-05 05:49:18] [INFO] 💾 Fold 1 Best model updated! F1: 0.8821
+[25-07-05 05:49:18] [INFO] train_loss: 0.8918 | train_acc: 0.9076 | train_f1: 0.9006 | val_loss: 0.9016 | val_acc: 0.9013 | val_f1: 0.8821 | lr: 0.000095
+[25-07-05 05:49:18] [INFO] 
 --- Fold 1 | Epoch 4/20 ---
-[25-07-04 18:11:43] [INFO] 💾 Fold 1 Best model updated! F1: 0.9175
-[25-07-04 18:11:43] [INFO] train_loss: 0.9183 | train_acc: 0.9076 | train_f1: 0.8935 | val_loss: 0.8606 | val_acc: 0.9236 | val_f1: 0.9175 | lr: 0.000091
-[25-07-04 18:11:43] [INFO] 
+[25-07-05 05:53:30] [INFO] 💾 Fold 1 Best model updated! F1: 0.9256
+[25-07-05 05:53:30] [INFO] train_loss: 0.8282 | train_acc: 0.9371 | train_f1: 0.9346 | val_loss: 0.8198 | val_acc: 0.9268 | val_f1: 0.9256 | lr: 0.000091
+[25-07-05 05:53:30] [INFO] 
 --- Fold 1 | Epoch 5/20 ---
+[25-07-05 05:57:11] [INFO] train_loss: 0.7861 | train_acc: 0.9594 | train_f1: 0.9573 | val_loss: 0.8384 | val_acc: 0.9236 | val_f1: 0.9213 | lr: 0.000086
+[25-07-05 05:57:11] [INFO] 
+--- Fold 1 | Epoch 6/20 ---
+[25-07-05 06:01:02] [INFO] 💾 Fold 1 Best model updated! F1: 0.9412
+[25-07-05 06:01:02] [INFO] train_loss: 0.7672 | train_acc: 0.9618 | train_f1: 0.9594 | val_loss: 0.7989 | val_acc: 0.9395 | val_f1: 0.9412 | lr: 0.000080
+[25-07-05 06:01:02] [INFO] 
+--- Fold 1 | Epoch 7/20 ---
+[25-07-05 06:04:59] [INFO] train_loss: 0.7256 | train_acc: 0.9769 | train_f1: 0.9763 | val_loss: 0.8222 | val_acc: 0.9268 | val_f1: 0.9241 | lr: 0.000073
+[25-07-05 06:04:59] [INFO] 
+--- Fold 1 | Epoch 8/20 ---
+[25-07-05 06:08:44] [INFO] train_loss: 0.7183 | train_acc: 0.9809 | train_f1: 0.9798 | val_loss: 0.7918 | val_acc: 0.9363 | val_f1: 0.9321 | lr: 0.000066
+[25-07-05 06:08:44] [INFO] 
+--- Fold 1 | Epoch 9/20 ---
+[25-07-05 06:12:19] [INFO] train_loss: 0.7004 | train_acc: 0.9849 | train_f1: 0.9848 | val_loss: 0.7885 | val_acc: 0.9363 | val_f1: 0.9356 | lr: 0.000058
+[25-07-05 06:12:19] [INFO] 
+--- Fold 1 | Epoch 10/20 ---
+[25-07-05 06:15:37] [INFO] train_loss: 0.6910 | train_acc: 0.9817 | train_f1: 0.9826 | val_loss: 0.7839 | val_acc: 0.9427 | val_f1: 0.9406 | lr: 0.000051
+[25-07-05 06:15:37] [INFO] 
+--- Fold 1 | Epoch 11/20 ---
+[25-07-05 06:19:10] [INFO] 💾 Fold 1 Best model updated! F1: 0.9439
+[25-07-05 06:19:10] [INFO] train_loss: 0.6785 | train_acc: 0.9912 | train_f1: 0.9912 | val_loss: 0.7769 | val_acc: 0.9427 | val_f1: 0.9439 | lr: 0.000043
+[25-07-05 06:19:10] [INFO] 
+--- Fold 1 | Epoch 12/20 ---
+[25-07-05 06:22:04] [INFO] 💾 Fold 1 Best model updated! F1: 0.9453
+[25-07-05 06:22:04] [INFO] train_loss: 0.6724 | train_acc: 0.9889 | train_f1: 0.9886 | val_loss: 0.7906 | val_acc: 0.9427 | val_f1: 0.9453 | lr: 0.000035
+[25-07-05 06:22:04] [INFO] 
+--- Fold 1 | Epoch 13/20 ---
+[25-07-05 06:24:16] [INFO] 💾 Fold 1 Best model updated! F1: 0.9515
+[25-07-05 06:24:16] [INFO] train_loss: 0.6646 | train_acc: 0.9928 | train_f1: 0.9930 | val_loss: 0.7610 | val_acc: 0.9522 | val_f1: 0.9515 | lr: 0.000028
+[25-07-05 06:24:16] [INFO] 
+--- Fold 1 | Epoch 14/20 ---
+[25-07-05 06:26:32] [INFO] train_loss: 0.6586 | train_acc: 0.9952 | train_f1: 0.9947 | val_loss: 0.7662 | val_acc: 0.9395 | val_f1: 0.9394 | lr: 0.000021
+[25-07-05 06:26:32] [INFO] 
+--- Fold 1 | Epoch 15/20 ---
+[25-07-05 06:29:33] [INFO] train_loss: 0.6539 | train_acc: 0.9960 | train_f1: 0.9956 | val_loss: 0.7608 | val_acc: 0.9427 | val_f1: 0.9430 | lr: 0.000015
+[25-07-05 06:29:33] [INFO] 
+--- Fold 1 | Epoch 16/20 ---
+[25-07-05 06:34:40] [INFO] train_loss: 0.6554 | train_acc: 0.9976 | train_f1: 0.9978 | val_loss: 0.7601 | val_acc: 0.9459 | val_f1: 0.9462 | lr: 0.000010
+[25-07-05 06:34:40] [INFO] 
+--- Fold 1 | Epoch 17/20 ---
+[25-07-05 06:38:27] [INFO] train_loss: 0.6531 | train_acc: 0.9944 | train_f1: 0.9945 | val_loss: 0.7629 | val_acc: 0.9427 | val_f1: 0.9420 | lr: 0.000006
+[25-07-05 06:38:27] [INFO] 
+--- Fold 1 | Epoch 18/20 ---
+[25-07-05 06:43:38] [INFO] train_loss: 0.6498 | train_acc: 0.9984 | train_f1: 0.9982 | val_loss: 0.7614 | val_acc: 0.9490 | val_f1: 0.9507 | lr: 0.000003
+[25-07-05 06:43:38] [INFO] 
+--- Fold 1 | Epoch 19/20 ---
+[25-07-05 06:46:22] [INFO] 💾 Fold 1 Best model updated! F1: 0.9528
+[25-07-05 06:46:22] [INFO] train_loss: 0.6485 | train_acc: 0.9960 | train_f1: 0.9959 | val_loss: 0.7686 | val_acc: 0.9522 | val_f1: 0.9528 | lr: 0.000002
+[25-07-05 06:46:22] [INFO] 
+--- Fold 1 | Epoch 20/20 ---
+[25-07-05 06:48:02] [INFO] train_loss: 0.6459 | train_acc: 0.9984 | train_f1: 0.9985 | val_loss: 0.7602 | val_acc: 0.9522 | val_f1: 0.9515 | lr: 0.000001
+[25-07-05 06:48:02] [INFO] 
+🎯 Fold 1 completed! Best F1: 0.9528
+[25-07-05 06:48:02] [INFO] 
+============================================================
+[25-07-05 06:48:02] [INFO] 🔥 FOLD 2/5
+[25-07-05 06:48:02] [INFO] ============================================================
+[25-07-05 06:48:02] [INFO] 📚 Train samples: 1256
+[25-07-05 06:48:02] [INFO] 📝 Validation samples: 314
+[25-07-05 06:48:06] [INFO] 🏗️ Model: tf_efficientnetv2_l
+[25-07-05 06:48:06] [INFO] 🔢 Number of parameters: 117,256,049
+[25-07-05 06:48:06] [INFO] 🚀 Starting Fold 2 training...
+[25-07-05 06:48:06] [INFO] 
+--- Fold 2 | Epoch 1/20 ---
+[25-07-05 06:49:42] [INFO] 💾 Fold 2 Best model updated! F1: 0.8567
+[25-07-05 06:49:42] [INFO] train_loss: 2.0585 | train_acc: 0.6186 | train_f1: 0.5928 | val_loss: 1.1398 | val_acc: 0.8758 | val_f1: 0.8567 | lr: 0.000099
+[25-07-05 06:49:42] [INFO] 
+--- Fold 2 | Epoch 2/20 ---
+[25-07-05 06:51:17] [INFO] 💾 Fold 2 Best model updated! F1: 0.8990
+[25-07-05 06:51:17] [INFO] train_loss: 1.0203 | train_acc: 0.8678 | train_f1: 0.8550 | val_loss: 0.9047 | val_acc: 0.9108 | val_f1: 0.8990 | lr: 0.000098
+[25-07-05 06:51:17] [INFO] 
+--- Fold 2 | Epoch 3/20 ---
+[25-07-05 06:53:00] [INFO] 💾 Fold 2 Best model updated! F1: 0.9144
+[25-07-05 06:53:00] [INFO] train_loss: 0.8814 | train_acc: 0.9156 | train_f1: 0.9078 | val_loss: 0.8373 | val_acc: 0.9204 | val_f1: 0.9144 | lr: 0.000095
+[25-07-05 06:53:00] [INFO] 
+--- Fold 2 | Epoch 4/20 ---
+[25-07-05 06:54:35] [INFO] 💾 Fold 2 Best model updated! F1: 0.9242
+[25-07-05 06:54:35] [INFO] train_loss: 0.8172 | train_acc: 0.9467 | train_f1: 0.9419 | val_loss: 0.8201 | val_acc: 0.9299 | val_f1: 0.9242 | lr: 0.000091
+[25-07-05 06:54:35] [INFO] 
+--- Fold 2 | Epoch 5/20 ---
+[25-07-05 06:56:14] [INFO] train_loss: 0.7865 | train_acc: 0.9538 | train_f1: 0.9498 | val_loss: 0.8184 | val_acc: 0.9331 | val_f1: 0.9231 | lr: 0.000086
+[25-07-05 06:56:14] [INFO] 
+--- Fold 2 | Epoch 6/20 ---
+[25-07-05 07:00:36] [INFO] 💾 Fold 2 Best model updated! F1: 0.9311
+[25-07-05 07:00:36] [INFO] train_loss: 0.7582 | train_acc: 0.9610 | train_f1: 0.9609 | val_loss: 0.8162 | val_acc: 0.9331 | val_f1: 0.9311 | lr: 0.000080
+[25-07-05 07:00:36] [INFO] 
+--- Fold 2 | Epoch 7/20 ---
+[25-07-05 07:02:35] [INFO] 💾 Fold 2 Best model updated! F1: 0.9425
+[25-07-05 07:02:35] [INFO] train_loss: 0.7320 | train_acc: 0.9713 | train_f1: 0.9691 | val_loss: 0.7813 | val_acc: 0.9459 | val_f1: 0.9425 | lr: 0.000073
+[25-07-05 07:02:35] [INFO] 
+--- Fold 2 | Epoch 8/20 ---
+[25-07-05 07:04:11] [INFO] 💾 Fold 2 Best model updated! F1: 0.9549
+[25-07-05 07:04:11] [INFO] train_loss: 0.7080 | train_acc: 0.9841 | train_f1: 0.9838 | val_loss: 0.7765 | val_acc: 0.9554 | val_f1: 0.9549 | lr: 0.000066
+[25-07-05 07:04:11] [INFO] 
+--- Fold 2 | Epoch 9/20 ---
+[25-07-05 07:05:42] [INFO] train_loss: 0.6913 | train_acc: 0.9873 | train_f1: 0.9875 | val_loss: 0.7661 | val_acc: 0.9459 | val_f1: 0.9438 | lr: 0.000058
+[25-07-05 07:05:42] [INFO] 
+--- Fold 2 | Epoch 10/20 ---
+[25-07-05 07:09:11] [INFO] 💾 Fold 2 Best model updated! F1: 0.9596
+[25-07-05 07:09:11] [INFO] train_loss: 0.6864 | train_acc: 0.9857 | train_f1: 0.9841 | val_loss: 0.7519 | val_acc: 0.9618 | val_f1: 0.9596 | lr: 0.000051
+[25-07-05 07:09:11] [INFO] 
+--- Fold 2 | Epoch 11/20 ---
+[25-07-05 07:13:23] [INFO] train_loss: 0.6824 | train_acc: 0.9865 | train_f1: 0.9853 | val_loss: 0.7481 | val_acc: 0.9586 | val_f1: 0.9580 | lr: 0.000043
+[25-07-05 07:13:23] [INFO] 
+--- Fold 2 | Epoch 12/20 ---
+[25-07-05 07:15:13] [INFO] train_loss: 0.6701 | train_acc: 0.9920 | train_f1: 0.9923 | val_loss: 0.7556 | val_acc: 0.9395 | val_f1: 0.9364 | lr: 0.000035
+[25-07-05 07:15:13] [INFO] 
+--- Fold 2 | Epoch 13/20 ---
+[25-07-05 07:17:01] [INFO] 💾 Fold 2 Best model updated! F1: 0.9611
+[25-07-05 07:17:01] [INFO] train_loss: 0.6634 | train_acc: 0.9944 | train_f1: 0.9940 | val_loss: 0.7569 | val_acc: 0.9650 | val_f1: 0.9611 | lr: 0.000028
+[25-07-05 07:17:01] [INFO] 
+--- Fold 2 | Epoch 14/20 ---
+[25-07-05 07:18:44] [INFO] train_loss: 0.6602 | train_acc: 0.9936 | train_f1: 0.9936 | val_loss: 0.7588 | val_acc: 0.9554 | val_f1: 0.9552 | lr: 0.000021
+[25-07-05 07:18:44] [INFO] 
+--- Fold 2 | Epoch 15/20 ---
+[25-07-05 07:20:25] [INFO] train_loss: 0.6621 | train_acc: 0.9944 | train_f1: 0.9933 | val_loss: 0.7567 | val_acc: 0.9490 | val_f1: 0.9466 | lr: 0.000015
+[25-07-05 07:20:25] [INFO] 
+--- Fold 2 | Epoch 16/20 ---
+[25-07-05 07:22:04] [INFO] train_loss: 0.6514 | train_acc: 0.9976 | train_f1: 0.9978 | val_loss: 0.7628 | val_acc: 0.9554 | val_f1: 0.9553 | lr: 0.000010
+[25-07-05 07:22:04] [INFO] 
+--- Fold 2 | Epoch 17/20 ---
+[25-07-05 07:23:49] [INFO] train_loss: 0.6497 | train_acc: 0.9976 | train_f1: 0.9974 | val_loss: 0.7611 | val_acc: 0.9554 | val_f1: 0.9549 | lr: 0.000006
+[25-07-05 07:23:49] [INFO] 
+--- Fold 2 | Epoch 18/20 ---
+[25-07-05 07:25:40] [INFO] train_loss: 0.6463 | train_acc: 0.9984 | train_f1: 0.9978 | val_loss: 0.7672 | val_acc: 0.9554 | val_f1: 0.9545 | lr: 0.000003
+[25-07-05 07:25:40] [INFO] 
+--- Fold 2 | Epoch 19/20 ---
+[25-07-05 07:27:20] [INFO] train_loss: 0.6478 | train_acc: 0.9976 | train_f1: 0.9978 | val_loss: 0.7574 | val_acc: 0.9490 | val_f1: 0.9490 | lr: 0.000002
+[25-07-05 07:27:20] [INFO] 
+--- Fold 2 | Epoch 20/20 ---
+[25-07-05 07:29:00] [INFO] train_loss: 0.6518 | train_acc: 0.9936 | train_f1: 0.9927 | val_loss: 0.7610 | val_acc: 0.9554 | val_f1: 0.9549 | lr: 0.000001
+[25-07-05 07:29:00] [INFO] 
+🎯 Fold 2 completed! Best F1: 0.9611
+[25-07-05 07:29:00] [INFO] 
+============================================================
+[25-07-05 07:29:00] [INFO] 🔥 FOLD 3/5
+[25-07-05 07:29:00] [INFO] ============================================================
+[25-07-05 07:29:00] [INFO] 📚 Train samples: 1256
+[25-07-05 07:29:00] [INFO] 📝 Validation samples: 314
+[25-07-05 07:29:04] [INFO] 🏗️ Model: tf_efficientnetv2_l
+[25-07-05 07:29:04] [INFO] 🔢 Number of parameters: 117,256,049
+[25-07-05 07:29:04] [INFO] 🚀 Starting Fold 3 training...
+[25-07-05 07:29:04] [INFO] 
+--- Fold 3 | Epoch 1/20 ---
+[25-07-05 07:30:59] [INFO] 💾 Fold 3 Best model updated! F1: 0.8671
+[25-07-05 07:30:59] [INFO] train_loss: 2.0627 | train_acc: 0.6210 | train_f1: 0.6042 | val_loss: 1.0549 | val_acc: 0.8854 | val_f1: 0.8671 | lr: 0.000099
+[25-07-05 07:30:59] [INFO] 
+--- Fold 3 | Epoch 2/20 ---
+[25-07-05 07:33:55] [INFO] 💾 Fold 3 Best model updated! F1: 0.9143
+[25-07-05 07:33:55] [INFO] train_loss: 1.0146 | train_acc: 0.8662 | train_f1: 0.8571 | val_loss: 0.8641 | val_acc: 0.9299 | val_f1: 0.9143 | lr: 0.000098
+[25-07-05 07:33:55] [INFO] 
+--- Fold 3 | Epoch 3/20 ---
+[25-07-05 07:39:17] [INFO] train_loss: 0.8733 | train_acc: 0.9323 | train_f1: 0.9271 | val_loss: 0.8902 | val_acc: 0.9204 | val_f1: 0.9091 | lr: 0.000095
+[25-07-05 07:39:17] [INFO] 
+--- Fold 3 | Epoch 4/20 ---
+[25-07-05 07:40:57] [INFO] 💾 Fold 3 Best model updated! F1: 0.9386
+[25-07-05 07:40:57] [INFO] train_loss: 0.8120 | train_acc: 0.9395 | train_f1: 0.9357 | val_loss: 0.8062 | val_acc: 0.9395 | val_f1: 0.9386 | lr: 0.000091
+[25-07-05 07:40:57] [INFO] 
+--- Fold 3 | Epoch 5/20 ---
+[25-07-05 07:42:30] [INFO] 💾 Fold 3 Best model updated! F1: 0.9479
+[25-07-05 07:42:30] [INFO] train_loss: 0.7897 | train_acc: 0.9498 | train_f1: 0.9480 | val_loss: 0.7859 | val_acc: 0.9459 | val_f1: 0.9479 | lr: 0.000086
+[25-07-05 07:42:30] [INFO] 
+--- Fold 3 | Epoch 6/20 ---
+[25-07-05 07:44:31] [INFO] train_loss: 0.7388 | train_acc: 0.9705 | train_f1: 0.9685 | val_loss: 0.7813 | val_acc: 0.9459 | val_f1: 0.9466 | lr: 0.000080
+[25-07-05 07:44:31] [INFO] 
+--- Fold 3 | Epoch 7/20 ---
+[25-07-05 07:46:14] [INFO] 💾 Fold 3 Best model updated! F1: 0.9509
+[25-07-05 07:46:14] [INFO] train_loss: 0.7219 | train_acc: 0.9777 | train_f1: 0.9777 | val_loss: 0.7769 | val_acc: 0.9490 | val_f1: 0.9509 | lr: 0.000073
+[25-07-05 07:46:14] [INFO] 
+--- Fold 3 | Epoch 8/20 ---
+[25-07-05 07:47:51] [INFO] 💾 Fold 3 Best model updated! F1: 0.9526
+[25-07-05 07:47:51] [INFO] train_loss: 0.7263 | train_acc: 0.9682 | train_f1: 0.9664 | val_loss: 0.7812 | val_acc: 0.9522 | val_f1: 0.9526 | lr: 0.000066
+[25-07-05 07:47:51] [INFO] 
+--- Fold 3 | Epoch 9/20 ---
+[25-07-05 07:49:27] [INFO] train_loss: 0.7086 | train_acc: 0.9801 | train_f1: 0.9801 | val_loss: 0.7804 | val_acc: 0.9459 | val_f1: 0.9470 | lr: 0.000058
+[25-07-05 07:49:27] [INFO] 
+--- Fold 3 | Epoch 10/20 ---
+[25-07-05 07:51:05] [INFO] train_loss: 0.6870 | train_acc: 0.9904 | train_f1: 0.9893 | val_loss: 0.7645 | val_acc: 0.9490 | val_f1: 0.9515 | lr: 0.000051
+[25-07-05 07:51:05] [INFO] 
+--- Fold 3 | Epoch 11/20 ---
+[25-07-05 07:52:35] [INFO] train_loss: 0.6788 | train_acc: 0.9904 | train_f1: 0.9901 | val_loss: 0.7638 | val_acc: 0.9459 | val_f1: 0.9466 | lr: 0.000043
+[25-07-05 07:52:35] [INFO] 
+--- Fold 3 | Epoch 12/20 ---
+[25-07-05 07:54:38] [INFO] train_loss: 0.6788 | train_acc: 0.9865 | train_f1: 0.9855 | val_loss: 0.7751 | val_acc: 0.9490 | val_f1: 0.9486 | lr: 0.000035
+[25-07-05 07:54:38] [INFO] 
+--- Fold 3 | Epoch 13/20 ---
+[25-07-05 07:58:33] [INFO] train_loss: 0.6716 | train_acc: 0.9904 | train_f1: 0.9896 | val_loss: 0.7831 | val_acc: 0.9427 | val_f1: 0.9433 | lr: 0.000028
+[25-07-05 07:58:33] [INFO] 
+--- Fold 3 | Epoch 14/20 ---
+[25-07-05 08:01:14] [INFO] train_loss: 0.6580 | train_acc: 0.9952 | train_f1: 0.9949 | val_loss: 0.7727 | val_acc: 0.9459 | val_f1: 0.9477 | lr: 0.000021
+[25-07-05 08:01:14] [INFO] 
+--- Fold 3 | Epoch 15/20 ---
+[25-07-05 08:03:07] [INFO] train_loss: 0.6557 | train_acc: 0.9944 | train_f1: 0.9949 | val_loss: 0.7660 | val_acc: 0.9490 | val_f1: 0.9509 | lr: 0.000015
+[25-07-05 08:03:07] [INFO] 
+--- Fold 3 | Epoch 16/20 ---
+[25-07-05 08:04:45] [INFO] train_loss: 0.6530 | train_acc: 0.9936 | train_f1: 0.9933 | val_loss: 0.7578 | val_acc: 0.9459 | val_f1: 0.9465 | lr: 0.000010
+[25-07-05 08:04:45] [INFO] 
+--- Fold 3 | Epoch 17/20 ---
+[25-07-05 08:06:24] [INFO] train_loss: 0.6542 | train_acc: 0.9944 | train_f1: 0.9938 | val_loss: 0.7576 | val_acc: 0.9490 | val_f1: 0.9509 | lr: 0.000006
+[25-07-05 08:06:24] [INFO] 
+--- Fold 3 | Epoch 18/20 ---
+[25-07-05 08:07:59] [INFO] train_loss: 0.6512 | train_acc: 0.9960 | train_f1: 0.9952 | val_loss: 0.7595 | val_acc: 0.9490 | val_f1: 0.9509 | lr: 0.000003
+[25-07-05 08:07:59] [INFO] 
+--- Fold 3 | Epoch 19/20 ---
+[25-07-05 08:09:40] [INFO] 💾 Fold 3 Best model updated! F1: 0.9540
+[25-07-05 08:09:40] [INFO] train_loss: 0.6522 | train_acc: 0.9968 | train_f1: 0.9967 | val_loss: 0.7597 | val_acc: 0.9522 | val_f1: 0.9540 | lr: 0.000002
+[25-07-05 08:09:40] [INFO] 
+--- Fold 3 | Epoch 20/20 ---
+[25-07-05 08:11:18] [INFO] train_loss: 0.6467 | train_acc: 0.9984 | train_f1: 0.9982 | val_loss: 0.7624 | val_acc: 0.9490 | val_f1: 0.9503 | lr: 0.000001
+[25-07-05 08:11:18] [INFO] 
+🎯 Fold 3 completed! Best F1: 0.9540
+[25-07-05 08:11:18] [INFO] 
+============================================================
+[25-07-05 08:11:18] [INFO] 🔥 FOLD 4/5
+[25-07-05 08:11:18] [INFO] ============================================================
+[25-07-05 08:11:18] [INFO] 📚 Train samples: 1256
+[25-07-05 08:11:18] [INFO] 📝 Validation samples: 314
+[25-07-05 08:11:21] [INFO] 🏗️ Model: tf_efficientnetv2_l
+[25-07-05 08:11:21] [INFO] 🔢 Number of parameters: 117,256,049
+[25-07-05 08:11:21] [INFO] 🚀 Starting Fold 4 training...
+[25-07-05 08:11:21] [INFO] 
+--- Fold 4 | Epoch 1/20 ---
+[25-07-05 08:12:57] [INFO] 💾 Fold 4 Best model updated! F1: 0.8366
+[25-07-05 08:12:57] [INFO] train_loss: 2.4091 | train_acc: 0.5860 | train_f1: 0.5614 | val_loss: 1.2795 | val_acc: 0.8535 | val_f1: 0.8366 | lr: 0.000099
+[25-07-05 08:12:57] [INFO] 
+--- Fold 4 | Epoch 2/20 ---
+[25-07-05 08:14:28] [INFO] 💾 Fold 4 Best model updated! F1: 0.8531
+[25-07-05 08:14:28] [INFO] train_loss: 1.1146 | train_acc: 0.8320 | train_f1: 0.8170 | val_loss: 1.0010 | val_acc: 0.8790 | val_f1: 0.8531 | lr: 0.000098
+[25-07-05 08:14:28] [INFO] 
+--- Fold 4 | Epoch 3/20 ---
+[25-07-05 08:16:14] [INFO] 💾 Fold 4 Best model updated! F1: 0.9231
+[25-07-05 08:16:14] [INFO] train_loss: 0.9229 | train_acc: 0.9013 | train_f1: 0.8920 | val_loss: 0.8643 | val_acc: 0.9331 | val_f1: 0.9231 | lr: 0.000095
+[25-07-05 08:16:14] [INFO] 
+--- Fold 4 | Epoch 4/20 ---
+[25-07-05 08:17:57] [INFO] 💾 Fold 4 Best model updated! F1: 0.9233
+[25-07-05 08:17:57] [INFO] train_loss: 0.8313 | train_acc: 0.9363 | train_f1: 0.9328 | val_loss: 0.8455 | val_acc: 0.9268 | val_f1: 0.9233 | lr: 0.000091
+[25-07-05 08:17:57] [INFO] 
+--- Fold 4 | Epoch 5/20 ---
+[25-07-05 08:19:33] [INFO] train_loss: 0.7884 | train_acc: 0.9554 | train_f1: 0.9513 | val_loss: 0.8544 | val_acc: 0.9268 | val_f1: 0.9159 | lr: 0.000086
+[25-07-05 08:19:33] [INFO] 
+--- Fold 4 | Epoch 6/20 ---
+[25-07-05 08:21:08] [INFO] train_loss: 0.7596 | train_acc: 0.9682 | train_f1: 0.9669 | val_loss: 0.8731 | val_acc: 0.9268 | val_f1: 0.9132 | lr: 0.000080
+[25-07-05 08:21:08] [INFO] 
+--- Fold 4 | Epoch 7/20 ---
+[25-07-05 08:22:40] [INFO] 💾 Fold 4 Best model updated! F1: 0.9256
+[25-07-05 08:22:40] [INFO] train_loss: 0.7526 | train_acc: 0.9666 | train_f1: 0.9636 | val_loss: 0.8193 | val_acc: 0.9363 | val_f1: 0.9256 | lr: 0.000073
+[25-07-05 08:22:40] [INFO] 
+--- Fold 4 | Epoch 8/20 ---
+[25-07-05 08:24:15] [INFO] 💾 Fold 4 Best model updated! F1: 0.9313
+[25-07-05 08:24:15] [INFO] train_loss: 0.7229 | train_acc: 0.9745 | train_f1: 0.9746 | val_loss: 0.8074 | val_acc: 0.9363 | val_f1: 0.9313 | lr: 0.000066
+[25-07-05 08:24:15] [INFO] 
+--- Fold 4 | Epoch 9/20 ---
+[25-07-05 08:25:46] [INFO] train_loss: 0.7190 | train_acc: 0.9761 | train_f1: 0.9742 | val_loss: 0.8210 | val_acc: 0.9299 | val_f1: 0.9240 | lr: 0.000058
+[25-07-05 08:25:46] [INFO] 
+--- Fold 4 | Epoch 10/20 ---
+[25-07-05 08:27:31] [INFO] train_loss: 0.6949 | train_acc: 0.9841 | train_f1: 0.9830 | val_loss: 0.8126 | val_acc: 0.9236 | val_f1: 0.9174 | lr: 0.000051
+[25-07-05 08:27:31] [INFO] 
+--- Fold 4 | Epoch 11/20 ---
+[25-07-05 08:29:10] [INFO] train_loss: 0.6915 | train_acc: 0.9865 | train_f1: 0.9860 | val_loss: 0.8345 | val_acc: 0.9363 | val_f1: 0.9286 | lr: 0.000043
+[25-07-05 08:29:10] [INFO] 
+--- Fold 4 | Epoch 12/20 ---
+[25-07-05 08:31:34] [INFO] train_loss: 0.6782 | train_acc: 0.9904 | train_f1: 0.9892 | val_loss: 0.7986 | val_acc: 0.9299 | val_f1: 0.9280 | lr: 0.000035
+[25-07-05 08:31:34] [INFO] 
+--- Fold 4 | Epoch 13/20 ---
+[25-07-05 08:33:20] [INFO] train_loss: 0.6750 | train_acc: 0.9881 | train_f1: 0.9883 | val_loss: 0.7951 | val_acc: 0.9331 | val_f1: 0.9272 | lr: 0.000028
+[25-07-05 08:33:20] [INFO] 
+--- Fold 4 | Epoch 14/20 ---
+[25-07-05 08:34:57] [INFO] 💾 Fold 4 Best model updated! F1: 0.9333
+[25-07-05 08:34:57] [INFO] train_loss: 0.6675 | train_acc: 0.9936 | train_f1: 0.9930 | val_loss: 0.7994 | val_acc: 0.9363 | val_f1: 0.9333 | lr: 0.000021
+[25-07-05 08:34:57] [INFO] 
+--- Fold 4 | Epoch 15/20 ---
+[25-07-05 08:36:34] [INFO] 💾 Fold 4 Best model updated! F1: 0.9361
+[25-07-05 08:36:34] [INFO] train_loss: 0.6565 | train_acc: 0.9952 | train_f1: 0.9944 | val_loss: 0.8007 | val_acc: 0.9395 | val_f1: 0.9361 | lr: 0.000015
+[25-07-05 08:36:34] [INFO] 
+--- Fold 4 | Epoch 16/20 ---
+[25-07-05 08:38:14] [INFO] train_loss: 0.6699 | train_acc: 0.9904 | train_f1: 0.9905 | val_loss: 0.8043 | val_acc: 0.9331 | val_f1: 0.9318 | lr: 0.000010
+[25-07-05 08:38:14] [INFO] 
+--- Fold 4 | Epoch 17/20 ---
+[25-07-05 08:39:49] [INFO] train_loss: 0.6571 | train_acc: 0.9936 | train_f1: 0.9930 | val_loss: 0.7983 | val_acc: 0.9331 | val_f1: 0.9311 | lr: 0.000006
+[25-07-05 08:39:49] [INFO] 
+--- Fold 4 | Epoch 18/20 ---
+[25-07-05 08:41:34] [INFO] train_loss: 0.6505 | train_acc: 0.9968 | train_f1: 0.9967 | val_loss: 0.8027 | val_acc: 0.9395 | val_f1: 0.9356 | lr: 0.000003
+[25-07-05 08:41:34] [INFO] 
+--- Fold 4 | Epoch 19/20 ---
+[25-07-05 08:43:16] [INFO] train_loss: 0.6549 | train_acc: 0.9936 | train_f1: 0.9930 | val_loss: 0.8120 | val_acc: 0.9363 | val_f1: 0.9302 | lr: 0.000002
+[25-07-05 08:43:16] [INFO] 
+--- Fold 4 | Epoch 20/20 ---
+[25-07-05 08:45:44] [INFO] train_loss: 0.6518 | train_acc: 0.9960 | train_f1: 0.9960 | val_loss: 0.8021 | val_acc: 0.9331 | val_f1: 0.9287 | lr: 0.000001
+[25-07-05 08:45:44] [INFO] 
+🎯 Fold 4 completed! Best F1: 0.9361
+[25-07-05 08:45:44] [INFO] 
+============================================================
+[25-07-05 08:45:44] [INFO] 🔥 FOLD 5/5
+[25-07-05 08:45:44] [INFO] ============================================================
+[25-07-05 08:45:44] [INFO] 📚 Train samples: 1256
+[25-07-05 08:45:44] [INFO] 📝 Validation samples: 314
+[25-07-05 08:45:49] [INFO] 🏗️ Model: tf_efficientnetv2_l
+[25-07-05 08:45:49] [INFO] 🔢 Number of parameters: 117,256,049
+[25-07-05 08:45:49] [INFO] 🚀 Starting Fold 5 training...
+[25-07-05 08:45:49] [INFO] 
+--- Fold 5 | Epoch 1/20 ---
+[25-07-05 08:47:48] [INFO] 💾 Fold 5 Best model updated! F1: 0.8038
+[25-07-05 08:47:48] [INFO] train_loss: 2.2444 | train_acc: 0.6035 | train_f1: 0.5777 | val_loss: 1.2299 | val_acc: 0.8248 | val_f1: 0.8038 | lr: 0.000099
+[25-07-05 08:47:48] [INFO] 
+--- Fold 5 | Epoch 2/20 ---
+[25-07-05 08:49:33] [INFO] 💾 Fold 5 Best model updated! F1: 0.8837
+[25-07-05 08:49:33] [INFO] train_loss: 1.0841 | train_acc: 0.8447 | train_f1: 0.8363 | val_loss: 0.9399 | val_acc: 0.8949 | val_f1: 0.8837 | lr: 0.000098
+[25-07-05 08:49:33] [INFO] 
+--- Fold 5 | Epoch 3/20 ---
+[25-07-05 08:51:19] [INFO] 💾 Fold 5 Best model updated! F1: 0.9191
+[25-07-05 08:51:19] [INFO] train_loss: 0.8954 | train_acc: 0.9180 | train_f1: 0.9108 | val_loss: 0.8776 | val_acc: 0.9268 | val_f1: 0.9191 | lr: 0.000095
+[25-07-05 08:51:19] [INFO] 
+--- Fold 5 | Epoch 4/20 ---
+[25-07-05 08:53:04] [INFO] train_loss: 0.8360 | train_acc: 0.9299 | train_f1: 0.9250 | val_loss: 0.8347 | val_acc: 0.9236 | val_f1: 0.9159 | lr: 0.000091
+[25-07-05 08:53:04] [INFO] 
+--- Fold 5 | Epoch 5/20 ---
+[25-07-05 08:54:49] [INFO] train_loss: 0.7817 | train_acc: 0.9514 | train_f1: 0.9456 | val_loss: 0.8548 | val_acc: 0.9076 | val_f1: 0.9061 | lr: 0.000086
+[25-07-05 08:54:49] [INFO] 
+--- Fold 5 | Epoch 6/20 ---
+[25-07-05 08:56:57] [INFO] 💾 Fold 5 Best model updated! F1: 0.9316
+[25-07-05 08:56:57] [INFO] train_loss: 0.7551 | train_acc: 0.9586 | train_f1: 0.9558 | val_loss: 0.8172 | val_acc: 0.9363 | val_f1: 0.9316 | lr: 0.000080
+[25-07-05 08:56:57] [INFO] 
+--- Fold 5 | Epoch 7/20 ---
+[25-07-05 08:58:59] [INFO] train_loss: 0.7193 | train_acc: 0.9793 | train_f1: 0.9779 | val_loss: 0.8057 | val_acc: 0.9268 | val_f1: 0.9225 | lr: 0.000073
+[25-07-05 08:58:59] [INFO] 
+--- Fold 5 | Epoch 8/20 ---
+[25-07-05 09:00:49] [INFO] 💾 Fold 5 Best model updated! F1: 0.9532
+[25-07-05 09:00:49] [INFO] train_loss: 0.7190 | train_acc: 0.9753 | train_f1: 0.9741 | val_loss: 0.7904 | val_acc: 0.9554 | val_f1: 0.9532 | lr: 0.000066
+[25-07-05 09:00:49] [INFO] 
+--- Fold 5 | Epoch 9/20 ---
+[25-07-05 09:02:31] [INFO] train_loss: 0.7056 | train_acc: 0.9801 | train_f1: 0.9796 | val_loss: 0.7942 | val_acc: 0.9427 | val_f1: 0.9391 | lr: 0.000058
+[25-07-05 09:02:31] [INFO] 
+--- Fold 5 | Epoch 10/20 ---
+[25-07-05 09:04:08] [INFO] train_loss: 0.6837 | train_acc: 0.9904 | train_f1: 0.9901 | val_loss: 0.7897 | val_acc: 0.9522 | val_f1: 0.9508 | lr: 0.000051
+[25-07-05 09:04:08] [INFO] 
+--- Fold 5 | Epoch 11/20 ---
+[25-07-05 09:05:40] [INFO] train_loss: 0.6800 | train_acc: 0.9873 | train_f1: 0.9864 | val_loss: 0.8046 | val_acc: 0.9331 | val_f1: 0.9324 | lr: 0.000043
+[25-07-05 09:05:40] [INFO] 
+--- Fold 5 | Epoch 12/20 ---
+[25-07-05 09:07:18] [INFO] train_loss: 0.6726 | train_acc: 0.9936 | train_f1: 0.9934 | val_loss: 0.8005 | val_acc: 0.9331 | val_f1: 0.9276 | lr: 0.000035
+[25-07-05 09:07:18] [INFO] 
+--- Fold 5 | Epoch 13/20 ---
+[25-07-05 09:09:45] [INFO] train_loss: 0.6665 | train_acc: 0.9920 | train_f1: 0.9923 | val_loss: 0.7897 | val_acc: 0.9427 | val_f1: 0.9373 | lr: 0.000028
+[25-07-05 09:09:45] [INFO] 
+--- Fold 5 | Epoch 14/20 ---
+[25-07-05 09:14:36] [INFO] train_loss: 0.6673 | train_acc: 0.9912 | train_f1: 0.9900 | val_loss: 0.7978 | val_acc: 0.9395 | val_f1: 0.9341 | lr: 0.000021
+[25-07-05 09:14:36] [INFO] 
+--- Fold 5 | Epoch 15/20 ---
+[25-07-05 09:17:03] [INFO] train_loss: 0.6618 | train_acc: 0.9920 | train_f1: 0.9911 | val_loss: 0.7985 | val_acc: 0.9395 | val_f1: 0.9363 | lr: 0.000015
+[25-07-05 09:17:03] [INFO] 
+--- Fold 5 | Epoch 16/20 ---
+[25-07-05 09:20:32] [INFO] train_loss: 0.6588 | train_acc: 0.9944 | train_f1: 0.9945 | val_loss: 0.7866 | val_acc: 0.9427 | val_f1: 0.9385 | lr: 0.000010
+[25-07-05 09:20:32] [INFO] 
+--- Fold 5 | Epoch 17/20 ---
+[25-07-05 09:22:34] [INFO] train_loss: 0.6541 | train_acc: 0.9936 | train_f1: 0.9934 | val_loss: 0.7877 | val_acc: 0.9459 | val_f1: 0.9418 | lr: 0.000006
+[25-07-05 09:22:34] [INFO] 
+--- Fold 5 | Epoch 18/20 ---
+[25-07-05 09:24:19] [INFO] train_loss: 0.6488 | train_acc: 0.9976 | train_f1: 0.9971 | val_loss: 0.7853 | val_acc: 0.9490 | val_f1: 0.9462 | lr: 0.000003
+[25-07-05 09:24:19] [INFO] 
+--- Fold 5 | Epoch 19/20 ---
+[25-07-05 09:25:58] [INFO] train_loss: 0.6522 | train_acc: 0.9952 | train_f1: 0.9949 | val_loss: 0.7887 | val_acc: 0.9395 | val_f1: 0.9357 | lr: 0.000002
+[25-07-05 09:25:58] [INFO] 
+--- Fold 5 | Epoch 20/20 ---
+[25-07-05 09:27:32] [INFO] train_loss: 0.6450 | train_acc: 1.0000 | train_f1: 1.0000 | val_loss: 0.7835 | val_acc: 0.9427 | val_f1: 0.9385 | lr: 0.000001
+[25-07-05 09:27:32] [INFO] 
+🎯 Fold 5 completed! Best F1: 0.9532
+[25-07-05 09:27:33] [INFO] 
+============================================================
+[25-07-05 09:27:33] [INFO] 📊 K-FOLD CROSS VALIDATION RESULTS
+[25-07-05 09:27:33] [INFO] ============================================================
+[25-07-05 09:27:33] [INFO] 📈 Individual fold scores: ['0.9528', '0.9611', '0.9540', '0.9361', '0.9532']
+[25-07-05 09:27:33] [INFO] 🎯 Mean F1 Score: 0.9515
+[25-07-05 09:27:33] [INFO] 📏 Standard Deviation: 0.0082
+[25-07-05 09:27:33] [INFO] 📊 Score Range: 0.9515 ± 0.0082
+[25-07-05 09:27:33] [INFO] ⬇️ Min Score: 0.9361
+[25-07-05 09:27:33] [INFO] ⬆️ Max Score: 0.9611
+[25-07-05 09:27:33] [INFO] 
+🚀 Starting Ensemble Prediction...
+[25-07-05 09:27:36] [INFO] ✅ Loaded Fold 1 model
+[25-07-05 09:27:39] [INFO] ✅ Loaded Fold 2 model
+[25-07-05 09:27:41] [INFO] ✅ Loaded Fold 3 model
+[25-07-05 09:27:44] [INFO] ✅ Loaded Fold 4 model
+[25-07-05 09:27:47] [INFO] ✅ Loaded Fold 5 model
+[25-07-05 09:27:47] [INFO] 
+🔮 Running ensemble prediction with 5 models and TTA...
+[25-07-05 09:27:47] [INFO] 🔮 Predicting with Fold 1 model...
+[25-07-05 09:38:40] [INFO] 🔮 Predicting with Fold 2 model...
+[25-07-05 09:49:31] [INFO] 🔮 Predicting with Fold 3 model...
+[25-07-05 10:00:33] [INFO] 🔮 Predicting with Fold 4 model...
+[25-07-05 10:11:19] [INFO] 🔮 Predicting with Fold 5 model...
+[25-07-05 10:24:28] [INFO] 
+✅ Ensemble prediction completed and saved to ./output/pred_advanced_kfold_tta2_efnv2l.csv
+[25-07-05 10:24:28] [INFO] 📈 Final K-Fold CV Score: 0.9515 ± 0.0082

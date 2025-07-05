@@ -56,3 +56,28 @@
 [25-07-05 00:27:02] [INFO] train_train_loss: 0.6485 | train_train_acc: 0.9936 | train_train_f1: 0.9926 | train_epoch: 13.0000 | val_loss: 0.8322 | val_acc: 0.9140 | val_f1: 0.9086 | epoch: 13.0000 | lr: 0.0000
 [25-07-05 00:27:02] [INFO] 
 === Epoch 15/20 ===
+[25-07-05 00:34:41] [INFO] 💾 Best model saved! F1: 0.9279
+[25-07-05 00:34:41] [INFO] train_train_loss: 0.6396 | train_train_acc: 0.9976 | train_train_f1: 0.9974 | train_epoch: 14.0000 | val_loss: 0.8078 | val_acc: 0.9331 | val_f1: 0.9279 | epoch: 14.0000 | lr: 0.0000
+[25-07-05 00:34:41] [INFO] 
+=== Epoch 16/20 ===
+[25-07-05 00:41:18] [INFO] train_train_loss: 0.6382 | train_train_acc: 0.9976 | train_train_f1: 0.9974 | train_epoch: 15.0000 | val_loss: 0.8197 | val_acc: 0.9236 | val_f1: 0.9187 | epoch: 15.0000 | lr: 0.0000
+[25-07-05 00:41:18] [INFO] 
+=== Epoch 17/20 ===
+[25-07-05 00:47:58] [INFO] train_train_loss: 0.6376 | train_train_acc: 0.9976 | train_train_f1: 0.9974 | train_epoch: 16.0000 | val_loss: 0.8137 | val_acc: 0.9236 | val_f1: 0.9204 | epoch: 16.0000 | lr: 0.0000
+[25-07-05 00:47:58] [INFO] 
+=== Epoch 18/20 ===
+[25-07-05 00:56:16] [INFO] train_train_loss: 0.6313 | train_train_acc: 1.0000 | train_train_f1: 1.0000 | train_epoch: 17.0000 | val_loss: 0.8177 | val_acc: 0.9172 | val_f1: 0.9135 | epoch: 17.0000 | lr: 0.0000
+[25-07-05 00:56:16] [INFO] 
+=== Epoch 19/20 ===
+[25-07-05 01:04:44] [INFO] 💾 Best model saved! F1: 0.9280
+[25-07-05 01:04:44] [INFO] train_train_loss: 0.6343 | train_train_acc: 0.9976 | train_train_f1: 0.9967 | train_epoch: 18.0000 | val_loss: 0.8021 | val_acc: 0.9331 | val_f1: 0.9280 | epoch: 18.0000 | lr: 0.0000
+[25-07-05 01:04:44] [INFO] 
+=== Epoch 20/20 ===
+[25-07-05 01:13:02] [INFO] train_train_loss: 0.6338 | train_train_acc: 0.9976 | train_train_f1: 0.9974 | train_epoch: 19.0000 | val_loss: 0.8079 | val_acc: 0.9204 | val_f1: 0.9158 | epoch: 19.0000 | lr: 0.0000
+[25-07-05 01:13:02] [INFO] 
+🏆 Loading best model (F1: 0.9280)
+[25-07-05 01:13:04] [INFO] 
+Starting inference with Test Time Augmentation...
+[25-07-05 02:04:14] [INFO] 
+✅ Prediction completed and saved to ./output/pred_advanced_tta2_efnv2xl_resize2.csv
+[25-07-05 02:04:14] [INFO] Best validation F1 score: 0.9280
