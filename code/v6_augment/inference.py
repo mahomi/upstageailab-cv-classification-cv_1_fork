@@ -14,6 +14,7 @@ from tqdm import tqdm
 import wandb
 
 import log_util as log
+from augmentations import AugmentationConfig
 
 
 def predict_single_model(model, test_loader, device):
@@ -24,12 +25,72 @@ def predict_single_model(model, test_loader, device):
     model.eval()
     
     with torch.no_grad():
-        for image, _ in tqdm(test_loader, desc="Inference"):
+        for batch_data in tqdm(test_loader, desc="Inference"):
+            if len(batch_data) == 3:
+                # TTA 데이터셋의 경우 (image, _, base_idx)
+                image, _, _ = batch_data
+            else:
+                # 일반 데이터셋의 경우 (image, _)
+                image, _ = batch_data
+            
             image = image.to(device)
             preds = model(image)
             preds_list.extend(preds.argmax(dim=1).detach().cpu().numpy())
     
     return preds_list
+
+
+def predict_single_model_with_tta(model, test_loader, device):
+    """단일 모델로 TTA 추론"""
+    log.info("TTA 추론 시작")
+    
+    model.eval()
+    tta_predictions = {}  # base_idx -> [predictions]
+    tta_count = 0
+    
+    with torch.no_grad():
+        for batch_data in tqdm(test_loader, desc="TTA Inference"):
+            if len(batch_data) == 3:
+                # TTA 데이터셋의 경우 (image, _, base_idx)
+                image, _, base_indices = batch_data
+                is_tta = True
+            else:
+                # 일반 데이터셋의 경우 (image, _)
+                image, _ = batch_data
+                is_tta = False
+            
+            image = image.to(device)
+            preds = model(image)
+            
+            if is_tta:
+                # TTA의 경우 base_idx별로 예측 결과를 수집
+                probs = torch.softmax(preds, dim=1)
+                
+                for i in range(len(base_indices)):
+                    base_idx = base_indices[i].item()
+                    pred_prob = probs[i].cpu().numpy()
+                    
+                    if base_idx not in tta_predictions:
+                        tta_predictions[base_idx] = []
+                    
+                    tta_predictions[base_idx].append(pred_prob)
+                    tta_count += 1
+            else:
+                # 일반 예측의 경우 바로 결과 반환
+                return preds.argmax(dim=1).detach().cpu().numpy().tolist()
+    
+    if tta_predictions:
+        # TTA 예측 결과 평균 계산
+        final_predictions = []
+        for base_idx in sorted(tta_predictions.keys()):
+            avg_pred = np.mean(tta_predictions[base_idx], axis=0)
+            final_pred = np.argmax(avg_pred)
+            final_predictions.append(final_pred)
+        
+        log.info(f"TTA 추론 완료: {len(tta_predictions)}개 샘플, 총 {tta_count}개 증강 예측")
+        return final_predictions
+    
+    return []
 
 
 def predict_kfold_ensemble(models, test_loader, device):
@@ -45,7 +106,14 @@ def predict_kfold_ensemble(models, test_loader, device):
         model.eval()
         
         with torch.no_grad():
-            for image, _ in tqdm(test_loader, desc=f"Fold {fold_idx + 1} Inference"):
+            for batch_data in tqdm(test_loader, desc=f"Fold {fold_idx + 1} Inference"):
+                if len(batch_data) == 3:
+                    # TTA 데이터셋의 경우 (image, _, base_idx)
+                    image, _, _ = batch_data
+                else:
+                    # 일반 데이터셋의 경우 (image, _)
+                    image, _ = batch_data
+                
                 image = image.to(device)
                 preds = model(image)
                 fold_predictions.extend(preds.softmax(dim=1).cpu().numpy())
@@ -56,6 +124,70 @@ def predict_kfold_ensemble(models, test_loader, device):
     # 앙상블 예측
     log.info("K-Fold 앙상블 예측 계산 중...")
     ensemble_predictions = np.mean(all_predictions, axis=0)
+    final_preds = np.argmax(ensemble_predictions, axis=1)
+    
+    return final_preds
+
+
+def predict_kfold_ensemble_with_tta(models, test_loader, device):
+    """K-Fold 모델들로 TTA 앙상블 추론"""
+    log.info("K-Fold TTA 앙상블 추론 시작")
+    
+    all_tta_predictions = []
+    
+    for fold_idx, model in enumerate(models):
+        log.info(f"Fold {fold_idx + 1} TTA 추론 시작")
+        
+        model.eval()
+        tta_predictions = {}  # base_idx -> [predictions]
+        tta_count = 0
+        
+        with torch.no_grad():
+            for batch_data in tqdm(test_loader, desc=f"Fold {fold_idx + 1} TTA Inference"):
+                if len(batch_data) == 3:
+                    # TTA 데이터셋의 경우 (image, _, base_idx)
+                    image, _, base_indices = batch_data
+                    is_tta = True
+                else:
+                    # 일반 데이터셋의 경우 (image, _)
+                    image, _ = batch_data
+                    is_tta = False
+                
+                image = image.to(device)
+                preds = model(image)
+                
+                if is_tta:
+                    # TTA의 경우 base_idx별로 예측 결과를 수집
+                    probs = torch.softmax(preds, dim=1)
+                    
+                    for i in range(len(base_indices)):
+                        base_idx = base_indices[i].item()
+                        pred_prob = probs[i].cpu().numpy()
+                        
+                        if base_idx not in tta_predictions:
+                            tta_predictions[base_idx] = []
+                        
+                        tta_predictions[base_idx].append(pred_prob)
+                        tta_count += 1
+                else:
+                    # 일반 예측의 경우 기존 방식 사용
+                    probs = torch.softmax(preds, dim=1)
+                    for i in range(len(probs)):
+                        base_idx = len(tta_predictions)
+                        tta_predictions[base_idx] = [probs[i].cpu().numpy()]
+        
+        # 각 fold의 TTA 예측 결과 평균 계산
+        fold_final_predictions = []
+        for base_idx in sorted(tta_predictions.keys()):
+            avg_pred = np.mean(tta_predictions[base_idx], axis=0)
+            fold_final_predictions.append(avg_pred)
+        
+        all_tta_predictions.append(fold_final_predictions)
+        log.info(f"Fold {fold_idx + 1} TTA 추론 완료: {len(tta_predictions)}개 샘플, 총 {tta_count}개 증강 예측")
+    
+    # 앙상블 예측
+    log.info("K-Fold TTA 앙상블 예측 계산 중...")
+    ensemble_predictions = np.mean(all_tta_predictions, axis=0)
     final_preds = np.argmax(ensemble_predictions, axis=1)
     
     return final_preds
@@ -115,11 +247,21 @@ def upload_to_wandb(pred_df, cfg):
 
 def run_inference(models_or_model, test_loader, test_dataset, cfg, device, is_kfold=False):
     """추론 실행 및 결과 저장"""
+    # 증강 설정 확인
+    aug_config = AugmentationConfig(cfg)
+    use_tta = aug_config.test_tta_enabled
+    
     # 추론 실행
     if is_kfold:
-        predictions = predict_kfold_ensemble(models_or_model, test_loader, device)
+        if use_tta:
+            predictions = predict_kfold_ensemble_with_tta(models_or_model, test_loader, device)
+        else:
+            predictions = predict_kfold_ensemble(models_or_model, test_loader, device)
     else:
-        predictions = predict_single_model(models_or_model, test_loader, device)
+        if use_tta:
+            predictions = predict_single_model_with_tta(models_or_model, test_loader, device)
+        else:
+            predictions = predict_single_model(models_or_model, test_loader, device)
     
     # 결과 저장
     pred_df = save_predictions(predictions, test_dataset, cfg)

@@ -1,0 +1,42 @@
+# Test configuration for mixed augmentation features
+defaults:
+  - config
+
+# Override augmentation settings
+augmentation:
+  enabled: true
+  library: "mixed"           # Mix both albumentations and augraphy
+  
+  # 각 단계별 증강 설정
+  train:
+    enabled: true    # 훈련 데이터 증강
+    num_augmented_images: 3    # 훈련용 증강 이미지 3개 생성
+  
+  valid:
+    enabled: false   # 검증 데이터 증강 비활성화
+    num_augmented_images: 2    # 검증용 증강 이미지 2개 생성
+  
+  valid_tta:
+    enabled: true    # 검증 시 TTA 사용
+  
+  test_tta:
+    enabled: true    # 테스트 시 TTA 사용
+
+# Test with smaller epochs for quick testing
+training:
+  epochs: 3
+  batch_size: 8
+
+# Use kfold validation for testing
+validation:
+  strategy: "kfold"
+  kfold:
+    n_splits: 3
+    stratify: true
+
+# Enable wandb for monitoring
+wandb:
+  enabled: true
+  run_name: "augmentation_mixed"
+  tags: ["augmentation", "test", "mixed", "kfold"]
+  notes: "Testing mixed augmentation features with both albumentations and augraphy" 

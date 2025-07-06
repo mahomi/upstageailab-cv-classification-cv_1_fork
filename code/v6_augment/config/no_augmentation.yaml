@@ -1,0 +1,42 @@
+# Configuration with no augmentation (baseline)
+defaults:
+  - config
+
+# Override augmentation settings - disable all augmentation
+augmentation:
+  enabled: false             # 전체 증강 비활성화
+  library: "none"           # No augmentation library
+  
+  # 각 단계별 증강 설정 - 모두 비활성화
+  train:
+    enabled: false
+    num_augmented_images: 1   # 원본 이미지만 사용
+  
+  valid:
+    enabled: false
+    num_augmented_images: 1   # 원본 이미지만 사용
+  
+  valid_tta:
+    enabled: false
+  
+  test_tta:
+    enabled: false
+
+# Test with standard configuration
+training:
+  epochs: 5
+  batch_size: 32
+
+# Use holdout validation
+validation:
+  strategy: "holdout"
+  holdout:
+    train_ratio: 0.8
+    stratify: true
+
+# Enable wandb for monitoring
+wandb:
+  enabled: true
+  run_name: "no_augmentation_baseline"
+  tags: ["baseline", "no_augmentation"]
+  notes: "Baseline experiment without any augmentation" 

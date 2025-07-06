@@ -16,6 +16,8 @@ from torch.utils.data import Dataset, DataLoader
 from PIL import Image
 from sklearn.model_selection import train_test_split, StratifiedKFold, KFold
 
+from augmentations import AugmentationConfig, create_augmented_dataset, create_tta_dataset
+
 
 class ImageDataset(Dataset):
     """기본 이미지 데이터셋 클래스"""
@@ -85,6 +87,9 @@ def prepare_data_loaders(cfg, seed):
     # Transform 준비
     train_transform, test_transform = get_transforms(img_size)
     
+    # 증강 설정 준비
+    aug_config = AugmentationConfig(cfg)
+    
     # 전체 훈련 데이터 로드
     full_train_df = pd.read_csv(f"{data_path}/train.csv")
     
@@ -94,6 +99,11 @@ def prepare_data_loaders(cfg, seed):
         f"{data_path}/test/",
         transform=test_transform
     )
+    
+    # 테스트 TTA 적용 (필요한 경우)
+    if aug_config.test_tta_enabled:
+        test_dataset = create_tta_dataset(test_dataset, aug_config)
+    
     test_loader = DataLoader(
         test_dataset,
         batch_size=batch_size,
@@ -107,13 +117,13 @@ def prepare_data_loaders(cfg, seed):
     
     if validation_strategy == "holdout":
         train_loader, val_loader = _prepare_holdout_loaders(
-            cfg, full_train_df, data_path, train_transform, test_transform, seed
+            cfg, full_train_df, data_path, train_transform, test_transform, seed, aug_config
         )
         return train_loader, val_loader, test_loader, None
         
     elif validation_strategy == "kfold":
         folds = _prepare_kfold_splits(cfg, full_train_df, seed)
-        return None, None, test_loader, (folds, full_train_df, data_path, train_transform, test_transform)
+        return None, None, test_loader, (folds, full_train_df, data_path, train_transform, test_transform, aug_config)
         
     elif validation_strategy == "none":
         train_dataset = IndexedImageDataset(
@@ -121,6 +131,11 @@ def prepare_data_loaders(cfg, seed):
             f"{data_path}/train/", 
             transform=train_transform
         )
+        
+        # 훈련 데이터 증강 적용
+        if aug_config.train_enabled:
+            train_dataset = create_augmented_dataset(train_dataset, aug_config, is_train=True)
+        
         train_loader = DataLoader(
             train_dataset, 
             batch_size=batch_size, 
@@ -135,7 +150,7 @@ def prepare_data_loaders(cfg, seed):
         raise ValueError(f"Unknown validation strategy: {validation_strategy}")
 
 
-def _prepare_holdout_loaders(cfg, full_train_df, data_path, train_transform, test_transform, seed):
+def _prepare_holdout_loaders(cfg, full_train_df, data_path, train_transform, test_transform, seed, aug_config):
     """Holdout 검증을 위한 데이터 로더 준비"""
     train_ratio = cfg.validation.holdout.train_ratio
     stratify = cfg.validation.holdout.stratify
@@ -167,6 +182,17 @@ def _prepare_holdout_loaders(cfg, full_train_df, data_path, train_transform, tes
         f"{data_path}/train/", 
         transform=test_transform
     )
+    
+    # 증강 적용
+    if aug_config.train_enabled:
+        train_dataset = create_augmented_dataset(train_dataset, aug_config, is_train=True)
+    
+    if aug_config.valid_enabled:
+        val_dataset = create_augmented_dataset(val_dataset, aug_config, is_train=False)
+    
+    # Valid TTA 적용
+    if aug_config.valid_tta_enabled:
+        val_dataset = create_tta_dataset(val_dataset, aug_config)
     
     # DataLoader 정의
     train_loader = DataLoader(
@@ -203,7 +229,7 @@ def _prepare_kfold_splits(cfg, full_train_df, seed):
     return folds
 
 
-def get_kfold_loaders(fold_idx, folds, full_train_df, data_path, train_transform, test_transform, cfg):
+def get_kfold_loaders(fold_idx, folds, full_train_df, data_path, train_transform, test_transform, cfg, aug_config=None):
     """특정 fold에 대한 데이터 로더 반환"""
     train_idx, val_idx = folds[fold_idx]
     
@@ -222,6 +248,18 @@ def get_kfold_loaders(fold_idx, folds, full_train_df, data_path, train_transform
         f"{data_path}/train/", 
         transform=test_transform
     )
+    
+    # 증강 적용 (aug_config가 제공된 경우)
+    if aug_config is not None:
+        if aug_config.train_enabled:
+            train_dataset = create_augmented_dataset(train_dataset, aug_config, is_train=True)
+        
+        if aug_config.valid_enabled:
+            val_dataset = create_augmented_dataset(val_dataset, aug_config, is_train=False)
+        
+        # Valid TTA 적용
+        if aug_config.valid_tta_enabled:
+            val_dataset = create_tta_dataset(val_dataset, aug_config)
     
     # DataLoader 정의
     train_loader = DataLoader(

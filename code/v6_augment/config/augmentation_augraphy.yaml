@@ -1,0 +1,42 @@
+# Test configuration for augmentation features with Augraphy
+defaults:
+  - config
+
+# Override augmentation settings
+augmentation:
+  enabled: true
+  library: "augraphy"        # Use augraphy for document-specific augmentation
+  
+  # 각 단계별 증강 설정
+  train:
+    enabled: true    # 훈련 데이터 증강
+    num_augmented_images: 1    # 훈련용 증강 이미지 1개 생성
+  
+  valid:
+    enabled: false   # 검증 데이터 증강 비활성화
+    num_augmented_images: 1    # 검증용 증강 이미지 1개 생성
+  
+  valid_tta:
+    enabled: false   # 검증 시 TTA 비활성화
+  
+  test_tta:
+    enabled: true    # 테스트 시 TTA 사용
+
+# Test with smaller epochs for quick testing
+training:
+  epochs: 2
+  batch_size: 16
+
+# Use holdout validation for testing
+validation:
+  strategy: "holdout"
+  holdout:
+    train_ratio: 0.8
+    stratify: true
+
+# Enable wandb for monitoring
+wandb:
+  enabled: true
+  run_name: "augmentation_augraphy"
+  tags: ["augmentation", "test", "augraphy"]
+  notes: "Testing augmentation features with augraphy library" 

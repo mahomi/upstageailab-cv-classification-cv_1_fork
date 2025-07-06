@@ -20,7 +20,7 @@ try:
 except ImportError:
     try:
         # 대안적인 import 방법
-        from torch.cuda.amp import autocast, GradScaler
+        from torch.cuda.amp import autocast, GradScaler  # type: ignore
         AMP_AVAILABLE = True
     except ImportError:
         # PyTorch 버전이 낮은 경우
@@ -30,6 +30,7 @@ import log_util as log
 from data import get_kfold_loaders, get_transforms
 from models import setup_model_and_optimizer, save_model_with_metadata, get_model_save_path
 from utils import EarlyStopping
+from augmentations import create_tta_dataset, AugmentationConfig
 
 
 def train_one_epoch(loader, model, optimizer, loss_fn, device, scaler=None):
@@ -111,6 +112,78 @@ def validate_one_epoch(loader, model, loss_fn, device):
     }
 
 
+def validate_one_epoch_with_tta(loader, model, loss_fn, device):
+    """TTA를 사용한 한 에포크 검증"""
+    model.eval()
+    val_loss = 0
+    all_preds = []
+    all_targets = []
+    
+    # TTA 관련 변수
+    tta_predictions = {}  # base_idx -> [predictions]
+    tta_targets = {}      # base_idx -> target
+    tta_count = 0
+    
+    with torch.no_grad():
+        for batch_data in tqdm(loader, desc="Validating with TTA"):
+            if len(batch_data) == 3:
+                # TTA 데이터셋에서 온 경우 (image, target, base_idx)
+                image, targets, base_indices = batch_data
+                is_tta = True
+            else:
+                # 일반 데이터셋에서 온 경우 (image, target)
+                image, targets = batch_data
+                is_tta = False
+            
+            image = image.to(device)
+            targets = targets.to(device)
+            
+            preds = model(image)
+            loss = loss_fn(preds, targets)
+            val_loss += loss.item()
+            
+            if is_tta:
+                # TTA의 경우 base_idx별로 예측 결과를 수집
+                probs = torch.softmax(preds, dim=1)
+                
+                for i in range(len(base_indices)):
+                    base_idx = base_indices[i].item()
+                    pred_prob = probs[i].cpu().numpy()
+                    target = targets[i].cpu().numpy()
+                    
+                    if base_idx not in tta_predictions:
+                        tta_predictions[base_idx] = []
+                        tta_targets[base_idx] = target
+                    
+                    tta_predictions[base_idx].append(pred_prob)
+                    tta_count += 1
+            else:
+                # 일반 검증의 경우 바로 예측 결과 수집
+                all_preds.extend(preds.argmax(dim=1).cpu().numpy())
+                all_targets.extend(targets.cpu().numpy())
+    
+    if tta_predictions:
+        # TTA 예측 결과 평균 계산
+        for base_idx in tta_predictions:
+            avg_pred = np.mean(tta_predictions[base_idx], axis=0)
+            final_pred = np.argmax(avg_pred)
+            
+            all_preds.append(final_pred)
+            all_targets.append(tta_targets[base_idx])
+        
+        log.info(f"TTA 검증 완료: {len(tta_predictions)}개 샘플, 총 {tta_count}개 증강 예측")
+    
+    val_loss /= len(loader)
+    val_acc = accuracy_score(all_targets, all_preds)
+    val_f1 = f1_score(all_targets, all_preds, average='macro')
+    
+    return {
+        "val_loss": val_loss,
+        "val_acc": val_acc,
+        "val_f1": val_f1,
+    }
+
+
 def update_scheduler(scheduler, val_metrics=None, cfg=None):
     """스케쥴러 업데이트"""
     if scheduler is None:
@@ -151,6 +224,10 @@ def train_single_model(cfg, train_loader, val_loader, device):
     """단일 모델 학습 (Holdout 또는 No validation)"""
     model, optimizer, loss_fn, scheduler = setup_model_and_optimizer(cfg, device)
     
+    # 증강 설정 확인
+    aug_config = AugmentationConfig(cfg)
+    use_tta = aug_config.valid_tta_enabled
+    
     # Mixed Precision Training 설정
     scaler = None
     if cfg.training.mixed_precision.enabled and AMP_AVAILABLE and device.type == 'cuda':
@@ -184,7 +261,10 @@ def train_single_model(cfg, train_loader, val_loader, device):
         
         # 검증 (holdout인 경우)
         if val_loader is not None:
-            val_ret = validate_one_epoch(val_loader, model, loss_fn, device)
+            if use_tta:
+                val_ret = validate_one_epoch_with_tta(val_loader, model, loss_fn, device)
+            else:
+                val_ret = validate_one_epoch(val_loader, model, loss_fn, device)
             ret.update(val_ret)
             
             log_message = f"Epoch {epoch+1}/{cfg.training.epochs} 완료 - "
@@ -285,16 +365,19 @@ def train_single_model(cfg, train_loader, val_loader, device):
 
 def train_kfold_models(cfg, kfold_data, device):
     """K-Fold 교차 검증 학습"""
-    folds, full_train_df, data_path, train_transform, test_transform = kfold_data
+    folds, full_train_df, data_path, train_transform, test_transform, aug_config = kfold_data
     n_splits = len(folds)
     models = []
+    
+    # 증강 설정 확인
+    use_tta = aug_config.valid_tta_enabled
     
     for fold_idx, (train_idx, val_idx) in enumerate(folds):
         log.info(f"========== Fold {fold_idx + 1}/{n_splits} ==========")
         
         # 현재 fold의 데이터 로더 준비
         train_loader, val_loader, train_df, val_df = get_kfold_loaders(
-            fold_idx, folds, full_train_df, data_path, train_transform, test_transform, cfg
+            fold_idx, folds, full_train_df, data_path, train_transform, test_transform, cfg, aug_config
         )
         
         # 모델 초기화
@@ -332,7 +415,10 @@ def train_kfold_models(cfg, kfold_data, device):
             # 훈련
             train_ret = train_one_epoch(train_loader, model, optimizer, loss_fn, device, scaler)
             # 검증
-            val_ret = validate_one_epoch(val_loader, model, loss_fn, device)
+            if use_tta:
+                val_ret = validate_one_epoch_with_tta(val_loader, model, loss_fn, device)
+            else:
+                val_ret = validate_one_epoch(val_loader, model, loss_fn, device)
             
             # 결과 합치기
             ret = {**train_ret, **val_ret, 'epoch': epoch, 'fold': fold_idx + 1}
