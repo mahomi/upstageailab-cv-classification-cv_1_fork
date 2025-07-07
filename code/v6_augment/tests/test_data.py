@@ -387,5 +387,69 @@ class TestKFoldLoaders:
         assert len(val_loader.dataset) == len(val_df)  # type: ignore
 
 
+class TestDataLoaderAugmentation:
+    """Augmentation 옵션에 따른 데이터셋 크기 테스트"""
+
+    def setup_method(self):
+        self.temp_dir = tempfile.mkdtemp()
+        self.data_dir = os.path.join(self.temp_dir, "data")
+        os.makedirs(os.path.join(self.data_dir, "train"))
+        os.makedirs(os.path.join(self.data_dir, "test"))
+
+        n_train = 20
+        train_data = {
+            "ID": [f"train_{i}.jpg" for i in range(n_train)],
+            "target": [i % 2 for i in range(n_train)],
+        }
+        train_df = pd.DataFrame(train_data)
+        train_df.to_csv(os.path.join(self.data_dir, "train.csv"), index=False)
+
+        n_test = 10
+        test_data = {"ID": [f"test_{i}.jpg" for i in range(n_test)], "target": [0] * n_test}
+        pd.DataFrame(test_data).to_csv(
+            os.path.join(self.data_dir, "sample_submission.csv"), index=False
+        )
+
+        for img_name in train_data["ID"]:
+            Image.new("RGB", (32, 32), color="red").save(
+                os.path.join(self.data_dir, "train", img_name)
+            )
+        for img_name in test_data["ID"]:
+            Image.new("RGB", (32, 32), color="blue").save(
+                os.path.join(self.data_dir, "test", img_name)
+            )
+
+    def test_dataset_length_with_options(self):
+        cfg = OmegaConf.create(
+            {
+                "data": {
+                    "train_images_path": os.path.join(self.data_dir, "train"),
+                    "test_images_path": os.path.join(self.data_dir, "test"),
+                    "train_csv_path": os.path.join(self.data_dir, "train.csv"),
+                    "test_csv_path": os.path.join(self.data_dir, "sample_submission.csv"),
+                    "img_size": 32,
+                    "num_workers": 0,
+                },
+                "training": {"batch_size": 4, "seed": 42},
+                "validation": {
+                    "strategy": "holdout",
+                    "holdout": {"train_ratio": 0.8, "stratify": True},
+                },
+                "augmentation": {
+                    "method": "albumentations",
+                    "intensity": 0.0,
+                    "train_aug_count": 2,
+                    "train_aug_add_org": True,
+                    "valid_aug_count": 1,
+                    "valid_aug_add_org": False,
+                },
+            }
+        )
+
+        train_loader, val_loader, _, _ = prepare_data_loaders(cfg, 42)
+        # 80% of 20 = 16
+        assert len(train_loader.dataset) == 16 * 3  # 2 aug + original
+        assert len(val_loader.dataset) == 4 * 1  # 1 aug only
+
 if __name__ == "__main__":
     pytest.main([__file__]) 

@@ -120,6 +120,28 @@ class AugmentedDataset(Dataset):
         return image, target, base_idx
 
 
+def _build_augmented_dataset(
+    df: pd.DataFrame,
+    path: str,
+    transform,
+    org_transform,
+    aug_count: int,
+    add_org: bool,
+) -> Dataset:
+    """Create dataset with optional augmentation."""
+
+    base_ds = IndexedImageDataset(df, path, transform=None)
+    if aug_count > 0:
+        return AugmentedDataset(
+            base_ds,
+            aug_count,
+            add_org,
+            aug_transform=transform,
+            org_transform=org_transform,
+        )
+    return IndexedImageDataset(df, path, transform=transform)
+
+
 def _create_augraphy_lambda(intensity: float, ops: list[str] | None = None):
     """Create an Albumentations Lambda applying selected Augraphy transforms."""
     try:
@@ -374,7 +396,7 @@ def prepare_data_loaders(cfg, seed):
             train_transform,
             val_transform,
             seed,
-            org_transform
+            org_transform,
         )
         return train_loader, val_loader, test_loader, None
         
@@ -390,34 +412,22 @@ def prepare_data_loaders(cfg, seed):
         )
         
     elif validation_strategy == "none":
-        train_dataset = IndexedImageDataset(
+        train_dataset = _build_augmented_dataset(
             full_train_df,
             train_images_path,
-            transform=None  # transform 없이 생성
+            train_transform,
+            org_transform,
+            getattr(aug_cfg, "train_aug_count", 0),
+            getattr(aug_cfg, "train_aug_add_org", False),
         )
-        if getattr(aug_cfg, "train_aug_count", 0) > 0:
-            train_dataset = AugmentedDataset(
-                train_dataset,
-                getattr(aug_cfg, "train_aug_count", 0),
-                getattr(aug_cfg, "train_aug_add_org", False),
-                aug_transform=train_transform,  # 증강 transform
-                org_transform=org_transform     # 원본 transform
-            )
-        else:
-            # 증강이 없는 경우 기본 transform 적용
-            train_dataset = IndexedImageDataset(
-                full_train_df,
-                train_images_path,
-                transform=train_transform
-            )
 
         train_loader = DataLoader(
             train_dataset,
             batch_size=batch_size,
             shuffle=True,
             num_workers=num_workers,
-            pin_memory=_should_use_pin_memory(), 
-            drop_last=False
+            pin_memory=_should_use_pin_memory(),
+            drop_last=False,
         )
         return train_loader, None, test_loader, None
         
@@ -450,47 +460,23 @@ def _prepare_holdout_loaders(cfg, full_train_df, train_images_path,
         )
     
     # Dataset 정의
-    train_dataset = IndexedImageDataset(
+    train_dataset = _build_augmented_dataset(
         train_df,
         train_images_path,
-        transform=None  # transform 없이 생성
+        train_transform,
+        org_transform,
+        getattr(aug_cfg, "train_aug_count", 0),
+        getattr(aug_cfg, "train_aug_add_org", False),
     )
-    if getattr(aug_cfg, "train_aug_count", 0) > 0:
-        train_dataset = AugmentedDataset(
-            train_dataset,
-            getattr(aug_cfg, "train_aug_count", 0),
-            getattr(aug_cfg, "train_aug_add_org", False),
-            aug_transform=train_transform,  # 증강 transform
-            org_transform=org_transform     # 원본 transform
-        )
-    else:
-        # 증강이 없는 경우 기본 transform 적용
-        train_dataset = IndexedImageDataset(
-            train_df,
-            train_images_path,
-            transform=train_transform
-        )
 
-    val_dataset = IndexedImageDataset(
+    val_dataset = _build_augmented_dataset(
         val_df,
         train_images_path,
-        transform=None  # transform 없이 생성
+        val_transform,
+        org_transform,
+        getattr(aug_cfg, "valid_aug_count", 0),
+        getattr(aug_cfg, "valid_aug_add_org", False),
     )
-    if getattr(aug_cfg, "valid_aug_count", 0) > 0:
-        val_dataset = AugmentedDataset(
-            val_dataset,
-            getattr(aug_cfg, "valid_aug_count", 0),
-            getattr(aug_cfg, "valid_aug_add_org", False),
-            aug_transform=val_transform,    # 증강 transform
-            org_transform=org_transform     # 원본 transform
-        )
-    else:
-        # 증강이 없는 경우 기본 transform 적용
-        val_dataset = IndexedImageDataset(
-            val_df,
-            train_images_path,
-            transform=val_transform
-        )
     
     # DataLoader 정의
     train_loader = DataLoader(
@@ -543,47 +529,23 @@ def get_kfold_loaders(fold_idx, folds, full_train_df, train_images_path,
     val_df = full_train_df.iloc[val_idx]
     
     # Dataset 정의
-    train_dataset = IndexedImageDataset(
+    train_dataset = _build_augmented_dataset(
         train_df,
         train_images_path,
-        transform=None  # transform 없이 생성
+        train_transform,
+        org_transform,
+        getattr(aug_cfg, "train_aug_count", 0),
+        getattr(aug_cfg, "train_aug_add_org", False),
     )
-    if getattr(aug_cfg, "train_aug_count", 0) > 0:
-        train_dataset = AugmentedDataset(
-            train_dataset,
-            getattr(aug_cfg, "train_aug_count", 0),
-            getattr(aug_cfg, "train_aug_add_org", False),
-            aug_transform=train_transform,  # 증강 transform
-            org_transform=org_transform     # 원본 transform
-        )
-    else:
-        # 증강이 없는 경우 기본 transform 적용
-        train_dataset = IndexedImageDataset(
-            train_df,
-            train_images_path,
-            transform=train_transform
-        )
 
-    val_dataset = IndexedImageDataset(
+    val_dataset = _build_augmented_dataset(
         val_df,
         train_images_path,
-        transform=None  # transform 없이 생성
+        val_transform,
+        org_transform,
+        getattr(aug_cfg, "valid_aug_count", 0),
+        getattr(aug_cfg, "valid_aug_add_org", False),
     )
-    if getattr(aug_cfg, "valid_aug_count", 0) > 0:
-        val_dataset = AugmentedDataset(
-            val_dataset,
-            getattr(aug_cfg, "valid_aug_count", 0),
-            getattr(aug_cfg, "valid_aug_add_org", False),
-            aug_transform=val_transform,    # 증강 transform
-            org_transform=org_transform     # 원본 transform
-        )
-    else:
-        # 증강이 없는 경우 기본 transform 적용
-        val_dataset = IndexedImageDataset(
-            val_df,
-            train_images_path,
-            transform=val_transform
-        )
     
     # DataLoader 정의
     train_loader = DataLoader(

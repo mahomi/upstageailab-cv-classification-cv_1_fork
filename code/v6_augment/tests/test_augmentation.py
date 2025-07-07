@@ -14,6 +14,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from data import ImageDataset, AugmentedDataset, get_transforms
 from inference import predict_single_model
+from unittest.mock import patch
 import pytest
 
 
@@ -110,6 +111,27 @@ def test_predict_single_model_tta_add_org():
     
     assert len(preds_with_org) == len(dataset)
     assert len(preds_without_org) == len(dataset)
+
+
+@patch('inference._predict_probs')
+def test_skip_original_when_tta_no_org(mock_pred):
+    """tta_add_org=False일 때 base 추론이 생략되는지 테스트"""
+    tmp = tempfile.mkdtemp()
+    img_dir = os.path.join(tmp, 'imgs')
+    os.makedirs(img_dir)
+    df = pd.DataFrame({'ID': [f'{i}.jpg' for i in range(2)], 'target': [0, 1]})
+    for name in df['ID']:
+        Image.new('RGB', (32, 32), color='white').save(os.path.join(img_dir, name))
+    cfg = OmegaConf.create({'data': {'img_size': 32}, 'augmentation': {'method': 'albumentations', 'intensity': 0.5, 'test_tta_ops': ['rotate']}})
+    tta_transform = get_transforms(cfg, 'test_tta_ops')
+    test_transform = get_transforms(cfg, None)
+    dataset = ImageDataset(df, img_dir, transform=test_transform)
+    loader = DataLoader(dataset, batch_size=1, shuffle=False)
+    model = torch.nn.Sequential(torch.nn.Flatten(), torch.nn.Linear(32*32*3, 2))
+
+    mock_pred.return_value = np.zeros((len(dataset), 2))
+    predict_single_model(model, loader, torch.device('cpu'), tta_transform=tta_transform, tta_count=2, tta_add_org=False)
+    assert mock_pred.call_count == 2
 
 
 def test_get_transforms_many_ops():

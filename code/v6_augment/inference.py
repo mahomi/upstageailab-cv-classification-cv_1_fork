@@ -55,7 +55,10 @@ def predict_single_model(model, test_loader, device, tta_transform=None, tta_cou
 
     model.eval()
 
-    probs = _predict_probs(model, test_loader, device)
+    probs = None
+    run_base = tta_transform is None or tta_count == 0 or tta_add_org
+    if run_base:
+        probs = _predict_probs(model, test_loader, device)
 
     if tta_transform is not None and tta_count > 0:
         tta_probs = []
@@ -68,15 +71,12 @@ def predict_single_model(model, test_loader, device, tta_transform=None, tta_cou
                 num_workers=test_loader.num_workers,
             )
             tta_probs.append(_predict_probs(model, t_loader, device))
-        
-        # TTA 결과 평균 계산
+
         tta_avg = np.mean(tta_probs, axis=0)
-        
+
         if tta_add_org:
-            # 원본 이미지 포함하여 평균
             probs = (probs + tta_avg * tta_count) / (tta_count + 1)
         else:
-            # 원본 이미지 제외하고 TTA 결과만 사용
             probs = tta_avg
 
     if return_probs:
@@ -107,7 +107,8 @@ def predict_kfold_ensemble(models, test_loader, device, tta_transform=None, tta_
         
         model.eval()
 
-        probs = _predict_probs(model, test_loader, device)
+        run_base = tta_transform is None or tta_count == 0 or tta_add_org
+        probs = _predict_probs(model, test_loader, device) if run_base else None
 
         if tta_transform is not None and tta_count > 0:
             tta_probs = []
@@ -121,14 +122,11 @@ def predict_kfold_ensemble(models, test_loader, device, tta_transform=None, tta_
                 )
                 tta_probs.append(_predict_probs(model, t_loader, device))
             
-            # TTA 결과 평균 계산
             tta_avg = np.mean(tta_probs, axis=0)
-            
+
             if tta_add_org:
-                # 원본 이미지 포함하여 평균
                 probs = (probs + tta_avg * tta_count) / (tta_count + 1)
             else:
-                # 원본 이미지 제외하고 TTA 결과만 사용
                 probs = tta_avg
 
         fold_predictions = probs
