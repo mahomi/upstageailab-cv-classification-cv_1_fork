@@ -89,9 +89,11 @@ def set_seed(seed):
         log.info(f"torch.use_deterministic_algorithms(True) 설정 실패: {e}")
         log.info("기본 재현성 설정만 사용됩니다.")
 
-SEED = 42
-set_seed(SEED)
-log.info(f"🌱 Random seed set to {SEED}")
+# 시드 리스트 정의 (2개 시드 사용)
+SEEDS = [42, 123]
+# 초기 시드 설정
+set_seed(SEEDS[0])
+log.info(f"🌱 Initial random seed set to {SEEDS[0]}")
 
 # 현재 스크립트 위치를 작업 디렉토리로 설정
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
@@ -726,168 +728,234 @@ class EarlyStopping:
         return False
 
 # K-Fold 정의
-skf = StratifiedKFold(n_splits=K_FOLDS, shuffle=True, random_state=SEED)
+# 초기 시드 설정을 위해 여기서는 skf 정의하지 않고 나중에 시드별로 정의
 
-# 폴드별 결과 저장
-fold_scores = []
-best_models = []
+# 시드별 결과 저장
+all_seed_scores = []
+model_paths = []  # 모델 파일 경로를 저장
 
-log.info(f"\n🔄 Starting {K_FOLDS}-Fold Cross Validation Training...")
+log.info(f"\n🔄 Starting {K_FOLDS}-Fold Cross Validation with {len(SEEDS)} seeds...")
 
-for fold, (train_idx, val_idx) in enumerate(skf.split(train_df, train_df['target'])):
+# 모델 저장 경로 설정
+models_dir = "./models"
+os.makedirs(models_dir, exist_ok=True)
+log.info(f"📂 Models will be saved to: {models_dir}")
+
+# 시드별 결과 저장
+all_seed_scores = []
+model_paths = []  # 모델 파일 경로를 저장
+
+# 시드별 학습 루프
+for seed_idx, seed in enumerate(SEEDS):
+    log.info(f"\n{'='*80}")
+    log.info(f"🌱 SEED {seed_idx+1}/{len(SEEDS)}: {seed}")
+    log.info(f"{'='*80}")
+    
+    # 시드 재설정
+    set_seed(seed)
+    
+    # 이 시드에 대한 K-Fold 정의
+    skf = StratifiedKFold(n_splits=K_FOLDS, shuffle=True, random_state=seed)
+    
+    # 폴드별 결과 저장
+    fold_scores = []
+    seed_model_paths = []  # 이 시드의 모델 파일 경로들
+    
+    for fold, (train_idx, val_idx) in enumerate(skf.split(train_df, train_df['target'])):
+        log.info(f"\n{'='*60}")
+        log.info(f"🔥 SEED {seed} | FOLD {fold+1}/{K_FOLDS}")
+        log.info(f"{'='*60}")
+        
+        # 폴드별 데이터 분할
+        train_fold = train_df.iloc[train_idx].reset_index(drop=True)
+        val_fold = train_df.iloc[val_idx].reset_index(drop=True)
+        
+        log.info(f"📚 Train samples: {len(train_fold)}")
+        log.info(f"📝 Validation samples: {len(val_fold)}")
+        
+        # 데이터셋 생성
+        trn_dataset = ImageDataset(train_fold, f"{data_path}/train/", transform=trn_transform, augmentation_multiplier=AUGMENTATION_MULTIPLIER, save_augmented_to_disk=True)
+        val_dataset = ImageDataset(val_fold, f"{data_path}/train/", transform=val_transform, augmentation_multiplier=AUGMENTATION_MULTIPLIER, save_augmented_to_disk=True)
+        
+        # DataLoader 생성
+        trn_loader = DataLoader(
+            trn_dataset,
+            batch_size=BATCH_SIZE,
+            shuffle=True,
+            num_workers=num_workers,
+            pin_memory=True,
+            drop_last=False
+        )
+        
+        val_loader = DataLoader(
+            val_dataset,
+            batch_size=BATCH_SIZE,
+            shuffle=False,
+            num_workers=num_workers,
+            pin_memory=True,
+            drop_last=False
+        )
+        
+        # 모델 초기화 (매 폴드마다 새로 시작)
+        model = timm.create_model(
+            model_name,
+            pretrained=True,
+            num_classes=17
+        ).to(device)
+        
+        log.info(f"🏗️ Model: {model_name}")
+        log.info(f"🔢 Number of parameters: {sum(p.numel() for p in model.parameters()):,}")
+        
+        # Loss function, optimizer, scheduler 정의
+        loss_fn = LabelSmoothingLoss(classes=17, smoothing=label_smoothing)
+        optimizer = Adam(model.parameters(), lr=LR, weight_decay=weight_decay)
+        scheduler = CosineAnnealingLR(optimizer, T_max=EPOCHS, eta_min=1e-6)
+        scaler = GradScaler()
+        
+        # Early stopping 초기화
+        early_stopping = EarlyStopping(patience=patience, min_delta=0.001, restore_best_weights=True)
+        
+        # 최고 성능 모델 저장을 위한 변수
+        best_val_f1 = 0.0
+        best_model_state = None
+        
+        log.info(f"🚀 Starting Seed {seed} | Fold {fold+1} training...")
+        
+        # 폴드별 학습
+        for epoch in range(EPOCHS):
+            log.info(f"\n--- Seed {seed} | Fold {fold+1} | Epoch {epoch+1}/{EPOCHS} ---")
+            
+            # 에포크 시작 시 통계 초기화
+            trn_dataset.reset_stats()
+            val_dataset.reset_stats()
+            
+            # Training
+            train_ret = train_one_epoch(trn_loader, model, optimizer, loss_fn, device, scaler)
+            
+            # Validation
+            val_ret = validate_one_epoch(val_loader, model, loss_fn, device)
+            
+            # Learning rate scheduler step
+            scheduler.step()
+            
+            # 결과 출력
+            current_lr = optimizer.param_groups[0]['lr']
+            
+            # 최고 성능 모델 저장
+            if val_ret['val_f1'] > best_val_f1:
+                best_val_f1 = val_ret['val_f1']
+                best_model_state = model.state_dict().copy()
+                log.info(f"💾 Seed {seed} | Fold {fold+1} Best model updated! F1: {best_val_f1:.4f}")
+            
+            # Early stopping 체크
+            if early_stopping(val_ret['val_f1'], model):
+                log.info(f"🛑 Early stopping triggered at epoch {epoch+1} for Seed {seed} | Fold {fold+1}")
+                log.info(f"🎯 Best F1 score: {early_stopping.best_score:.4f}")
+                break
+            
+            # 로그 출력
+            log_msg = f"train_loss: {train_ret['train_loss']:.4f} | "
+            log_msg += f"train_acc: {train_ret['train_acc']:.4f} | "
+            log_msg += f"train_f1: {train_ret['train_f1']:.4f} | "
+            log_msg += f"val_loss: {val_ret['val_loss']:.4f} | "
+            log_msg += f"val_acc: {val_ret['val_acc']:.4f} | "
+            log_msg += f"val_f1: {val_ret['val_f1']:.4f} | "
+            log_msg += f"lr: {current_lr:.6f}"
+            
+            log.info(log_msg)
+            
+            # 매 에포크마다 캐싱 통계 출력
+            log.info(f"\n📊 Epoch {epoch+1} Cache Statistics:")
+            trn_dataset.print_stats()
+            val_dataset.print_stats()
+        
+        # 폴드 완료 후 모델 저장
+        # Early stopping이 활성화된 경우 best_weights를 사용, 그렇지 않으면 기존 방식 사용
+        if early_stopping.best_weights is not None:
+            final_f1 = early_stopping.best_score
+            final_model_state = early_stopping.best_weights
+            log.info(f"\n🎯 Seed {seed} | Fold {fold+1} completed with early stopping! Best F1: {final_f1:.4f}")
+        else:
+            final_f1 = best_val_f1
+            final_model_state = best_model_state if best_model_state is not None else model.state_dict()
+            log.info(f"\n🎯 Seed {seed} | Fold {fold+1} completed! Best F1: {final_f1:.4f}")
+        
+        fold_scores.append(final_f1)
+        
+        # 모델을 디스크에 저장
+        model_filename = f"model_seed{seed}_fold{fold+1}.pth"
+        model_path = os.path.join(models_dir, model_filename)
+        torch.save(final_model_state, model_path)
+        seed_model_paths.append(model_path)
+        log.info(f"💾 Model saved to: {model_path}")
+        
+        # 메모리 정리 (모델 상태 삭제)
+        del model, optimizer, scheduler, scaler, trn_loader, val_loader
+        del trn_dataset, val_dataset, train_fold, val_fold
+        del best_model_state, final_model_state
+        if early_stopping.best_weights is not None:
+            del early_stopping.best_weights
+        torch.cuda.empty_cache()
+        gc.collect()
+        
+        log.info(f"🧹 Memory cleaned for Seed {seed} | Fold {fold+1}")
+    
+    # 시드별 결과 저장
+    all_seed_scores.append(fold_scores)
+    model_paths.append(seed_model_paths)
+    
+    # 시드별 결과 요약
     log.info(f"\n{'='*60}")
-    log.info(f"🔥 FOLD {fold+1}/{K_FOLDS}")
+    log.info(f"📊 SEED {seed} K-FOLD RESULTS")
     log.info(f"{'='*60}")
     
-    # 폴드별 데이터 분할
-    train_fold = train_df.iloc[train_idx].reset_index(drop=True)
-    val_fold = train_df.iloc[val_idx].reset_index(drop=True)
+    seed_mean_score = np.mean(fold_scores)
+    seed_std_score = np.std(fold_scores)
     
-    log.info(f"📚 Train samples: {len(train_fold)}")
-    log.info(f"📝 Validation samples: {len(val_fold)}")
-    
-    # 데이터셋 생성
-    trn_dataset = ImageDataset(train_fold, f"{data_path}/train/", transform=trn_transform, augmentation_multiplier=AUGMENTATION_MULTIPLIER, save_augmented_to_disk=True)
-    val_dataset = ImageDataset(val_fold, f"{data_path}/train/", transform=val_transform, augmentation_multiplier=AUGMENTATION_MULTIPLIER, save_augmented_to_disk=True)
-    
-    # DataLoader 생성
-    trn_loader = DataLoader(
-        trn_dataset,
-        batch_size=BATCH_SIZE,
-        shuffle=True,
-        num_workers=num_workers,
-        pin_memory=True,
-        drop_last=False
-    )
-    
-    val_loader = DataLoader(
-        val_dataset,
-        batch_size=BATCH_SIZE,
-        shuffle=False,
-        num_workers=num_workers,
-        pin_memory=True,
-        drop_last=False
-    )
-    
-    # 모델 초기화 (매 폴드마다 새로 시작)
-    model = timm.create_model(
-        model_name,
-        pretrained=True,
-        num_classes=17
-    ).to(device)
-    
-    log.info(f"🏗️ Model: {model_name}")
-    log.info(f"🔢 Number of parameters: {sum(p.numel() for p in model.parameters()):,}")
-    
-    # Loss function, optimizer, scheduler 정의
-    loss_fn = LabelSmoothingLoss(classes=17, smoothing=label_smoothing)
-    optimizer = Adam(model.parameters(), lr=LR, weight_decay=weight_decay)
-    scheduler = CosineAnnealingLR(optimizer, T_max=EPOCHS, eta_min=1e-6)
-    scaler = GradScaler()
-    
-    # Early stopping 초기화
-    early_stopping = EarlyStopping(patience=patience, min_delta=0.001, restore_best_weights=True)
-    
-    # 최고 성능 모델 저장을 위한 변수
-    best_val_f1 = 0.0
-    best_model_state = None
-    
-    log.info(f"🚀 Starting Fold {fold+1} training...")
-    
-    # 폴드별 학습
-    for epoch in range(EPOCHS):
-        log.info(f"\n--- Fold {fold+1} | Epoch {epoch+1}/{EPOCHS} ---")
-        
-        # 에포크 시작 시 통계 초기화
-        trn_dataset.reset_stats()
-        val_dataset.reset_stats()
-        
-        # Training
-        train_ret = train_one_epoch(trn_loader, model, optimizer, loss_fn, device, scaler)
-        
-        # Validation
-        val_ret = validate_one_epoch(val_loader, model, loss_fn, device)
-        
-        # Learning rate scheduler step
-        scheduler.step()
-        
-        # 결과 출력
-        current_lr = optimizer.param_groups[0]['lr']
-        
-        # 최고 성능 모델 저장
-        if val_ret['val_f1'] > best_val_f1:
-            best_val_f1 = val_ret['val_f1']
-            best_model_state = model.state_dict().copy()
-            log.info(f"💾 Fold {fold+1} Best model updated! F1: {best_val_f1:.4f}")
-        
-        # Early stopping 체크
-        if early_stopping(val_ret['val_f1'], model):
-            log.info(f"🛑 Early stopping triggered at epoch {epoch+1} for Fold {fold+1}")
-            log.info(f"🎯 Best F1 score: {early_stopping.best_score:.4f}")
-            break
-        
-        # 로그 출력
-        log_msg = f"train_loss: {train_ret['train_loss']:.4f} | "
-        log_msg += f"train_acc: {train_ret['train_acc']:.4f} | "
-        log_msg += f"train_f1: {train_ret['train_f1']:.4f} | "
-        log_msg += f"val_loss: {val_ret['val_loss']:.4f} | "
-        log_msg += f"val_acc: {val_ret['val_acc']:.4f} | "
-        log_msg += f"val_f1: {val_ret['val_f1']:.4f} | "
-        log_msg += f"lr: {current_lr:.6f}"
-        
-        log.info(log_msg)
-        
-        # 매 에포크마다 캐싱 통계 출력
-        log.info(f"\n📊 Epoch {epoch+1} Cache Statistics:")
-        trn_dataset.print_stats()
-        val_dataset.print_stats()
-    
-    # 폴드 완료
-    # Early stopping이 활성화된 경우 best_weights를 사용, 그렇지 않으면 기존 방식 사용
-    if early_stopping.best_weights is not None:
-        final_f1 = early_stopping.best_score
-        log.info(f"\n🎯 Fold {fold+1} completed with early stopping! Best F1: {final_f1:.4f}")
-    else:
-        final_f1 = best_val_f1
-        log.info(f"\n🎯 Fold {fold+1} completed! Best F1: {final_f1:.4f}")
-    
-    fold_scores.append(final_f1)
-    
-    # 최고 성능 모델 저장 (early stopping이 활성화된 경우 best_weights 사용)
-    if early_stopping.best_weights is not None:
-        best_models.append(early_stopping.best_weights.copy())
-    elif best_model_state is not None:
-        best_models.append(best_model_state.copy())
-    else:
-        # fallback: 현재 모델 상태 저장
-        best_models.append(model.state_dict().copy())
-    
-    # 메모리 정리
-    del model, optimizer, scheduler, scaler, trn_loader, val_loader
-    del trn_dataset, val_dataset, train_fold, val_fold
-    torch.cuda.empty_cache()
-    gc.collect()
+    log.info(f"📈 Seed {seed} fold scores: {[f'{score:.4f}' for score in fold_scores]}")
+    log.info(f"🎯 Seed {seed} Mean F1 Score: {seed_mean_score:.4f}")
+    log.info(f"📏 Seed {seed} Standard Deviation: {seed_std_score:.4f}")
+    log.info(f"📊 Seed {seed} Score Range: {seed_mean_score:.4f} ± {seed_std_score:.4f}")
+    log.info(f"⬇️ Seed {seed} Min Score: {min(fold_scores):.4f}")
+    log.info(f"⬆️ Seed {seed} Max Score: {max(fold_scores):.4f}")
+    log.info(f"💾 Seed {seed} model paths: {seed_model_paths}")
 
-# K-Fold 결과 요약
-log.info(f"\n{'='*60}")
-log.info(f"📊 K-FOLD CROSS VALIDATION RESULTS")
-log.info(f"{'='*60}")
+# 전체 시드별 결과 요약
+log.info(f"\n{'='*80}")
+log.info(f"📊 ALL SEEDS K-FOLD CROSS VALIDATION RESULTS")
+log.info(f"{'='*80}")
 
-mean_score = np.mean(fold_scores)
-std_score = np.std(fold_scores)
+# 모든 시드의 모든 폴드 점수를 하나의 리스트로 만들기
+all_scores = []
+for seed_idx, seed_scores in enumerate(all_seed_scores):
+    all_scores.extend(seed_scores)
 
-log.info(f"📈 Individual fold scores: {[f'{score:.4f}' for score in fold_scores]}")
-log.info(f"🎯 Mean F1 Score: {mean_score:.4f}")
-log.info(f"📏 Standard Deviation: {std_score:.4f}")
-log.info(f"📊 Score Range: {mean_score:.4f} ± {std_score:.4f}")
-log.info(f"⬇️ Min Score: {min(fold_scores):.4f}")
-log.info(f"⬆️ Max Score: {max(fold_scores):.4f}")
+overall_mean_score = np.mean(all_scores)
+overall_std_score = np.std(all_scores)
+
+log.info(f"📈 Total models trained: {len(all_scores)} (Seeds: {len(SEEDS)}, Folds per seed: {K_FOLDS})")
+log.info(f"🎯 Overall Mean F1 Score: {overall_mean_score:.4f}")
+log.info(f"📏 Overall Standard Deviation: {overall_std_score:.4f}")
+log.info(f"📊 Overall Score Range: {overall_mean_score:.4f} ± {overall_std_score:.4f}")
+log.info(f"⬇️ Overall Min Score: {min(all_scores):.4f}")
+log.info(f"⬆️ Overall Max Score: {max(all_scores):.4f}")
+
+# 시드별 평균 점수 출력
+for seed_idx, (seed, seed_scores) in enumerate(zip(SEEDS, all_seed_scores)):
+    seed_mean = np.mean(seed_scores)
+    log.info(f"🌱 Seed {seed} average: {seed_mean:.4f}")
+
+# 모든 모델 파일 경로 출력
+all_model_paths = []
+for seed_paths in model_paths:
+    all_model_paths.extend(seed_paths)
+log.info(f"💾 Total saved models: {len(all_model_paths)}")
 
 """## Ensemble Inference & Save File
-* 모든 폴드의 모델을 앙상블하여 테스트 이미지에 대한 추론을 진행합니다.
+* 모든 시드의 모든 폴드 모델을 앙상블하여 테스트 이미지에 대한 추론을 진행합니다.
 """
 
-log.info(f"\n🚀 Starting Ensemble Prediction...")
+log.info(f"\n🚀 Starting Ensemble Prediction with {len(all_scores)} models...")
 
 # 테스트 데이터셋 생성
 tst_dataset = ImageDataset(
@@ -898,39 +966,58 @@ tst_dataset = ImageDataset(
     save_augmented_to_disk=False  # 테스트는 증강하지 않으므로 저장하지 않음
 )
 
-# 앙상블을 위해 모든 폴드의 모델 로드
-ensemble_models = []
-for fold in range(K_FOLDS):
+# 앙상블을 위해 저장된 모든 모델을 순차적으로 로드하여 예측
+log.info(f"🔮 Running ensemble prediction with {len(all_model_paths)} models and TTA...")
+
+# 모든 모델의 예측 결과를 저장할 리스트
+all_predictions = []
+
+# 각 모델을 순차적으로 로드하여 예측
+for i, model_path in enumerate(all_model_paths):
+    log.info(f"🔮 Loading and predicting with model {i+1}/{len(all_model_paths)}: {os.path.basename(model_path)}")
+    
+    # 모델 로드
     model = timm.create_model(
         model_name,
         pretrained=True,
         num_classes=17
     ).to(device)
-    model.load_state_dict(best_models[fold])
-    ensemble_models.append(model)
-    log.info(f"✅ Loaded Fold {fold+1} model")
+    
+    model.load_state_dict(torch.load(model_path, map_location=device))
+    
+    # 예측 수행
+    fold_predictions = predict_with_tta(model, tst_dataset, device, img_size)
+    all_predictions.append(fold_predictions)
+    
+    # 메모리 정리
+    del model
+    torch.cuda.empty_cache()
+    gc.collect()
+    
+    log.info(f"✅ Completed prediction with {os.path.basename(model_path)}")
 
-# 앙상블 예측 실행
-log.info(f"\n🔮 Running ensemble prediction with {K_FOLDS} models and TTA...")
-preds_list = predict_ensemble(ensemble_models, tst_dataset, device, img_size)
+# 모든 모델의 예측을 평균하여 최종 예측 생성
+log.info(f"🎯 Averaging predictions from {len(all_predictions)} models...")
+ensemble_predictions = np.mean(all_predictions, axis=0)
+final_predictions = np.argmax(ensemble_predictions, axis=1)
 
 # 결과 저장
 pred_df = pd.DataFrame(tst_dataset.df, columns=['ID', 'target'])
-pred_df['target'] = preds_list
+pred_df['target'] = final_predictions
 
 sample_submission_df = pd.read_csv(f"{data_path}/sample_submission.csv")
 assert (sample_submission_df['ID'] == pred_df['ID']).all()
 
 output_path = "./output"
 os.makedirs(output_path, exist_ok=True)
-pred_df.to_csv(f"{output_path}/pred_advanced_kfold_tta2_efnv2rwm_v3_augx2_saveimg.csv", index=False)
+pred_df.to_csv(f"{output_path}/pred_advanced_kfold_tta2_efnv2rwm_v3_augx2_saveimg_seed_ensemble.csv", index=False)
 
-log.info(f"\n✅ Ensemble prediction completed and saved to {output_path}/pred_advanced_kfold_tta2_efnv2rwm_v3_augx2_saveimg.csv")
-log.info(f"📈 Final K-Fold CV Score: {mean_score:.4f} ± {std_score:.4f}")
+log.info(f"\n✅ Ensemble prediction completed and saved to {output_path}/pred_advanced_kfold_tta2_efnv2rwm_v3_augx2_saveimg_seed_ensemble.csv")
+log.info(f"📈 Final Overall CV Score: {overall_mean_score:.4f} ± {overall_std_score:.4f}")
+log.info(f"🎯 Used {len(all_model_paths)} models for ensemble prediction")
+log.info(f"💾 All model files saved in: {models_dir}")
 
 # 메모리 정리
-for model in ensemble_models:
-    del model
 torch.cuda.empty_cache()
 gc.collect()
 
