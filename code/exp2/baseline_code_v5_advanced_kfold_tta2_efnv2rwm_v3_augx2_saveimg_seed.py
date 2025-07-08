@@ -115,7 +115,7 @@ class LabelSmoothingLoss(nn.Module):
 
 # 데이터셋 클래스를 정의합니다.
 class ImageDataset(Dataset):
-    def __init__(self, csv_data, path, transform=None, cache_images=True, cache_augmented=True, augmentation_multiplier=1, save_augmented_to_disk=True):
+    def __init__(self, csv_data, path, transform=None, cache_images=True, cache_augmented=True, augmentation_multiplier=1, save_augmented_to_disk=True, current_seed=None, img_size=None):
         if isinstance(csv_data, str):
             self.df = pd.read_csv(csv_data).values
         else:
@@ -126,6 +126,8 @@ class ImageDataset(Dataset):
         self.cache_augmented = cache_augmented
         self.augmentation_multiplier = augmentation_multiplier
         self.save_augmented_to_disk = save_augmented_to_disk
+        self.current_seed = current_seed
+        self.img_size = img_size
         self.image_cache = {} if cache_images else None
         self.augmented_cache = {} if cache_augmented else None
         
@@ -134,11 +136,18 @@ class ImageDataset(Dataset):
         if self.augraphy_pipeline:
             log.info("📸 Augraphy pipeline initialized")
         
-        # 증강된 이미지 저장 폴더 설정
-        if self.save_augmented_to_disk:
-            self.augmented_cache_dir = os.path.join(os.path.dirname(self.path), 'img_cache')
-            os.makedirs(self.augmented_cache_dir, exist_ok=True)
-            log.info(f"📁 Augmented cache directory: {self.augmented_cache_dir}")
+        # 시드별 증강 이미지 저장 폴더 설정
+        if self.save_augmented_to_disk and self.current_seed is not None:
+            # 캐시 디렉토리를 data 폴더 안으로 변경 (input/data/train_cache)
+            data_dir = os.path.dirname(os.path.dirname(self.path))  # input/data/train/ -> input/data/
+            self.train_cache_dir = os.path.join(data_dir, 'train_cache')
+            # img_size를 포함한 캐시 디렉토리명 생성
+            cache_dir_name = f'img{self.img_size}_seed{self.current_seed}' if self.img_size is not None else f'seed_{self.current_seed}'
+            self.seed_cache_dir = os.path.join(self.train_cache_dir, cache_dir_name)
+            os.makedirs(self.seed_cache_dir, exist_ok=True)
+            log.info(f"📁 Seed {self.current_seed} cache directory: {self.seed_cache_dir}")
+        else:
+            self.seed_cache_dir = None
         
         # 증강 배수가 1보다 큰 경우 데이터를 복제 (원본 제외, 증강된 데이터만 사용)
         if self.augmentation_multiplier > 1:
@@ -170,6 +179,8 @@ class ImageDataset(Dataset):
             'original_cache_misses': 0,
             'augmented_cache_hits': 0,
             'augmented_cache_misses': 0,
+            'disk_cache_hits': 0,
+            'disk_cache_misses': 0,
             'disk_loads': 0,
             'augmentations': 0,
             'augmented_saves': 0
@@ -177,37 +188,87 @@ class ImageDataset(Dataset):
 
     def _get_augmented_cache_path(self, img_name, aug_idx):
         """증강된 이미지 캐시 파일 경로를 반환합니다."""
-        if not self.save_augmented_to_disk:
+        if not self.save_augmented_to_disk or self.seed_cache_dir is None:
             return None
-        # 파일명에서 확장자 제거하고 증강 인덱스와 함께 .jpg 확장자 추가
+        # 파일명에서 확장자 제거하고 증강 인덱스와 함께 .pt 확장자 추가 (텐서 저장용)
         base_name = os.path.splitext(img_name)[0]
-        return os.path.join(self.augmented_cache_dir, f"{base_name}_aug{aug_idx}.jpg")
+        return os.path.join(self.seed_cache_dir, f"{base_name}_aug_{aug_idx}.pt")
     
-    def _save_augmented_to_disk(self, img_name, aug_idx, img_array):
+    def _get_augmented_visual_path(self, img_name, aug_idx):
+        """증강된 이미지 시각적 확인용 파일 경로를 반환합니다."""
+        if not self.save_augmented_to_disk or self.seed_cache_dir is None:
+            return None
+        # 파일명에서 확장자 제거하고 증강 인덱스와 함께 .jpg 확장자 추가 (시각적 확인용)
+        base_name = os.path.splitext(img_name)[0]
+        return os.path.join(self.seed_cache_dir, f"{base_name}_aug_{aug_idx}.jpg")
+    
+    def _get_tta_cache_path(self, img_name, tta_idx):
+        """TTA 이미지 캐시 파일 경로를 반환합니다."""
+        if not self.save_augmented_to_disk or self.seed_cache_dir is None:
+            return None
+        # 파일명에서 확장자 제거하고 TTA 인덱스와 함께 .pt 확장자 추가 (텐서 저장용)
+        base_name = os.path.splitext(img_name)[0]
+        return os.path.join(self.seed_cache_dir, f"{base_name}_tta_{tta_idx}.pt")
+    
+    def _get_tta_visual_path(self, img_name, tta_idx):
+        """TTA 이미지 시각적 확인용 파일 경로를 반환합니다."""
+        if not self.save_augmented_to_disk or self.seed_cache_dir is None:
+            return None
+        # 파일명에서 확장자 제거하고 TTA 인덱스와 함께 .jpg 확장자 추가 (시각적 확인용)
+        base_name = os.path.splitext(img_name)[0]
+        return os.path.join(self.seed_cache_dir, f"{base_name}_tta_{tta_idx}.jpg")
+    
+    def _load_image_from_cache(self, cache_path):
+        """캐시 파일에서 이미지를 로드합니다."""
+        if cache_path is None or not os.path.exists(cache_path):
+            return None
+        
+        try:
+            # 텐서 파일에서 직접 로드 (더 빠름)
+            img_tensor = torch.load(cache_path, map_location='cpu')
+            
+            self.stats['disk_cache_hits'] += 1
+            return img_tensor
+            
+        except Exception as e:
+            log.warning(f"Failed to load cached tensor from {cache_path}: {e}")
+            self.stats['disk_cache_misses'] += 1
+            return None
+    
+    def _save_augmented_to_disk(self, img_name, aug_idx, img_tensor):
         """증강된 이미지를 디스크에 저장합니다."""
-        if not self.save_augmented_to_disk:
+        if not self.save_augmented_to_disk or self.seed_cache_dir is None:
             return
         
         try:
+            # 텐서를 직접 저장 (더 빠름)
             cache_path = self._get_augmented_cache_path(img_name, aug_idx)
             if cache_path is not None:
-                # 정규화된 텐서를 원본 이미지로 역변환
-                # img_array는 [C, H, W] 형태이므로 [H, W, C]로 변환
+                torch.save(img_tensor.cpu(), cache_path)
+                self.stats['augmented_saves'] += 1
+            
+            # 시각적 확인용 jpg 파일도 저장
+            visual_path = self._get_augmented_visual_path(img_name, aug_idx)
+            if visual_path is not None:
+                # 텐서를 이미지로 변환
+                img_array = img_tensor.cpu().numpy()
+                
+                # [C, H, W] -> [H, W, C] 변환
                 img_array_hwc = img_array.transpose(1, 2, 0)
                 
                 # 정규화 역변환 (ImageNet 평균과 표준편차 사용)
                 mean = np.array([0.485, 0.456, 0.406])
                 std = np.array([0.229, 0.224, 0.225])
                 
-                # 정규화 해제: (normalized - mean) / std -> original = normalized * std + mean
+                # 정규화 해제: normalized = (original - mean) / std -> original = normalized * std + mean
                 img_array_denorm = img_array_hwc * std + mean
                 
                 # [0, 1] 범위로 클리핑하고 255를 곱해서 uint8로 변환
                 img_array_uint8 = (np.clip(img_array_denorm, 0, 1) * 255).astype(np.uint8)
                 
                 pil_image = Image.fromarray(img_array_uint8)
-                pil_image.save(cache_path, 'JPEG', quality=95)
-                self.stats['augmented_saves'] += 1
+                pil_image.save(visual_path, 'JPEG', quality=95)
+                
         except Exception as e:
             log.warning(f"Failed to save augmented cache for {img_name}_aug{aug_idx}: {e}")
 
@@ -223,70 +284,86 @@ class ImageDataset(Dataset):
             name, target = self.df[idx]
             aug_idx = 0
         
-        # 증강된 이미지가 캐시되어 있는지 확인
+        # 증강된 이미지 캐시 확인 (메모리 캐시)
         cache_key = f"{name}_aug{aug_idx}" if aug_idx > 0 else name
         if self.cache_augmented and self.augmented_cache is not None and cache_key in self.augmented_cache:
             img = self.augmented_cache[cache_key]
             self.stats['augmented_cache_hits'] += 1
+            target = int(target)
+            return img, target
+        
+        self.stats['augmented_cache_misses'] += 1
+        
+        # 디스크 캐시 확인 (증강 이미지)
+        if aug_idx > 0:
+            cache_path = self._get_augmented_cache_path(name, aug_idx)
+            cached_img = self._load_image_from_cache(cache_path)
+            if cached_img is not None:
+                # 메모리 캐시에도 저장
+                if self.cache_augmented and self.augmented_cache is not None:
+                    self.augmented_cache[cache_key] = cached_img
+                target = int(target)
+                return cached_img, target
+        
+        # 캐시에 없으면 이미지 로드 및 증강 처리
+        # 원본 이미지 로드
+        if self.cache_images and self.image_cache is not None and name in self.image_cache:
+            img = self.image_cache[name]
+            self.stats['original_cache_hits'] += 1
         else:
-            self.stats['augmented_cache_misses'] += 1
+            self.stats['original_cache_misses'] += 1
+            img = np.array(Image.open(os.path.join(self.path, name)))
+            self.stats['disk_loads'] += 1
             
-            # 원본 이미지 로드
-            if self.cache_images and self.image_cache is not None and name in self.image_cache:
-                img = self.image_cache[name]
-                self.stats['original_cache_hits'] += 1
-            else:
-                self.stats['original_cache_misses'] += 1
-                img = np.array(Image.open(os.path.join(self.path, name)))
-                self.stats['disk_loads'] += 1
+            # 메모리 캐시에 저장
+            if self.cache_images and self.image_cache is not None:
+                self.image_cache[name] = img
+        
+        # 증강 적용
+        if self.transform:
+            if aug_idx > 0:
+                # 증강된 데이터: Augraphy + 랜덤 증강 + transform 적용
+                self.stats['augmentations'] += 1
                 
-                # 메모리 캐시에 저장
-                if self.cache_images and self.image_cache is not None:
-                    self.image_cache[name] = img
-            
-            # 증강 적용
-            if self.transform:
-                if aug_idx > 0:
-                    # 증강된 데이터: Augraphy + 랜덤 증강 + transform 적용
-                    self.stats['augmentations'] += 1
-                    
-                    # Augraphy 적용 (50% 확률)
-                    if self.augraphy_pipeline and random.random() < 0.5:
-                        try:
-                            # img가 numpy array인지 확인
-                            if not isinstance(img, np.ndarray):
-                                img = np.array(img)
-                            # 흑백이면 3채널로 변환
-                            if img.ndim == 2:
-                                img = np.stack([img]*3, axis=-1)
-                            if img.shape[2] == 1:
-                                img = np.repeat(img, 3, axis=2)
-                            if img.dtype != np.uint8:
-                                img = img.astype(np.uint8)
-                            # Augraphy 적용
-                            img = self.augraphy_pipeline(img)
-                        except Exception as e:
-                            log.warning(f"Augraphy failed for {name}: {e}")
-                    
-                    # Albumentations transform 적용
-                    img = self.transform(image=img)['image']
-                    
-                    # 증강된 이미지 캐싱
-                    if self.cache_augmented and self.augmented_cache is not None:
-                        self.augmented_cache[cache_key] = img
-                        # 증강된 이미지를 디스크에 저장
-                        self._save_augmented_to_disk(name, aug_idx, img.cpu().numpy())
-                else:
-                    # 원본 데이터: transform만 적용 (resize, normalize 등, 증강 없음)
-                    # 원본용 transform 생성 (증강 제외)
-                    original_transform = A.Compose([
-                        A.LongestMaxSize(max_size=320, interpolation=cv2.INTER_AREA),  # img_size 하드코딩
-                        A.PadIfNeeded(min_height=320, min_width=320,
-                                    border_mode=cv2.BORDER_CONSTANT, value=(255, 255, 255), p=1),
-                        A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-                        ToTensorV2(),
-                    ])
-                    img = original_transform(image=img)['image']
+                # Augraphy 적용 (50% 확률)
+                if self.augraphy_pipeline and random.random() < 0.5:
+                    try:
+                        # img가 numpy array인지 확인
+                        if not isinstance(img, np.ndarray):
+                            img = np.array(img)
+                        # 흑백이면 3채널로 변환
+                        if img.ndim == 2:
+                            img = np.stack([img]*3, axis=-1)
+                        if img.shape[2] == 1:
+                            img = np.repeat(img, 3, axis=2)
+                        if img.dtype != np.uint8:
+                            img = img.astype(np.uint8)
+                        # Augraphy 적용
+                        img = self.augraphy_pipeline(img)
+                    except Exception as e:
+                        log.warning(f"Augraphy failed for {name}: {e}")
+                
+                # Albumentations transform 적용
+                img = self.transform(image=img)['image']
+                
+                # 증강된 이미지 캐싱
+                if self.cache_augmented and self.augmented_cache is not None:
+                    self.augmented_cache[cache_key] = img
+                
+                # 증강된 이미지를 디스크에 저장
+                self._save_augmented_to_disk(name, aug_idx, img)
+                
+            else:
+                # 원본 데이터: transform만 적용 (resize, normalize 등, 증강 없음)
+                # 원본용 transform 생성 (증강 제외)
+                original_transform = A.Compose([
+                    A.LongestMaxSize(max_size=320, interpolation=cv2.INTER_AREA),  # img_size 하드코딩
+                    A.PadIfNeeded(min_height=320, min_width=320,
+                                border_mode=cv2.BORDER_CONSTANT, value=(255, 255, 255), p=1),
+                    A.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
+                    ToTensorV2(),
+                ])
+                img = original_transform(image=img)['image']
         
         # target을 정수로 변환 (numpy array에서 문자열로 읽힐 수 있음)
         target = int(target)
@@ -298,22 +375,18 @@ class ImageDataset(Dataset):
         current_epoch_requests = self.stats['augmented_cache_hits'] + self.stats['augmented_cache_misses']
         
         if current_epoch_requests > 0:
-            log.info(f"📊 Dataset Cache Statistics:")
+            log.info(f"📊 Dataset Disk Cache Statistics (Memory Cache Disabled):")
             log.info(f"   Current epoch requests: {current_epoch_requests}")
-            log.info(f"   Original cache hits: {self.stats['original_cache_hits']} ({self.stats['original_cache_hits']/current_epoch_requests*100:.1f}%)")
-            log.info(f"   Original cache misses: {self.stats['original_cache_misses']} ({self.stats['original_cache_misses']/current_epoch_requests*100:.1f}%)")
-            log.info(f"   Augmented cache hits: {self.stats['augmented_cache_hits']} ({self.stats['augmented_cache_hits']/current_epoch_requests*100:.1f}%)")
-            log.info(f"   Augmented cache misses: {self.stats['augmented_cache_misses']} ({self.stats['augmented_cache_misses']/current_epoch_requests*100:.1f}%)")
+            log.info(f"   Disk cache hits: {self.stats['disk_cache_hits']} ({self.stats['disk_cache_hits']/current_epoch_requests*100:.1f}%)")
+            log.info(f"   Disk cache misses: {self.stats['disk_cache_misses']} ({self.stats['disk_cache_misses']/current_epoch_requests*100:.1f}%)")
             log.info(f"   Disk loads: {self.stats['disk_loads']}")
             log.info(f"   Augmented saves: {self.stats['augmented_saves']}")
             log.info(f"   Augmentations applied: {self.stats['augmentations']}")
-            log.info(f"   Original cache size: {len(self.image_cache) if self.image_cache else 0}")
-            log.info(f"   Augmented cache size: {len(self.augmented_cache) if self.augmented_cache else 0}")
             
-            # 캐시 효율성 계산
-            if self.stats['augmented_cache_hits'] > 0:
-                cache_efficiency = self.stats['augmented_cache_hits'] / current_epoch_requests * 100
-                log.info(f"   Cache efficiency: {cache_efficiency:.1f}%")
+            # 디스크 캐시 효율성 계산
+            if self.stats['disk_cache_hits'] > 0:
+                disk_cache_efficiency = self.stats['disk_cache_hits'] / current_epoch_requests * 100
+                log.info(f"   Disk cache efficiency: {disk_cache_efficiency:.1f}%")
     
     def reset_stats(self):
         """통계를 초기화합니다."""
@@ -322,6 +395,8 @@ class ImageDataset(Dataset):
             'original_cache_misses': 0,
             'augmented_cache_hits': 0,
             'augmented_cache_misses': 0,
+            'disk_cache_hits': 0,
+            'disk_cache_misses': 0,
             'disk_loads': 0,
             'augmentations': 0,
             'augmented_saves': 0
@@ -336,7 +411,7 @@ def train_one_epoch(loader, model, optimizer, loss_fn, device, scaler):
 
     pbar = tqdm(loader, desc="Training")
     for image, targets in pbar:
-        image = image.to(device)
+        image = image.to(device, dtype=torch.float32)  # 명시적으로 float32로 변환
         targets = targets.to(device)
 
         optimizer.zero_grad()
@@ -377,7 +452,7 @@ def validate_one_epoch(loader, model, loss_fn, device):
     pbar = tqdm(loader, desc="Validation")
     with torch.no_grad():
         for image, targets in pbar:
-            image = image.to(device)
+            image = image.to(device, dtype=torch.float32)  # 명시적으로 float32로 변환
             targets = targets.to(device)
 
             with autocast():
@@ -457,59 +532,8 @@ def get_val_tta_transforms(img_size):
         ]),
     ]
 
-# 고정된 TTA를 사용하는 검증 함수
-def validate_one_epoch_tta(val_data, model, loss_fn, device, img_size, data_path):
-    """고정된 TTA를 사용한 validation"""
-    model.eval()
-    val_loss = 0
-    preds_list = []
-    targets_list = []
-    
-    val_tta_transforms = get_val_tta_transforms(img_size)
-    
-    with torch.no_grad():
-        for idx, (img_name, target) in enumerate(tqdm(val_data.values, desc="Validation TTA")):
-            # 이미지 로드
-            img_path = os.path.join(data_path, "train", img_name)  
-            img = np.array(Image.open(img_path))
-            
-            # 각 TTA transform 적용하여 예측
-            all_preds = []
-            all_losses = []
-            
-            for transform in val_tta_transforms:
-                transformed_img = transform(image=img)['image'].unsqueeze(0).to(device)
-                target_tensor = torch.tensor([target]).to(device)
-                
-                with autocast():
-                    preds = model(transformed_img)
-                    loss = loss_fn(preds, target_tensor)
-                
-                all_preds.append(preds.softmax(dim=1))
-                all_losses.append(loss.item())
-            
-            # 예측 평균
-            final_pred = torch.stack(all_preds).mean(0)
-            avg_loss = np.mean(all_losses)
-            
-            val_loss += avg_loss
-            preds_list.extend(final_pred.argmax(dim=1).detach().cpu().numpy())
-            targets_list.append(target)
-    
-    val_loss /= len(val_data)
-    val_acc = accuracy_score(targets_list, preds_list)
-    val_f1 = f1_score(targets_list, preds_list, average='macro')
-    
-    ret = {
-        "val_loss": val_loss,
-        "val_acc": val_acc,
-        "val_f1": val_f1,
-    }
-    
-    return ret
-
 # Test Time Augmentation을 위한 예측 함수 (tst_dataset 사용)
-def predict_with_tta(model, dataset, device, img_size):
+def predict_with_tta(model, dataset, device, img_size, current_seed=None):
     """진짜 TTA를 적용한 예측 함수 - dataset을 사용"""
     model.eval()
     predictions = []
@@ -517,21 +541,116 @@ def predict_with_tta(model, dataset, device, img_size):
     # TTA transforms 가져오기 (validation과 동일)
     tta_transforms = get_val_tta_transforms(img_size)
     
+    # 시드별 TTA 캐시 디렉토리 설정
+    if current_seed is not None:
+        data_dir = os.path.dirname(os.path.dirname(dataset.path))  # input/data/train/ -> input/data/
+        train_cache_dir = os.path.join(data_dir, 'train_cache')
+        # img_size를 포함한 캐시 디렉토리명 생성
+        cache_dir_name = f'img{img_size}_seed{current_seed}' if img_size is not None else f'seed_{current_seed}'
+        seed_cache_dir = os.path.join(train_cache_dir, cache_dir_name)
+        os.makedirs(seed_cache_dir, exist_ok=True)
+    else:
+        seed_cache_dir = None
+    
+    def get_tta_cache_path(img_name, tta_idx):
+        """TTA 이미지 캐시 파일 경로를 반환합니다."""
+        if seed_cache_dir is None:
+            return None
+        base_name = os.path.splitext(img_name)[0]
+        return os.path.join(seed_cache_dir, f"{base_name}_tta_{tta_idx}.pt")
+    
+    def get_tta_visual_path(img_name, tta_idx):
+        """TTA 이미지 시각적 확인용 파일 경로를 반환합니다."""
+        if seed_cache_dir is None:
+            return None
+        base_name = os.path.splitext(img_name)[0]
+        return os.path.join(seed_cache_dir, f"{base_name}_tta_{tta_idx}.jpg")
+    
+    def load_tta_from_cache(cache_path):
+        """캐시된 TTA 이미지를 로드합니다."""
+        if cache_path is None or not os.path.exists(cache_path):
+            return None
+        
+        try:
+            img = Image.open(cache_path)
+            img_array = np.array(img)
+            
+            # 정규화 적용 (ImageNet 평균과 표준편차 사용)
+            img_array = img_array.astype(np.float32) / 255.0
+            mean = np.array([0.485, 0.456, 0.406])
+            std = np.array([0.229, 0.224, 0.225])
+            img_array = (img_array - mean) / std
+            
+            # [H, W, C] -> [C, H, W] 변환 후 텐서로 변환
+            img_tensor = torch.from_numpy(img_array.transpose(2, 0, 1))
+            return img_tensor
+            
+        except Exception as e:
+            log.warning(f"Failed to load cached TTA image from {cache_path}: {e}")
+            return None
+    
+    def save_tta_to_cache(img_name, tta_idx, img_tensor):
+        """TTA 이미지를 캐시에 저장합니다."""
+        if seed_cache_dir is None:
+            return
+        
+        try:
+            cache_path = get_tta_cache_path(img_name, tta_idx)
+            if cache_path is not None:
+                # 텐서를 이미지로 변환
+                img_array = img_tensor.cpu().numpy()
+                
+                # [C, H, W] -> [H, W, C] 변환
+                img_array_hwc = img_array.transpose(1, 2, 0)
+                
+                # 정규화 역변환 (ImageNet 평균과 표준편차 사용)
+                mean = np.array([0.485, 0.456, 0.406])
+                std = np.array([0.229, 0.224, 0.225])
+                
+                # 정규화 해제: normalized = (original - mean) / std -> original = normalized * std + mean
+                img_array_denorm = img_array_hwc * std + mean
+                
+                # [0, 1] 범위로 클리핑하고 255를 곱해서 uint8로 변환
+                img_array_uint8 = (np.clip(img_array_denorm, 0, 1) * 255).astype(np.uint8)
+                
+                pil_image = Image.fromarray(img_array_uint8)
+                pil_image.save(cache_path, 'JPEG', quality=95)
+                
+        except Exception as e:
+            log.warning(f"Failed to save TTA cache for {img_name}_tta{tta_idx}: {e}")
+    
     with torch.no_grad():
         for idx in tqdm(range(len(dataset)), desc="Real TTA Prediction"):
             # 원본 이미지를 파일에서 직접 로드 (transform 없이)
-            img_name, _ = dataset.df[idx]
+            if len(dataset.df[idx]) == 3:
+                img_name, _, _ = dataset.df[idx]  # augmentation_multiplier > 1인 경우
+            else:
+                img_name, _ = dataset.df[idx]  # augmentation_multiplier == 1인 경우
             img_path = os.path.join(dataset.path, img_name)
             original_img = np.array(Image.open(img_path))
             
             # 각 TTA transform 적용하여 예측
             all_preds = []
             
-            for transform in tta_transforms:
-                # 매번 원본 이미지에서 다른 변형 적용
-                transformed_img = transform(image=original_img)['image'].unsqueeze(0).to(device)
+            for tta_idx, transform in enumerate(tta_transforms):
+                # 캐시된 TTA 이미지 확인
+                cache_path = get_tta_cache_path(img_name, tta_idx)
+                cached_img = load_tta_from_cache(cache_path)
+                
+                if cached_img is not None:
+                    # 캐시된 이미지 사용
+                    transformed_img = cached_img.unsqueeze(0).to(device)
+                else:
+                    # 매번 원본 이미지에서 다른 변형 적용
+                    transformed_img_tensor = transform(image=original_img)['image']
+                    transformed_img = transformed_img_tensor.unsqueeze(0).to(device)
+                    
+                    # 캐시에 저장
+                    save_tta_to_cache(img_name, tta_idx, transformed_img_tensor)
                 
                 with autocast():
+                    # 입력 텐서를 float32로 명시적으로 변환
+                    transformed_img = transformed_img.float()
                     preds = model(transformed_img)
                 
                 all_preds.append(preds.softmax(dim=1))
@@ -578,7 +697,7 @@ model_name = 'efficientnetv2_rw_m'  # 더 좋은 모델 사용
 # training config
 img_size = 320  # 이미지 크기 대폭 확대
 LR = 1e-3  # 더 낮은 학습률
-EPOCHS = 100  # early stopping을 위해 더 많은 epoch 설정
+EPOCHS = 1 #100  # early stopping을 위해 더 많은 epoch 설정
 BATCH_SIZE = 16  # 큰 모델에 맞춰 배치 크기 조정
 num_workers = 0
 weight_decay = 1e-4
@@ -600,8 +719,8 @@ K_FOLDS = 5
 # 강화된 augmentation을 위한 transform 코드
 trn_transform = A.Compose([
     # 다양한 데이터 증강 기법들
-    # A.HorizontalFlip(p=0.5),
-    # A.VerticalFlip(p=0.2),
+    A.HorizontalFlip(p=0.5),
+    A.VerticalFlip(p=0.2),
     # A.RandomRotate90(p=0.5),
     # A.RandomBrightnessContrast(brightness_limit=0.2, contrast_limit=0.2, p=0.3),
     # A.GaussNoise(var_limit=(10.0, 50.0), p=0.2),
@@ -773,9 +892,9 @@ for seed_idx, seed in enumerate(SEEDS):
         log.info(f"📚 Train samples: {len(train_fold)}")
         log.info(f"📝 Validation samples: {len(val_fold)}")
         
-        # 데이터셋 생성
-        trn_dataset = ImageDataset(train_fold, f"{data_path}/train/", transform=trn_transform, augmentation_multiplier=AUGMENTATION_MULTIPLIER, save_augmented_to_disk=True)
-        val_dataset = ImageDataset(val_fold, f"{data_path}/train/", transform=val_transform, augmentation_multiplier=AUGMENTATION_MULTIPLIER, save_augmented_to_disk=True)
+        # 데이터셋 생성 (메모리 캐시 비활성화, 디스크 캐시만 사용)
+        trn_dataset = ImageDataset(train_fold, f"{data_path}/train/", transform=trn_transform, cache_images=False, cache_augmented=False, augmentation_multiplier=AUGMENTATION_MULTIPLIER, save_augmented_to_disk=True, current_seed=seed, img_size=img_size)
+        val_dataset = ImageDataset(val_fold, f"{data_path}/train/", transform=val_transform, cache_images=False, cache_augmented=False, augmentation_multiplier=AUGMENTATION_MULTIPLIER, save_augmented_to_disk=True, current_seed=seed, img_size=img_size)
         
         # DataLoader 생성
         trn_loader = DataLoader(
@@ -802,6 +921,9 @@ for seed_idx, seed in enumerate(SEEDS):
             pretrained=True,
             num_classes=17
         ).to(device)
+        
+        # 모델을 float32로 명시적으로 변환
+        model = model.float()
         
         log.info(f"🏗️ Model: {model_name}")
         log.info(f"🔢 Number of parameters: {sum(p.numel() for p in model.parameters()):,}")
@@ -864,8 +986,8 @@ for seed_idx, seed in enumerate(SEEDS):
             
             log.info(log_msg)
             
-            # 매 에포크마다 캐싱 통계 출력
-            log.info(f"\n📊 Epoch {epoch+1} Cache Statistics:")
+            # 매 에포크마다 캐싱 통계 출력 (디스크 캐시만)
+            log.info(f"\n📊 Epoch {epoch+1} Disk Cache Statistics:")
             trn_dataset.print_stats()
             val_dataset.print_stats()
         
@@ -957,13 +1079,17 @@ log.info(f"💾 Total saved models: {len(all_model_paths)}")
 
 log.info(f"\n🚀 Starting Ensemble Prediction with {len(all_scores)} models...")
 
-# 테스트 데이터셋 생성
+# 테스트 데이터셋 생성 (메모리 캐시 비활성화)
 tst_dataset = ImageDataset(
     f"{data_path}/sample_submission.csv",
     f"{data_path}/test/",
     transform=None,  # TTA에서 원본 이미지를 직접 변형하므로 여기서는 None
+    cache_images=False,  # 메모리 캐시 비활성화
+    cache_augmented=False,  # 메모리 캐시 비활성화
     augmentation_multiplier=1,  # 테스트는 증강 적용하지 않음
-    save_augmented_to_disk=False  # 테스트는 증강하지 않으므로 저장하지 않음
+    save_augmented_to_disk=False,  # 테스트는 증강하지 않으므로 저장하지 않음
+    current_seed=None,  # 테스트 데이터는 시드 무관
+    img_size=img_size
 )
 
 # 앙상블을 위해 저장된 모든 모델을 순차적으로 로드하여 예측
@@ -976,6 +1102,17 @@ all_predictions = []
 for i, model_path in enumerate(all_model_paths):
     log.info(f"🔮 Loading and predicting with model {i+1}/{len(all_model_paths)}: {os.path.basename(model_path)}")
     
+    # 모델 파일명에서 시드 추출 (예: model_seed42_fold1.pth -> 42)
+    model_filename = os.path.basename(model_path)
+    if 'seed' in model_filename:
+        try:
+            seed_part = model_filename.split('_')[1]  # 'seed42' 부분
+            current_seed = int(seed_part.replace('seed', ''))  # 42
+        except:
+            current_seed = None
+    else:
+        current_seed = None
+    
     # 모델 로드
     model = timm.create_model(
         model_name,
@@ -983,10 +1120,13 @@ for i, model_path in enumerate(all_model_paths):
         num_classes=17
     ).to(device)
     
+    # 모델을 float32로 명시적으로 변환
+    model = model.float()
+    
     model.load_state_dict(torch.load(model_path, map_location=device))
     
-    # 예측 수행
-    fold_predictions = predict_with_tta(model, tst_dataset, device, img_size)
+    # 예측 수행 (해당 모델의 시드를 사용하여 TTA 캐시 활용)
+    fold_predictions = predict_with_tta(model, tst_dataset, device, img_size, current_seed=current_seed)
     all_predictions.append(fold_predictions)
     
     # 메모리 정리
@@ -994,7 +1134,7 @@ for i, model_path in enumerate(all_model_paths):
     torch.cuda.empty_cache()
     gc.collect()
     
-    log.info(f"✅ Completed prediction with {os.path.basename(model_path)}")
+    log.info(f"✅ Completed prediction with {os.path.basename(model_path)} (seed: {current_seed})")
 
 # 모든 모델의 예측을 평균하여 최종 예측 생성
 log.info(f"🎯 Averaging predictions from {len(all_predictions)} models...")
@@ -1002,7 +1142,15 @@ ensemble_predictions = np.mean(all_predictions, axis=0)
 final_predictions = np.argmax(ensemble_predictions, axis=1)
 
 # 결과 저장
-pred_df = pd.DataFrame(tst_dataset.df, columns=['ID', 'target'])
+# tst_dataset.df의 구조에 따라 적절한 컬럼 선택
+if len(tst_dataset.df[0]) == 3:
+    # augmentation_multiplier > 1인 경우: (name, target, aug_idx)
+    pred_df = pd.DataFrame(tst_dataset.df, columns=['ID', 'target', 'aug_idx'])
+    pred_df = pred_df[['ID', 'target']]  # aug_idx 컬럼 제거
+else:
+    # augmentation_multiplier == 1인 경우: (name, target)
+    pred_df = pd.DataFrame(tst_dataset.df, columns=['ID', 'target'])
+
 pred_df['target'] = final_predictions
 
 sample_submission_df = pd.read_csv(f"{data_path}/sample_submission.csv")
@@ -1016,6 +1164,25 @@ log.info(f"\n✅ Ensemble prediction completed and saved to {output_path}/pred_a
 log.info(f"📈 Final Overall CV Score: {overall_mean_score:.4f} ± {overall_std_score:.4f}")
 log.info(f"🎯 Used {len(all_model_paths)} models for ensemble prediction")
 log.info(f"💾 All model files saved in: {models_dir}")
+log.info(f"🎨 Augmented images cached in: {os.path.join(data_path, 'train_cache')}")
+
+# 캐시 통계 출력
+log.info(f"\n📊 Final Cache Statistics:")
+train_cache_path = os.path.join(data_path, 'train_cache')
+if os.path.exists(train_cache_path):
+    # 새로운 디렉토리명 패턴: img{img_size}_seed{seed}
+    cache_dir_pattern = f'img{img_size}_seed'
+    total_cache_dirs = len([d for d in os.listdir(train_cache_path) if d.startswith(cache_dir_pattern)])
+    log.info(f"   Total seed cache directories: {total_cache_dirs}")
+    for seed in SEEDS:
+        seed_cache_dir = os.path.join(train_cache_path, f'img{img_size}_seed{seed}')
+        if os.path.exists(seed_cache_dir):
+            cache_files = len([f for f in os.listdir(seed_cache_dir) if f.endswith('.jpg')])
+            log.info(f"   Seed {seed} cached images: {cache_files}")
+        else:
+            log.info(f"   Seed {seed} cache directory not found: {seed_cache_dir}")
+else:
+    log.info(f"   Train cache directory not found: {train_cache_path}")
 
 # 메모리 정리
 torch.cuda.empty_cache()
