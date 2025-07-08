@@ -16,3 +16,4 @@ train.csv
 *.yml
 # *.csv
 *.pth
+.env
