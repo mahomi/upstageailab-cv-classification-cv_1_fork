@@ -1,0 +1,652 @@
+[25-07-07 19:05:12] [INFO] 완전한 재현성 설정이 활성화되었습니다.
+[25-07-07 19:05:12] [INFO] 🌱 Random seed set to 42
+[25-07-07 19:05:12] [INFO] 💻 Using device: cuda
+[25-07-07 19:05:12] [INFO] 📂 Total training samples: 1570
+[25-07-07 19:05:12] [INFO] 📊 Class distribution: {0: 100, 1: 46, 2: 100, 3: 100, 4: 100, 5: 100, 6: 100, 7: 100, 8: 100, 9: 100, 10: 100, 11: 100, 12: 100, 13: 74, 14: 50, 15: 100, 16: 100}
+[25-07-07 19:05:12] [INFO] 
+🔄 Starting 5-Fold Cross Validation Training...
+[25-07-07 19:05:12] [INFO] 
+============================================================
+[25-07-07 19:05:12] [INFO] 🔥 FOLD 1/5
+[25-07-07 19:05:12] [INFO] ============================================================
+[25-07-07 19:05:12] [INFO] 📚 Train samples: 1256
+[25-07-07 19:05:12] [INFO] 📝 Validation samples: 314
+[25-07-07 19:05:14] [INFO] 🏗️ Model: efficientnetv2_rw_m
+[25-07-07 19:05:14] [INFO] 🔢 Number of parameters: 51,120,043
+[25-07-07 19:05:14] [INFO] 🚀 Starting Fold 1 training...
+[25-07-07 19:05:14] [INFO] 
+--- Fold 1 | Epoch 1/100 ---
+[25-07-07 19:06:32] [INFO] 💾 Fold 1 Best model updated! F1: 0.8356
+[25-07-07 19:06:32] [INFO] train_loss: 1.3730 | train_acc: 0.7229 | train_f1: 0.6909 | val_loss: 0.9938 | val_acc: 0.8535 | val_f1: 0.8356 | lr: 0.001000
+[25-07-07 19:06:32] [INFO] 
+--- Fold 1 | Epoch 2/100 ---
+[25-07-07 19:07:49] [INFO] 💾 Fold 1 Best model updated! F1: 0.8597
+[25-07-07 19:07:49] [INFO] train_loss: 1.0025 | train_acc: 0.8559 | train_f1: 0.8351 | val_loss: 0.9296 | val_acc: 0.8917 | val_f1: 0.8597 | lr: 0.000999
+[25-07-07 19:07:49] [INFO] 
+--- Fold 1 | Epoch 3/100 ---
+[25-07-07 19:09:07] [INFO] 💾 Fold 1 Best model updated! F1: 0.9259
+[25-07-07 19:09:07] [INFO] train_loss: 0.8883 | train_acc: 0.8917 | train_f1: 0.8797 | val_loss: 0.8503 | val_acc: 0.9236 | val_f1: 0.9259 | lr: 0.000998
+[25-07-07 19:09:07] [INFO] 
+--- Fold 1 | Epoch 4/100 ---
+[25-07-07 19:10:25] [INFO] train_loss: 0.8771 | train_acc: 0.8973 | train_f1: 0.8913 | val_loss: 0.9866 | val_acc: 0.8822 | val_f1: 0.8803 | lr: 0.000996
+[25-07-07 19:10:25] [INFO] 
+--- Fold 1 | Epoch 5/100 ---
+[25-07-07 19:11:42] [INFO] train_loss: 0.8880 | train_acc: 0.9005 | train_f1: 0.8952 | val_loss: 0.8663 | val_acc: 0.9076 | val_f1: 0.8962 | lr: 0.000994
+[25-07-07 19:11:42] [INFO] 
+--- Fold 1 | Epoch 6/100 ---
+[25-07-07 19:13:00] [INFO] train_loss: 0.8470 | train_acc: 0.9172 | train_f1: 0.9140 | val_loss: 0.8459 | val_acc: 0.9045 | val_f1: 0.8838 | lr: 0.000991
+[25-07-07 19:13:00] [INFO] 
+--- Fold 1 | Epoch 7/100 ---
+[25-07-07 19:14:18] [INFO] 💾 Fold 1 Best model updated! F1: 0.9332
+[25-07-07 19:14:18] [INFO] train_loss: 0.8937 | train_acc: 0.9021 | train_f1: 0.8968 | val_loss: 0.8212 | val_acc: 0.9331 | val_f1: 0.9332 | lr: 0.000988
+[25-07-07 19:14:18] [INFO] 
+--- Fold 1 | Epoch 8/100 ---
+[25-07-07 19:15:35] [INFO] train_loss: 0.8550 | train_acc: 0.9084 | train_f1: 0.9048 | val_loss: 0.8631 | val_acc: 0.9013 | val_f1: 0.8878 | lr: 0.000984
+[25-07-07 19:15:35] [INFO] 
+--- Fold 1 | Epoch 9/100 ---
+[25-07-07 19:16:53] [INFO] train_loss: 0.8225 | train_acc: 0.9299 | train_f1: 0.9274 | val_loss: 0.8028 | val_acc: 0.9268 | val_f1: 0.9130 | lr: 0.000980
+[25-07-07 19:16:53] [INFO] 
+--- Fold 1 | Epoch 10/100 ---
+[25-07-07 19:18:11] [INFO] train_loss: 0.8246 | train_acc: 0.9260 | train_f1: 0.9188 | val_loss: 0.8127 | val_acc: 0.9331 | val_f1: 0.9218 | lr: 0.000976
+[25-07-07 19:18:11] [INFO] 
+--- Fold 1 | Epoch 11/100 ---
+[25-07-07 19:19:28] [INFO] train_loss: 0.7821 | train_acc: 0.9467 | train_f1: 0.9479 | val_loss: 0.8343 | val_acc: 0.9268 | val_f1: 0.9220 | lr: 0.000970
+[25-07-07 19:19:28] [INFO] 
+--- Fold 1 | Epoch 12/100 ---
+[25-07-07 19:20:45] [INFO] 💾 Fold 1 Best model updated! F1: 0.9361
+[25-07-07 19:20:45] [INFO] train_loss: 0.8263 | train_acc: 0.9268 | train_f1: 0.9217 | val_loss: 0.8175 | val_acc: 0.9427 | val_f1: 0.9361 | lr: 0.000965
+[25-07-07 19:20:45] [INFO] 
+--- Fold 1 | Epoch 13/100 ---
+[25-07-07 19:22:03] [INFO] train_loss: 0.8268 | train_acc: 0.9323 | train_f1: 0.9275 | val_loss: 0.9406 | val_acc: 0.9013 | val_f1: 0.8813 | lr: 0.000959
+[25-07-07 19:22:03] [INFO] 
+--- Fold 1 | Epoch 14/100 ---
+[25-07-07 19:23:21] [INFO] train_loss: 0.8173 | train_acc: 0.9379 | train_f1: 0.9313 | val_loss: 1.0050 | val_acc: 0.8631 | val_f1: 0.8401 | lr: 0.000952
+[25-07-07 19:23:21] [INFO] 
+--- Fold 1 | Epoch 15/100 ---
+[25-07-07 19:24:38] [INFO] 💾 Fold 1 Best model updated! F1: 0.9413
+[25-07-07 19:24:38] [INFO] train_loss: 0.8228 | train_acc: 0.9403 | train_f1: 0.9385 | val_loss: 0.8080 | val_acc: 0.9522 | val_f1: 0.9413 | lr: 0.000946
+[25-07-07 19:24:38] [INFO] 
+--- Fold 1 | Epoch 16/100 ---
+[25-07-07 19:25:56] [INFO] train_loss: 0.7746 | train_acc: 0.9594 | train_f1: 0.9568 | val_loss: 0.7956 | val_acc: 0.9522 | val_f1: 0.9406 | lr: 0.000938
+[25-07-07 19:25:56] [INFO] 
+--- Fold 1 | Epoch 17/100 ---
+[25-07-07 19:27:13] [INFO] train_loss: 0.7873 | train_acc: 0.9498 | train_f1: 0.9458 | val_loss: 0.7965 | val_acc: 0.9522 | val_f1: 0.9406 | lr: 0.000930
+[25-07-07 19:27:13] [INFO] 
+--- Fold 1 | Epoch 18/100 ---
+[25-07-07 19:28:31] [INFO] train_loss: 0.7833 | train_acc: 0.9522 | train_f1: 0.9497 | val_loss: 0.8807 | val_acc: 0.9363 | val_f1: 0.9368 | lr: 0.000922
+[25-07-07 19:28:31] [INFO] 
+--- Fold 1 | Epoch 19/100 ---
+[25-07-07 19:29:49] [INFO] 💾 Fold 1 Best model updated! F1: 0.9726
+[25-07-07 19:29:49] [INFO] train_loss: 0.7971 | train_acc: 0.9403 | train_f1: 0.9372 | val_loss: 0.7749 | val_acc: 0.9713 | val_f1: 0.9726 | lr: 0.000914
+[25-07-07 19:29:49] [INFO] 
+--- Fold 1 | Epoch 20/100 ---
+[25-07-07 19:31:07] [INFO] train_loss: 0.7472 | train_acc: 0.9689 | train_f1: 0.9680 | val_loss: 0.8104 | val_acc: 0.9427 | val_f1: 0.9336 | lr: 0.000905
+[25-07-07 19:31:07] [INFO] 
+--- Fold 1 | Epoch 21/100 ---
+[25-07-07 19:32:24] [INFO] train_loss: 0.7662 | train_acc: 0.9570 | train_f1: 0.9536 | val_loss: 0.7658 | val_acc: 0.9554 | val_f1: 0.9556 | lr: 0.000895
+[25-07-07 19:32:24] [INFO] 
+--- Fold 1 | Epoch 22/100 ---
+[25-07-07 19:33:41] [INFO] train_loss: 0.7674 | train_acc: 0.9562 | train_f1: 0.9530 | val_loss: 0.8670 | val_acc: 0.9299 | val_f1: 0.9275 | lr: 0.000885
+[25-07-07 19:33:41] [INFO] 
+--- Fold 1 | Epoch 23/100 ---
+[25-07-07 19:34:59] [INFO] train_loss: 0.7792 | train_acc: 0.9562 | train_f1: 0.9557 | val_loss: 0.7765 | val_acc: 0.9395 | val_f1: 0.9329 | lr: 0.000875
+[25-07-07 19:34:59] [INFO] 
+--- Fold 1 | Epoch 24/100 ---
+[25-07-07 19:36:16] [INFO] train_loss: 0.7821 | train_acc: 0.9443 | train_f1: 0.9432 | val_loss: 0.8069 | val_acc: 0.9490 | val_f1: 0.9422 | lr: 0.000865
+[25-07-07 19:36:16] [INFO] 
+--- Fold 1 | Epoch 25/100 ---
+[25-07-07 19:37:34] [INFO] train_loss: 0.7727 | train_acc: 0.9562 | train_f1: 0.9521 | val_loss: 0.7784 | val_acc: 0.9586 | val_f1: 0.9572 | lr: 0.000854
+[25-07-07 19:37:34] [INFO] 
+--- Fold 1 | Epoch 26/100 ---
+[25-07-07 19:38:52] [INFO] train_loss: 0.7443 | train_acc: 0.9697 | train_f1: 0.9663 | val_loss: 0.7740 | val_acc: 0.9650 | val_f1: 0.9639 | lr: 0.000842
+[25-07-07 19:38:52] [INFO] 
+--- Fold 1 | Epoch 27/100 ---
+[25-07-07 19:40:10] [INFO] train_loss: 0.7565 | train_acc: 0.9658 | train_f1: 0.9640 | val_loss: 0.7881 | val_acc: 0.9522 | val_f1: 0.9425 | lr: 0.000831
+[25-07-07 19:40:10] [INFO] 
+--- Fold 1 | Epoch 28/100 ---
+[25-07-07 19:41:27] [INFO] 💾 Fold 1 Best model updated! F1: 0.9779
+[25-07-07 19:41:27] [INFO] train_loss: 0.7485 | train_acc: 0.9682 | train_f1: 0.9663 | val_loss: 0.7359 | val_acc: 0.9777 | val_f1: 0.9779 | lr: 0.000819
+[25-07-07 19:41:27] [INFO] 
+--- Fold 1 | Epoch 29/100 ---
+[25-07-07 19:42:45] [INFO] train_loss: 0.7385 | train_acc: 0.9658 | train_f1: 0.9637 | val_loss: 0.7725 | val_acc: 0.9713 | val_f1: 0.9707 | lr: 0.000807
+[25-07-07 19:42:45] [INFO] 
+--- Fold 1 | Epoch 30/100 ---
+[25-07-07 19:44:02] [INFO] train_loss: 0.7286 | train_acc: 0.9682 | train_f1: 0.9668 | val_loss: 0.7435 | val_acc: 0.9682 | val_f1: 0.9688 | lr: 0.000794
+[25-07-07 19:44:02] [INFO] 
+--- Fold 1 | Epoch 31/100 ---
+[25-07-07 19:45:20] [INFO] train_loss: 0.7489 | train_acc: 0.9658 | train_f1: 0.9635 | val_loss: 0.7942 | val_acc: 0.9490 | val_f1: 0.9472 | lr: 0.000781
+[25-07-07 19:45:20] [INFO] 
+--- Fold 1 | Epoch 32/100 ---
+[25-07-07 19:46:37] [INFO] train_loss: 0.7536 | train_acc: 0.9626 | train_f1: 0.9610 | val_loss: 0.7659 | val_acc: 0.9682 | val_f1: 0.9651 | lr: 0.000768
+[25-07-07 19:46:37] [INFO] 
+--- Fold 1 | Epoch 33/100 ---
+[25-07-07 19:47:54] [INFO] train_loss: 0.7242 | train_acc: 0.9777 | train_f1: 0.9763 | val_loss: 0.7381 | val_acc: 0.9650 | val_f1: 0.9596 | lr: 0.000755
+[25-07-07 19:47:54] [INFO] 
+--- Fold 1 | Epoch 34/100 ---
+[25-07-07 19:49:12] [INFO] train_loss: 0.7230 | train_acc: 0.9761 | train_f1: 0.9739 | val_loss: 0.7202 | val_acc: 0.9713 | val_f1: 0.9674 | lr: 0.000741
+[25-07-07 19:49:12] [INFO] 
+--- Fold 1 | Epoch 35/100 ---
+[25-07-07 19:50:30] [INFO] train_loss: 0.7380 | train_acc: 0.9721 | train_f1: 0.9691 | val_loss: 0.7503 | val_acc: 0.9682 | val_f1: 0.9676 | lr: 0.000727
+[25-07-07 19:50:30] [INFO] 
+--- Fold 1 | Epoch 36/100 ---
+[25-07-07 19:51:47] [INFO] train_loss: 0.7135 | train_acc: 0.9793 | train_f1: 0.9781 | val_loss: 0.7479 | val_acc: 0.9777 | val_f1: 0.9752 | lr: 0.000713
+[25-07-07 19:51:47] [INFO] 
+--- Fold 1 | Epoch 37/100 ---
+[25-07-07 19:53:05] [INFO] 💾 Fold 1 Best model updated! F1: 0.9811
+[25-07-07 19:53:05] [INFO] train_loss: 0.6976 | train_acc: 0.9841 | train_f1: 0.9806 | val_loss: 0.7505 | val_acc: 0.9809 | val_f1: 0.9811 | lr: 0.000699
+[25-07-07 19:53:05] [INFO] 
+--- Fold 1 | Epoch 38/100 ---
+[25-07-07 19:54:22] [INFO] train_loss: 0.7021 | train_acc: 0.9745 | train_f1: 0.9735 | val_loss: 0.7567 | val_acc: 0.9554 | val_f1: 0.9475 | lr: 0.000684
+[25-07-07 19:54:22] [INFO] 
+--- Fold 1 | Epoch 39/100 ---
+[25-07-07 19:55:39] [INFO] train_loss: 0.7151 | train_acc: 0.9737 | train_f1: 0.9696 | val_loss: 0.7938 | val_acc: 0.9554 | val_f1: 0.9510 | lr: 0.000670
+[25-07-07 19:55:39] [INFO] 
+--- Fold 1 | Epoch 40/100 ---
+[25-07-07 19:56:57] [INFO] train_loss: 0.6956 | train_acc: 0.9809 | train_f1: 0.9797 | val_loss: 0.8221 | val_acc: 0.9490 | val_f1: 0.9364 | lr: 0.000655
+[25-07-07 19:56:57] [INFO] 
+--- Fold 1 | Epoch 41/100 ---
+[25-07-07 19:58:15] [INFO] train_loss: 0.7015 | train_acc: 0.9769 | train_f1: 0.9775 | val_loss: 0.7590 | val_acc: 0.9554 | val_f1: 0.9509 | lr: 0.000640
+[25-07-07 19:58:15] [INFO] 
+--- Fold 1 | Epoch 42/100 ---
+[25-07-07 19:59:32] [INFO] train_loss: 0.6993 | train_acc: 0.9777 | train_f1: 0.9771 | val_loss: 0.7515 | val_acc: 0.9682 | val_f1: 0.9633 | lr: 0.000625
+[25-07-07 19:59:32] [INFO] 
+--- Fold 1 | Epoch 43/100 ---
+[25-07-07 20:00:50] [INFO] train_loss: 0.7061 | train_acc: 0.9785 | train_f1: 0.9771 | val_loss: 0.7355 | val_acc: 0.9682 | val_f1: 0.9690 | lr: 0.000609
+[25-07-07 20:00:50] [INFO] 
+--- Fold 1 | Epoch 44/100 ---
+[25-07-07 20:02:07] [INFO] train_loss: 0.7161 | train_acc: 0.9745 | train_f1: 0.9736 | val_loss: 0.7130 | val_acc: 0.9650 | val_f1: 0.9561 | lr: 0.000594
+[25-07-07 20:02:07] [INFO] 
+--- Fold 1 | Epoch 45/100 ---
+[25-07-07 20:03:25] [INFO] 💾 Fold 1 Best model updated! F1: 0.9849
+[25-07-07 20:03:25] [INFO] train_loss: 0.6879 | train_acc: 0.9833 | train_f1: 0.9833 | val_loss: 0.7049 | val_acc: 0.9841 | val_f1: 0.9849 | lr: 0.000579
+[25-07-07 20:03:25] [INFO] 
+--- Fold 1 | Epoch 46/100 ---
+[25-07-07 20:04:43] [INFO] 💾 Fold 1 Best model updated! F1: 0.9849
+[25-07-07 20:04:43] [INFO] train_loss: 0.6736 | train_acc: 0.9889 | train_f1: 0.9874 | val_loss: 0.6893 | val_acc: 0.9841 | val_f1: 0.9849 | lr: 0.000563
+[25-07-07 20:04:43] [INFO] 
+--- Fold 1 | Epoch 47/100 ---
+[25-07-07 20:06:00] [INFO] train_loss: 0.6874 | train_acc: 0.9849 | train_f1: 0.9840 | val_loss: 0.7108 | val_acc: 0.9809 | val_f1: 0.9809 | lr: 0.000548
+[25-07-07 20:06:00] [INFO] 
+--- Fold 1 | Epoch 48/100 ---
+[25-07-07 20:07:17] [INFO] train_loss: 0.6811 | train_acc: 0.9833 | train_f1: 0.9814 | val_loss: 0.7389 | val_acc: 0.9682 | val_f1: 0.9646 | lr: 0.000532
+[25-07-07 20:07:17] [INFO] 
+--- Fold 1 | Epoch 49/100 ---
+[25-07-07 20:08:34] [INFO] train_loss: 0.6845 | train_acc: 0.9793 | train_f1: 0.9778 | val_loss: 0.7117 | val_acc: 0.9809 | val_f1: 0.9808 | lr: 0.000516
+[25-07-07 20:08:34] [INFO] 
+--- Fold 1 | Epoch 50/100 ---
+[25-07-07 20:09:51] [INFO] train_loss: 0.6705 | train_acc: 0.9889 | train_f1: 0.9886 | val_loss: 0.7347 | val_acc: 0.9745 | val_f1: 0.9756 | lr: 0.000501
+[25-07-07 20:09:51] [INFO] 
+--- Fold 1 | Epoch 51/100 ---
+[25-07-07 20:11:09] [INFO] train_loss: 0.6856 | train_acc: 0.9841 | train_f1: 0.9821 | val_loss: 0.7228 | val_acc: 0.9554 | val_f1: 0.9433 | lr: 0.000485
+[25-07-07 20:11:09] [INFO] 
+--- Fold 1 | Epoch 52/100 ---
+[25-07-07 20:12:27] [INFO] train_loss: 0.6821 | train_acc: 0.9841 | train_f1: 0.9833 | val_loss: 0.7175 | val_acc: 0.9777 | val_f1: 0.9741 | lr: 0.000469
+[25-07-07 20:12:27] [INFO] 
+--- Fold 1 | Epoch 53/100 ---
+[25-07-07 20:13:44] [INFO] train_loss: 0.6642 | train_acc: 0.9881 | train_f1: 0.9883 | val_loss: 0.7200 | val_acc: 0.9809 | val_f1: 0.9794 | lr: 0.000453
+[25-07-07 20:13:44] [INFO] 
+--- Fold 1 | Epoch 54/100 ---
+[25-07-07 20:15:02] [INFO] train_loss: 0.6595 | train_acc: 0.9928 | train_f1: 0.9926 | val_loss: 0.7281 | val_acc: 0.9713 | val_f1: 0.9686 | lr: 0.000438
+[25-07-07 20:15:02] [INFO] 
+--- Fold 1 | Epoch 55/100 ---
+[25-07-07 20:16:20] [INFO] 🛑 Early stopping triggered at epoch 55 for Fold 1
+[25-07-07 20:16:20] [INFO] 🎯 Best F1 score: 0.9849
+[25-07-07 20:16:20] [INFO] 
+🎯 Fold 1 completed with early stopping! Best F1: 0.9849
+[25-07-07 20:16:21] [INFO] 
+============================================================
+[25-07-07 20:16:21] [INFO] 🔥 FOLD 2/5
+[25-07-07 20:16:21] [INFO] ============================================================
+[25-07-07 20:16:21] [INFO] 📚 Train samples: 1256
+[25-07-07 20:16:21] [INFO] 📝 Validation samples: 314
+[25-07-07 20:16:22] [INFO] 🏗️ Model: efficientnetv2_rw_m
+[25-07-07 20:16:22] [INFO] 🔢 Number of parameters: 51,120,043
+[25-07-07 20:16:22] [INFO] 🚀 Starting Fold 2 training...
+[25-07-07 20:16:22] [INFO] 
+--- Fold 2 | Epoch 1/100 ---
+[25-07-07 20:17:40] [INFO] 💾 Fold 2 Best model updated! F1: 0.8409
+[25-07-07 20:17:40] [INFO] train_loss: 1.3634 | train_acc: 0.7253 | train_f1: 0.7044 | val_loss: 0.9684 | val_acc: 0.8726 | val_f1: 0.8409 | lr: 0.001000
+[25-07-07 20:17:40] [INFO] 
+--- Fold 2 | Epoch 2/100 ---
+[25-07-07 20:18:58] [INFO] 💾 Fold 2 Best model updated! F1: 0.8927
+[25-07-07 20:18:58] [INFO] train_loss: 0.9940 | train_acc: 0.8543 | train_f1: 0.8397 | val_loss: 0.8858 | val_acc: 0.9076 | val_f1: 0.8927 | lr: 0.000999
+[25-07-07 20:18:58] [INFO] 
+--- Fold 2 | Epoch 3/100 ---
+[25-07-07 20:20:16] [INFO] train_loss: 0.9421 | train_acc: 0.8830 | train_f1: 0.8724 | val_loss: 0.9146 | val_acc: 0.8885 | val_f1: 0.8574 | lr: 0.000998
+[25-07-07 20:20:16] [INFO] 
+--- Fold 2 | Epoch 4/100 ---
+[25-07-07 20:21:34] [INFO] train_loss: 0.8897 | train_acc: 0.8909 | train_f1: 0.8845 | val_loss: 0.9023 | val_acc: 0.8917 | val_f1: 0.8792 | lr: 0.000996
+[25-07-07 20:21:34] [INFO] 
+--- Fold 2 | Epoch 5/100 ---
+[25-07-07 20:22:52] [INFO] 💾 Fold 2 Best model updated! F1: 0.9029
+[25-07-07 20:22:52] [INFO] train_loss: 0.9125 | train_acc: 0.8981 | train_f1: 0.8895 | val_loss: 0.8738 | val_acc: 0.9108 | val_f1: 0.9029 | lr: 0.000994
+[25-07-07 20:22:52] [INFO] 
+--- Fold 2 | Epoch 6/100 ---
+[25-07-07 20:24:10] [INFO] 💾 Fold 2 Best model updated! F1: 0.9230
+[25-07-07 20:24:10] [INFO] train_loss: 0.8762 | train_acc: 0.9156 | train_f1: 0.9122 | val_loss: 0.7994 | val_acc: 0.9331 | val_f1: 0.9230 | lr: 0.000991
+[25-07-07 20:24:10] [INFO] 
+--- Fold 2 | Epoch 7/100 ---
+[25-07-07 20:25:28] [INFO] 💾 Fold 2 Best model updated! F1: 0.9324
+[25-07-07 20:25:28] [INFO] train_loss: 0.8387 | train_acc: 0.9196 | train_f1: 0.9168 | val_loss: 0.7926 | val_acc: 0.9331 | val_f1: 0.9324 | lr: 0.000988
+[25-07-07 20:25:28] [INFO] 
+--- Fold 2 | Epoch 8/100 ---
+[25-07-07 20:26:46] [INFO] train_loss: 0.8657 | train_acc: 0.9140 | train_f1: 0.9103 | val_loss: 0.9232 | val_acc: 0.9172 | val_f1: 0.9153 | lr: 0.000984
+[25-07-07 20:26:46] [INFO] 
+--- Fold 2 | Epoch 9/100 ---
+[25-07-07 20:28:04] [INFO] train_loss: 0.8411 | train_acc: 0.9252 | train_f1: 0.9209 | val_loss: 0.8284 | val_acc: 0.9236 | val_f1: 0.9151 | lr: 0.000980
+[25-07-07 20:28:04] [INFO] 
+--- Fold 2 | Epoch 10/100 ---
+[25-07-07 20:29:22] [INFO] train_loss: 0.8424 | train_acc: 0.9307 | train_f1: 0.9262 | val_loss: 0.8940 | val_acc: 0.9268 | val_f1: 0.9271 | lr: 0.000976
+[25-07-07 20:29:22] [INFO] 
+--- Fold 2 | Epoch 11/100 ---
+[25-07-07 20:30:40] [INFO] train_loss: 0.8465 | train_acc: 0.9164 | train_f1: 0.9138 | val_loss: 0.8425 | val_acc: 0.9108 | val_f1: 0.8957 | lr: 0.000970
+[25-07-07 20:30:40] [INFO] 
+--- Fold 2 | Epoch 12/100 ---
+[25-07-07 20:31:57] [INFO] train_loss: 0.8129 | train_acc: 0.9268 | train_f1: 0.9209 | val_loss: 0.8485 | val_acc: 0.9108 | val_f1: 0.9051 | lr: 0.000965
+[25-07-07 20:31:57] [INFO] 
+--- Fold 2 | Epoch 13/100 ---
+[25-07-07 20:33:15] [INFO] train_loss: 0.8279 | train_acc: 0.9339 | train_f1: 0.9297 | val_loss: 0.8761 | val_acc: 0.9076 | val_f1: 0.8912 | lr: 0.000959
+[25-07-07 20:33:15] [INFO] 
+--- Fold 2 | Epoch 14/100 ---
+[25-07-07 20:34:33] [INFO] train_loss: 0.8019 | train_acc: 0.9443 | train_f1: 0.9427 | val_loss: 0.8663 | val_acc: 0.8949 | val_f1: 0.8785 | lr: 0.000952
+[25-07-07 20:34:33] [INFO] 
+--- Fold 2 | Epoch 15/100 ---
+[25-07-07 20:35:51] [INFO] 💾 Fold 2 Best model updated! F1: 0.9416
+[25-07-07 20:35:51] [INFO] train_loss: 0.8242 | train_acc: 0.9363 | train_f1: 0.9310 | val_loss: 0.7812 | val_acc: 0.9459 | val_f1: 0.9416 | lr: 0.000946
+[25-07-07 20:35:51] [INFO] 
+--- Fold 2 | Epoch 16/100 ---
+[25-07-07 20:37:09] [INFO] 💾 Fold 2 Best model updated! F1: 0.9422
+[25-07-07 20:37:09] [INFO] train_loss: 0.7906 | train_acc: 0.9427 | train_f1: 0.9399 | val_loss: 0.8179 | val_acc: 0.9427 | val_f1: 0.9422 | lr: 0.000938
+[25-07-07 20:37:09] [INFO] 
+--- Fold 2 | Epoch 17/100 ---
+[25-07-07 20:38:26] [INFO] train_loss: 0.8016 | train_acc: 0.9403 | train_f1: 0.9383 | val_loss: 0.8362 | val_acc: 0.9363 | val_f1: 0.9352 | lr: 0.000930
+[25-07-07 20:38:26] [INFO] 
+--- Fold 2 | Epoch 18/100 ---
+[25-07-07 20:39:44] [INFO] 💾 Fold 2 Best model updated! F1: 0.9644
+[25-07-07 20:39:44] [INFO] train_loss: 0.8038 | train_acc: 0.9371 | train_f1: 0.9350 | val_loss: 0.7834 | val_acc: 0.9682 | val_f1: 0.9644 | lr: 0.000922
+[25-07-07 20:39:44] [INFO] 
+--- Fold 2 | Epoch 19/100 ---
+[25-07-07 20:41:02] [INFO] train_loss: 0.7887 | train_acc: 0.9498 | train_f1: 0.9473 | val_loss: 0.8325 | val_acc: 0.9427 | val_f1: 0.9361 | lr: 0.000914
+[25-07-07 20:41:02] [INFO] 
+--- Fold 2 | Epoch 20/100 ---
+[25-07-07 20:42:20] [INFO] train_loss: 0.7905 | train_acc: 0.9498 | train_f1: 0.9483 | val_loss: 0.7740 | val_acc: 0.9586 | val_f1: 0.9545 | lr: 0.000905
+[25-07-07 20:42:20] [INFO] 
+--- Fold 2 | Epoch 21/100 ---
+[25-07-07 20:43:38] [INFO] 💾 Fold 2 Best model updated! F1: 0.9671
+[25-07-07 20:43:38] [INFO] train_loss: 0.7798 | train_acc: 0.9522 | train_f1: 0.9498 | val_loss: 0.7533 | val_acc: 0.9682 | val_f1: 0.9671 | lr: 0.000895
+[25-07-07 20:43:38] [INFO] 
+--- Fold 2 | Epoch 22/100 ---
+[25-07-07 20:44:55] [INFO] train_loss: 0.7756 | train_acc: 0.9530 | train_f1: 0.9500 | val_loss: 0.7856 | val_acc: 0.9586 | val_f1: 0.9550 | lr: 0.000885
+[25-07-07 20:44:55] [INFO] 
+--- Fold 2 | Epoch 23/100 ---
+[25-07-07 20:46:13] [INFO] train_loss: 0.7892 | train_acc: 0.9530 | train_f1: 0.9479 | val_loss: 0.7955 | val_acc: 0.9522 | val_f1: 0.9527 | lr: 0.000875
+[25-07-07 20:46:13] [INFO] 
+--- Fold 2 | Epoch 24/100 ---
+[25-07-07 20:47:30] [INFO] train_loss: 0.7730 | train_acc: 0.9578 | train_f1: 0.9555 | val_loss: 0.7498 | val_acc: 0.9618 | val_f1: 0.9604 | lr: 0.000865
+[25-07-07 20:47:30] [INFO] 
+--- Fold 2 | Epoch 25/100 ---
+[25-07-07 20:48:48] [INFO] 💾 Fold 2 Best model updated! F1: 0.9703
+[25-07-07 20:48:48] [INFO] train_loss: 0.7524 | train_acc: 0.9634 | train_f1: 0.9611 | val_loss: 0.7507 | val_acc: 0.9713 | val_f1: 0.9703 | lr: 0.000854
+[25-07-07 20:48:48] [INFO] 
+--- Fold 2 | Epoch 26/100 ---
+[25-07-07 20:50:06] [INFO] train_loss: 0.7740 | train_acc: 0.9570 | train_f1: 0.9532 | val_loss: 0.8079 | val_acc: 0.9204 | val_f1: 0.9157 | lr: 0.000842
+[25-07-07 20:50:06] [INFO] 
+--- Fold 2 | Epoch 27/100 ---
+[25-07-07 20:51:24] [INFO] train_loss: 0.7619 | train_acc: 0.9554 | train_f1: 0.9548 | val_loss: 0.7508 | val_acc: 0.9618 | val_f1: 0.9620 | lr: 0.000831
+[25-07-07 20:51:24] [INFO] 
+--- Fold 2 | Epoch 28/100 ---
+[25-07-07 20:52:42] [INFO] 💾 Fold 2 Best model updated! F1: 0.9709
+[25-07-07 20:52:42] [INFO] train_loss: 0.7270 | train_acc: 0.9753 | train_f1: 0.9715 | val_loss: 0.7644 | val_acc: 0.9745 | val_f1: 0.9709 | lr: 0.000819
+[25-07-07 20:52:42] [INFO] 
+--- Fold 2 | Epoch 29/100 ---
+[25-07-07 20:54:00] [INFO] train_loss: 0.7681 | train_acc: 0.9570 | train_f1: 0.9544 | val_loss: 0.7887 | val_acc: 0.9554 | val_f1: 0.9548 | lr: 0.000807
+[25-07-07 20:54:00] [INFO] 
+--- Fold 2 | Epoch 30/100 ---
+[25-07-07 20:55:18] [INFO] 💾 Fold 2 Best model updated! F1: 0.9749
+[25-07-07 20:55:18] [INFO] train_loss: 0.7507 | train_acc: 0.9674 | train_f1: 0.9653 | val_loss: 0.7555 | val_acc: 0.9777 | val_f1: 0.9749 | lr: 0.000794
+[25-07-07 20:55:18] [INFO] 
+--- Fold 2 | Epoch 31/100 ---
+[25-07-07 20:56:36] [INFO] 💾 Fold 2 Best model updated! F1: 0.9773
+[25-07-07 20:56:36] [INFO] train_loss: 0.7348 | train_acc: 0.9745 | train_f1: 0.9730 | val_loss: 0.7235 | val_acc: 0.9777 | val_f1: 0.9773 | lr: 0.000781
+[25-07-07 20:56:36] [INFO] 
+--- Fold 2 | Epoch 32/100 ---
+[25-07-07 20:57:54] [INFO] train_loss: 0.7239 | train_acc: 0.9737 | train_f1: 0.9728 | val_loss: 0.7886 | val_acc: 0.9554 | val_f1: 0.9529 | lr: 0.000768
+[25-07-07 20:57:54] [INFO] 
+--- Fold 2 | Epoch 33/100 ---
+[25-07-07 20:59:12] [INFO] train_loss: 0.7424 | train_acc: 0.9674 | train_f1: 0.9663 | val_loss: 0.7430 | val_acc: 0.9618 | val_f1: 0.9602 | lr: 0.000755
+[25-07-07 20:59:12] [INFO] 
+--- Fold 2 | Epoch 34/100 ---
+[25-07-07 21:00:30] [INFO] train_loss: 0.7316 | train_acc: 0.9705 | train_f1: 0.9677 | val_loss: 0.7308 | val_acc: 0.9777 | val_f1: 0.9760 | lr: 0.000741
+[25-07-07 21:00:30] [INFO] 
+--- Fold 2 | Epoch 35/100 ---
+[25-07-07 21:01:47] [INFO] train_loss: 0.7287 | train_acc: 0.9753 | train_f1: 0.9719 | val_loss: 0.7651 | val_acc: 0.9650 | val_f1: 0.9599 | lr: 0.000727
+[25-07-07 21:01:47] [INFO] 
+--- Fold 2 | Epoch 36/100 ---
+[25-07-07 21:03:04] [INFO] train_loss: 0.7470 | train_acc: 0.9666 | train_f1: 0.9639 | val_loss: 0.7542 | val_acc: 0.9713 | val_f1: 0.9644 | lr: 0.000713
+[25-07-07 21:03:04] [INFO] 
+--- Fold 2 | Epoch 37/100 ---
+[25-07-07 21:04:22] [INFO] train_loss: 0.7087 | train_acc: 0.9817 | train_f1: 0.9808 | val_loss: 0.7471 | val_acc: 0.9522 | val_f1: 0.9505 | lr: 0.000699
+[25-07-07 21:04:22] [INFO] 
+--- Fold 2 | Epoch 38/100 ---
+[25-07-07 21:05:40] [INFO] train_loss: 0.7303 | train_acc: 0.9682 | train_f1: 0.9653 | val_loss: 0.7178 | val_acc: 0.9745 | val_f1: 0.9725 | lr: 0.000684
+[25-07-07 21:05:40] [INFO] 
+--- Fold 2 | Epoch 39/100 ---
+[25-07-07 21:06:58] [INFO] 💾 Fold 2 Best model updated! F1: 0.9783
+[25-07-07 21:06:58] [INFO] train_loss: 0.7037 | train_acc: 0.9801 | train_f1: 0.9794 | val_loss: 0.7246 | val_acc: 0.9809 | val_f1: 0.9783 | lr: 0.000670
+[25-07-07 21:06:58] [INFO] 
+--- Fold 2 | Epoch 40/100 ---
+[25-07-07 21:08:15] [INFO] train_loss: 0.7048 | train_acc: 0.9793 | train_f1: 0.9783 | val_loss: 0.7332 | val_acc: 0.9586 | val_f1: 0.9565 | lr: 0.000655
+[25-07-07 21:08:15] [INFO] 
+--- Fold 2 | Epoch 41/100 ---
+[25-07-07 21:09:33] [INFO] 🛑 Early stopping triggered at epoch 41 for Fold 2
+[25-07-07 21:09:33] [INFO] 🎯 Best F1 score: 0.9773
+[25-07-07 21:09:33] [INFO] 
+🎯 Fold 2 completed with early stopping! Best F1: 0.9773
+[25-07-07 21:09:34] [INFO] 
+============================================================
+[25-07-07 21:09:34] [INFO] 🔥 FOLD 3/5
+[25-07-07 21:09:34] [INFO] ============================================================
+[25-07-07 21:09:34] [INFO] 📚 Train samples: 1256
+[25-07-07 21:09:34] [INFO] 📝 Validation samples: 314
+[25-07-07 21:09:35] [INFO] 🏗️ Model: efficientnetv2_rw_m
+[25-07-07 21:09:35] [INFO] 🔢 Number of parameters: 51,120,043
+[25-07-07 21:09:35] [INFO] 🚀 Starting Fold 3 training...
+[25-07-07 21:09:35] [INFO] 
+--- Fold 3 | Epoch 1/100 ---
+[25-07-07 21:10:53] [INFO] 💾 Fold 3 Best model updated! F1: 0.8298
+[25-07-07 21:10:53] [INFO] train_loss: 1.4349 | train_acc: 0.6990 | train_f1: 0.6709 | val_loss: 1.0666 | val_acc: 0.8567 | val_f1: 0.8298 | lr: 0.001000
+[25-07-07 21:10:53] [INFO] 
+--- Fold 3 | Epoch 2/100 ---
+[25-07-07 21:12:11] [INFO] 💾 Fold 3 Best model updated! F1: 0.8863
+[25-07-07 21:12:11] [INFO] train_loss: 0.9803 | train_acc: 0.8662 | train_f1: 0.8535 | val_loss: 0.8921 | val_acc: 0.9045 | val_f1: 0.8863 | lr: 0.000999
+[25-07-07 21:12:11] [INFO] 
+--- Fold 3 | Epoch 3/100 ---
+[25-07-07 21:13:28] [INFO] 💾 Fold 3 Best model updated! F1: 0.9002
+[25-07-07 21:13:28] [INFO] train_loss: 0.9343 | train_acc: 0.8893 | train_f1: 0.8769 | val_loss: 0.8391 | val_acc: 0.9140 | val_f1: 0.9002 | lr: 0.000998
+[25-07-07 21:13:28] [INFO] 
+--- Fold 3 | Epoch 4/100 ---
+[25-07-07 21:14:47] [INFO] 💾 Fold 3 Best model updated! F1: 0.9196
+[25-07-07 21:14:47] [INFO] train_loss: 0.9150 | train_acc: 0.8941 | train_f1: 0.8860 | val_loss: 0.8598 | val_acc: 0.9299 | val_f1: 0.9196 | lr: 0.000996
+[25-07-07 21:14:47] [INFO] 
+--- Fold 3 | Epoch 5/100 ---
+[25-07-07 21:16:05] [INFO] 💾 Fold 3 Best model updated! F1: 0.9345
+[25-07-07 21:16:05] [INFO] train_loss: 0.9067 | train_acc: 0.8861 | train_f1: 0.8803 | val_loss: 0.8653 | val_acc: 0.9395 | val_f1: 0.9345 | lr: 0.000994
+[25-07-07 21:16:05] [INFO] 
+--- Fold 3 | Epoch 6/100 ---
+[25-07-07 21:17:23] [INFO] train_loss: 0.8407 | train_acc: 0.9172 | train_f1: 0.9139 | val_loss: 0.8931 | val_acc: 0.8885 | val_f1: 0.8545 | lr: 0.000991
+[25-07-07 21:17:23] [INFO] 
+--- Fold 3 | Epoch 7/100 ---
+[25-07-07 21:18:42] [INFO] train_loss: 0.8418 | train_acc: 0.9148 | train_f1: 0.9113 | val_loss: 0.8904 | val_acc: 0.9140 | val_f1: 0.9089 | lr: 0.000988
+[25-07-07 21:18:42] [INFO] 
+--- Fold 3 | Epoch 8/100 ---
+[25-07-07 21:20:00] [INFO] train_loss: 0.8752 | train_acc: 0.9108 | train_f1: 0.9039 | val_loss: 0.8630 | val_acc: 0.9236 | val_f1: 0.9048 | lr: 0.000984
+[25-07-07 21:20:00] [INFO] 
+--- Fold 3 | Epoch 9/100 ---
+[25-07-07 21:21:18] [INFO] train_loss: 0.8237 | train_acc: 0.9252 | train_f1: 0.9196 | val_loss: 0.8664 | val_acc: 0.9140 | val_f1: 0.9062 | lr: 0.000980
+[25-07-07 21:21:18] [INFO] 
+--- Fold 3 | Epoch 10/100 ---
+[25-07-07 21:22:36] [INFO] train_loss: 0.8389 | train_acc: 0.9268 | train_f1: 0.9205 | val_loss: 0.8215 | val_acc: 0.9236 | val_f1: 0.9147 | lr: 0.000976
+[25-07-07 21:22:36] [INFO] 
+--- Fold 3 | Epoch 11/100 ---
+[25-07-07 21:23:54] [INFO] train_loss: 0.8336 | train_acc: 0.9220 | train_f1: 0.9183 | val_loss: 0.8184 | val_acc: 0.9331 | val_f1: 0.9225 | lr: 0.000970
+[25-07-07 21:23:54] [INFO] 
+--- Fold 3 | Epoch 12/100 ---
+[25-07-07 21:25:13] [INFO] train_loss: 0.8521 | train_acc: 0.9172 | train_f1: 0.9117 | val_loss: 0.8256 | val_acc: 0.9236 | val_f1: 0.9186 | lr: 0.000965
+[25-07-07 21:25:13] [INFO] 
+--- Fold 3 | Epoch 13/100 ---
+[25-07-07 21:26:31] [INFO] train_loss: 0.8074 | train_acc: 0.9371 | train_f1: 0.9328 | val_loss: 0.8391 | val_acc: 0.9268 | val_f1: 0.9199 | lr: 0.000959
+[25-07-07 21:26:31] [INFO] 
+--- Fold 3 | Epoch 14/100 ---
+[25-07-07 21:27:49] [INFO] train_loss: 0.8420 | train_acc: 0.9268 | train_f1: 0.9211 | val_loss: 0.8239 | val_acc: 0.9331 | val_f1: 0.9302 | lr: 0.000952
+[25-07-07 21:27:49] [INFO] 
+--- Fold 3 | Epoch 15/100 ---
+[25-07-07 21:29:07] [INFO] 💾 Fold 3 Best model updated! F1: 0.9557
+[25-07-07 21:29:07] [INFO] train_loss: 0.7985 | train_acc: 0.9363 | train_f1: 0.9335 | val_loss: 0.7836 | val_acc: 0.9554 | val_f1: 0.9557 | lr: 0.000946
+[25-07-07 21:29:07] [INFO] 
+--- Fold 3 | Epoch 16/100 ---
+[25-07-07 21:30:24] [INFO] train_loss: 0.8124 | train_acc: 0.9403 | train_f1: 0.9370 | val_loss: 0.9166 | val_acc: 0.9076 | val_f1: 0.8928 | lr: 0.000938
+[25-07-07 21:30:24] [INFO] 
+--- Fold 3 | Epoch 17/100 ---
+[25-07-07 21:31:42] [INFO] train_loss: 0.8234 | train_acc: 0.9355 | train_f1: 0.9332 | val_loss: 0.7871 | val_acc: 0.9363 | val_f1: 0.9358 | lr: 0.000930
+[25-07-07 21:31:42] [INFO] 
+--- Fold 3 | Epoch 18/100 ---
+[25-07-07 21:33:01] [INFO] train_loss: 0.8060 | train_acc: 0.9307 | train_f1: 0.9260 | val_loss: 0.8348 | val_acc: 0.9363 | val_f1: 0.9262 | lr: 0.000922
+[25-07-07 21:33:01] [INFO] 
+--- Fold 3 | Epoch 19/100 ---
+[25-07-07 21:34:19] [INFO] train_loss: 0.7725 | train_acc: 0.9514 | train_f1: 0.9498 | val_loss: 0.8063 | val_acc: 0.9459 | val_f1: 0.9395 | lr: 0.000914
+[25-07-07 21:34:19] [INFO] 
+--- Fold 3 | Epoch 20/100 ---
+[25-07-07 21:35:37] [INFO] train_loss: 0.7558 | train_acc: 0.9642 | train_f1: 0.9638 | val_loss: 0.8008 | val_acc: 0.9427 | val_f1: 0.9408 | lr: 0.000905
+[25-07-07 21:35:37] [INFO] 
+--- Fold 3 | Epoch 21/100 ---
+[25-07-07 21:36:55] [INFO] train_loss: 0.7944 | train_acc: 0.9411 | train_f1: 0.9359 | val_loss: 0.8242 | val_acc: 0.9363 | val_f1: 0.9235 | lr: 0.000895
+[25-07-07 21:36:55] [INFO] 
+--- Fold 3 | Epoch 22/100 ---
+[25-07-07 21:38:13] [INFO] train_loss: 0.7907 | train_acc: 0.9490 | train_f1: 0.9446 | val_loss: 0.7946 | val_acc: 0.9459 | val_f1: 0.9401 | lr: 0.000885
+[25-07-07 21:38:13] [INFO] 
+--- Fold 3 | Epoch 23/100 ---
+[25-07-07 21:39:31] [INFO] train_loss: 0.7745 | train_acc: 0.9586 | train_f1: 0.9546 | val_loss: 0.7937 | val_acc: 0.9490 | val_f1: 0.9386 | lr: 0.000875
+[25-07-07 21:39:31] [INFO] 
+--- Fold 3 | Epoch 24/100 ---
+[25-07-07 21:40:50] [INFO] 💾 Fold 3 Best model updated! F1: 0.9608
+[25-07-07 21:40:50] [INFO] train_loss: 0.7810 | train_acc: 0.9490 | train_f1: 0.9458 | val_loss: 0.7332 | val_acc: 0.9650 | val_f1: 0.9608 | lr: 0.000865
+[25-07-07 21:40:50] [INFO] 
+--- Fold 3 | Epoch 25/100 ---
+[25-07-07 21:42:07] [INFO] 💾 Fold 3 Best model updated! F1: 0.9666
+[25-07-07 21:42:07] [INFO] train_loss: 0.7476 | train_acc: 0.9721 | train_f1: 0.9698 | val_loss: 0.7349 | val_acc: 0.9682 | val_f1: 0.9666 | lr: 0.000854
+[25-07-07 21:42:07] [INFO] 
+--- Fold 3 | Epoch 26/100 ---
+[25-07-07 21:43:25] [INFO] train_loss: 0.7412 | train_acc: 0.9689 | train_f1: 0.9678 | val_loss: 0.7988 | val_acc: 0.9363 | val_f1: 0.9328 | lr: 0.000842
+[25-07-07 21:43:25] [INFO] 
+--- Fold 3 | Epoch 27/100 ---
+[25-07-07 21:44:43] [INFO] train_loss: 0.7591 | train_acc: 0.9618 | train_f1: 0.9602 | val_loss: 0.7531 | val_acc: 0.9586 | val_f1: 0.9547 | lr: 0.000831
+[25-07-07 21:44:43] [INFO] 
+--- Fold 3 | Epoch 28/100 ---
+[25-07-07 21:46:01] [INFO] train_loss: 0.7375 | train_acc: 0.9697 | train_f1: 0.9691 | val_loss: 0.7177 | val_acc: 0.9650 | val_f1: 0.9640 | lr: 0.000819
+[25-07-07 21:46:01] [INFO] 
+--- Fold 3 | Epoch 29/100 ---
+[25-07-07 21:47:19] [INFO] train_loss: 0.7320 | train_acc: 0.9721 | train_f1: 0.9690 | val_loss: 0.7938 | val_acc: 0.9586 | val_f1: 0.9564 | lr: 0.000807
+[25-07-07 21:47:19] [INFO] 
+--- Fold 3 | Epoch 30/100 ---
+[25-07-07 21:48:37] [INFO] 💾 Fold 3 Best model updated! F1: 0.9807
+[25-07-07 21:48:37] [INFO] train_loss: 0.7266 | train_acc: 0.9777 | train_f1: 0.9754 | val_loss: 0.7322 | val_acc: 0.9809 | val_f1: 0.9807 | lr: 0.000794
+[25-07-07 21:48:37] [INFO] 
+--- Fold 3 | Epoch 31/100 ---
+[25-07-07 21:49:55] [INFO] train_loss: 0.7349 | train_acc: 0.9737 | train_f1: 0.9713 | val_loss: 0.7301 | val_acc: 0.9713 | val_f1: 0.9701 | lr: 0.000781
+[25-07-07 21:49:55] [INFO] 
+--- Fold 3 | Epoch 32/100 ---
+[25-07-07 21:51:12] [INFO] train_loss: 0.7173 | train_acc: 0.9753 | train_f1: 0.9746 | val_loss: 0.7341 | val_acc: 0.9650 | val_f1: 0.9614 | lr: 0.000768
+[25-07-07 21:51:12] [INFO] 
+--- Fold 3 | Epoch 33/100 ---
+[25-07-07 21:52:30] [INFO] train_loss: 0.7423 | train_acc: 0.9626 | train_f1: 0.9596 | val_loss: 0.7316 | val_acc: 0.9650 | val_f1: 0.9626 | lr: 0.000755
+[25-07-07 21:52:30] [INFO] 
+--- Fold 3 | Epoch 34/100 ---
+[25-07-07 21:53:48] [INFO] train_loss: 0.7232 | train_acc: 0.9697 | train_f1: 0.9687 | val_loss: 0.7148 | val_acc: 0.9809 | val_f1: 0.9784 | lr: 0.000741
+[25-07-07 21:53:48] [INFO] 
+--- Fold 3 | Epoch 35/100 ---
+[25-07-07 21:55:06] [INFO] train_loss: 0.7227 | train_acc: 0.9689 | train_f1: 0.9673 | val_loss: 0.7320 | val_acc: 0.9713 | val_f1: 0.9691 | lr: 0.000727
+[25-07-07 21:55:06] [INFO] 
+--- Fold 3 | Epoch 36/100 ---
+[25-07-07 21:56:24] [INFO] train_loss: 0.7367 | train_acc: 0.9689 | train_f1: 0.9675 | val_loss: 0.7484 | val_acc: 0.9395 | val_f1: 0.9336 | lr: 0.000713
+[25-07-07 21:56:24] [INFO] 
+--- Fold 3 | Epoch 37/100 ---
+[25-07-07 21:57:42] [INFO] train_loss: 0.7004 | train_acc: 0.9801 | train_f1: 0.9800 | val_loss: 0.7492 | val_acc: 0.9618 | val_f1: 0.9609 | lr: 0.000699
+[25-07-07 21:57:42] [INFO] 
+--- Fold 3 | Epoch 38/100 ---
+[25-07-07 21:59:00] [INFO] train_loss: 0.6982 | train_acc: 0.9817 | train_f1: 0.9798 | val_loss: 0.6994 | val_acc: 0.9809 | val_f1: 0.9794 | lr: 0.000684
+[25-07-07 21:59:00] [INFO] 
+--- Fold 3 | Epoch 39/100 ---
+[25-07-07 22:00:19] [INFO] train_loss: 0.6963 | train_acc: 0.9841 | train_f1: 0.9821 | val_loss: 0.7243 | val_acc: 0.9713 | val_f1: 0.9625 | lr: 0.000670
+[25-07-07 22:00:19] [INFO] 
+--- Fold 3 | Epoch 40/100 ---
+[25-07-07 22:01:38] [INFO] 🛑 Early stopping triggered at epoch 40 for Fold 3
+[25-07-07 22:01:38] [INFO] 🎯 Best F1 score: 0.9807
+[25-07-07 22:01:38] [INFO] 
+🎯 Fold 3 completed with early stopping! Best F1: 0.9807
+[25-07-07 22:01:38] [INFO] 
+============================================================
+[25-07-07 22:01:38] [INFO] 🔥 FOLD 4/5
+[25-07-07 22:01:38] [INFO] ============================================================
+[25-07-07 22:01:38] [INFO] 📚 Train samples: 1256
+[25-07-07 22:01:38] [INFO] 📝 Validation samples: 314
+[25-07-07 22:01:39] [INFO] 🏗️ Model: efficientnetv2_rw_m
+[25-07-07 22:01:39] [INFO] 🔢 Number of parameters: 51,120,043
+[25-07-07 22:01:39] [INFO] 🚀 Starting Fold 4 training...
+[25-07-07 22:01:39] [INFO] 
+--- Fold 4 | Epoch 1/100 ---
+[25-07-07 22:02:57] [INFO] 💾 Fold 4 Best model updated! F1: 0.8500
+[25-07-07 22:02:57] [INFO] train_loss: 1.3527 | train_acc: 0.7357 | train_f1: 0.7090 | val_loss: 1.0660 | val_acc: 0.8694 | val_f1: 0.8500 | lr: 0.001000
+[25-07-07 22:02:57] [INFO] 
+--- Fold 4 | Epoch 2/100 ---
+[25-07-07 22:04:15] [INFO] 💾 Fold 4 Best model updated! F1: 0.9046
+[25-07-07 22:04:15] [INFO] train_loss: 1.0033 | train_acc: 0.8527 | train_f1: 0.8445 | val_loss: 0.8471 | val_acc: 0.9140 | val_f1: 0.9046 | lr: 0.000999
+[25-07-07 22:04:15] [INFO] 
+--- Fold 4 | Epoch 3/100 ---
+[25-07-07 22:05:32] [INFO] train_loss: 0.9492 | train_acc: 0.8678 | train_f1: 0.8512 | val_loss: 0.9303 | val_acc: 0.8631 | val_f1: 0.8563 | lr: 0.000998
+[25-07-07 22:05:32] [INFO] 
+--- Fold 4 | Epoch 4/100 ---
+[25-07-07 22:06:50] [INFO] train_loss: 0.8972 | train_acc: 0.9013 | train_f1: 0.8916 | val_loss: 0.9351 | val_acc: 0.9108 | val_f1: 0.8967 | lr: 0.000996
+[25-07-07 22:06:50] [INFO] 
+--- Fold 4 | Epoch 5/100 ---
+[25-07-07 22:08:08] [INFO] 💾 Fold 4 Best model updated! F1: 0.9227
+[25-07-07 22:08:08] [INFO] train_loss: 0.8735 | train_acc: 0.9084 | train_f1: 0.9016 | val_loss: 0.8551 | val_acc: 0.9331 | val_f1: 0.9227 | lr: 0.000994
+[25-07-07 22:08:08] [INFO] 
+--- Fold 4 | Epoch 6/100 ---
+[25-07-07 22:09:26] [INFO] 💾 Fold 4 Best model updated! F1: 0.9281
+[25-07-07 22:09:26] [INFO] train_loss: 0.8545 | train_acc: 0.9108 | train_f1: 0.9080 | val_loss: 0.8337 | val_acc: 0.9363 | val_f1: 0.9281 | lr: 0.000991
+[25-07-07 22:09:26] [INFO] 
+--- Fold 4 | Epoch 7/100 ---
+[25-07-07 22:10:44] [INFO] train_loss: 0.8667 | train_acc: 0.9204 | train_f1: 0.9177 | val_loss: 0.8774 | val_acc: 0.8949 | val_f1: 0.8533 | lr: 0.000988
+[25-07-07 22:10:44] [INFO] 
+--- Fold 4 | Epoch 8/100 ---
+[25-07-07 22:12:01] [INFO] train_loss: 0.8923 | train_acc: 0.9068 | train_f1: 0.9006 | val_loss: 0.8205 | val_acc: 0.9204 | val_f1: 0.9094 | lr: 0.000984
+[25-07-07 22:12:01] [INFO] 
+--- Fold 4 | Epoch 9/100 ---
+[25-07-07 22:13:18] [INFO] train_loss: 0.8736 | train_acc: 0.9164 | train_f1: 0.9143 | val_loss: 0.9169 | val_acc: 0.8981 | val_f1: 0.8704 | lr: 0.000980
+[25-07-07 22:13:18] [INFO] 
+--- Fold 4 | Epoch 10/100 ---
+[25-07-07 22:14:37] [INFO] 💾 Fold 4 Best model updated! F1: 0.9573
+[25-07-07 22:14:37] [INFO] train_loss: 0.8373 | train_acc: 0.9196 | train_f1: 0.9141 | val_loss: 0.7562 | val_acc: 0.9586 | val_f1: 0.9573 | lr: 0.000976
+[25-07-07 22:14:37] [INFO] 
+--- Fold 4 | Epoch 11/100 ---
+[25-07-07 22:15:55] [INFO] train_loss: 0.8265 | train_acc: 0.9363 | train_f1: 0.9338 | val_loss: 0.8219 | val_acc: 0.9522 | val_f1: 0.9537 | lr: 0.000970
+[25-07-07 22:15:55] [INFO] 
+--- Fold 4 | Epoch 12/100 ---
+[25-07-07 22:17:13] [INFO] train_loss: 0.8400 | train_acc: 0.9124 | train_f1: 0.9087 | val_loss: 0.8173 | val_acc: 0.9236 | val_f1: 0.9211 | lr: 0.000965
+[25-07-07 22:17:13] [INFO] 
+--- Fold 4 | Epoch 13/100 ---
+[25-07-07 22:18:31] [INFO] train_loss: 0.7915 | train_acc: 0.9451 | train_f1: 0.9459 | val_loss: 0.8574 | val_acc: 0.9172 | val_f1: 0.9013 | lr: 0.000959
+[25-07-07 22:18:31] [INFO] 
+--- Fold 4 | Epoch 14/100 ---
+[25-07-07 22:19:49] [INFO] train_loss: 0.7907 | train_acc: 0.9379 | train_f1: 0.9359 | val_loss: 0.8178 | val_acc: 0.9140 | val_f1: 0.9111 | lr: 0.000952
+[25-07-07 22:19:49] [INFO] 
+--- Fold 4 | Epoch 15/100 ---
+[25-07-07 22:21:08] [INFO] train_loss: 0.8241 | train_acc: 0.9371 | train_f1: 0.9338 | val_loss: 0.8249 | val_acc: 0.9268 | val_f1: 0.9192 | lr: 0.000946
+[25-07-07 22:21:08] [INFO] 
+--- Fold 4 | Epoch 16/100 ---
+[25-07-07 22:22:26] [INFO] train_loss: 0.8103 | train_acc: 0.9355 | train_f1: 0.9316 | val_loss: 0.8427 | val_acc: 0.9268 | val_f1: 0.9135 | lr: 0.000938
+[25-07-07 22:22:26] [INFO] 
+--- Fold 4 | Epoch 17/100 ---
+[25-07-07 22:23:44] [INFO] train_loss: 0.8188 | train_acc: 0.9307 | train_f1: 0.9295 | val_loss: 0.8256 | val_acc: 0.9395 | val_f1: 0.9376 | lr: 0.000930
+[25-07-07 22:23:44] [INFO] 
+--- Fold 4 | Epoch 18/100 ---
+[25-07-07 22:25:02] [INFO] train_loss: 0.7941 | train_acc: 0.9522 | train_f1: 0.9487 | val_loss: 0.9348 | val_acc: 0.9045 | val_f1: 0.8755 | lr: 0.000922
+[25-07-07 22:25:02] [INFO] 
+--- Fold 4 | Epoch 19/100 ---
+[25-07-07 22:26:20] [INFO] train_loss: 0.7895 | train_acc: 0.9490 | train_f1: 0.9479 | val_loss: 0.8950 | val_acc: 0.9045 | val_f1: 0.8972 | lr: 0.000914
+[25-07-07 22:26:20] [INFO] 
+--- Fold 4 | Epoch 20/100 ---
+[25-07-07 22:27:39] [INFO] 🛑 Early stopping triggered at epoch 20 for Fold 4
+[25-07-07 22:27:39] [INFO] 🎯 Best F1 score: 0.9573
+[25-07-07 22:27:39] [INFO] 
+🎯 Fold 4 completed with early stopping! Best F1: 0.9573
+[25-07-07 22:27:39] [INFO] 
+============================================================
+[25-07-07 22:27:39] [INFO] 🔥 FOLD 5/5
+[25-07-07 22:27:39] [INFO] ============================================================
+[25-07-07 22:27:39] [INFO] 📚 Train samples: 1256
+[25-07-07 22:27:39] [INFO] 📝 Validation samples: 314
+[25-07-07 22:27:40] [INFO] 🏗️ Model: efficientnetv2_rw_m
+[25-07-07 22:27:40] [INFO] 🔢 Number of parameters: 51,120,043
+[25-07-07 22:27:40] [INFO] 🚀 Starting Fold 5 training...
+[25-07-07 22:27:40] [INFO] 
+--- Fold 5 | Epoch 1/100 ---
+[25-07-07 22:28:59] [INFO] 💾 Fold 5 Best model updated! F1: 0.8547
+[25-07-07 22:28:59] [INFO] train_loss: 1.3758 | train_acc: 0.7309 | train_f1: 0.7057 | val_loss: 0.9774 | val_acc: 0.8917 | val_f1: 0.8547 | lr: 0.001000
+[25-07-07 22:28:59] [INFO] 
+--- Fold 5 | Epoch 2/100 ---
+[25-07-07 22:30:17] [INFO] 💾 Fold 5 Best model updated! F1: 0.8647
+[25-07-07 22:30:17] [INFO] train_loss: 1.0106 | train_acc: 0.8471 | train_f1: 0.8261 | val_loss: 0.9271 | val_acc: 0.8885 | val_f1: 0.8647 | lr: 0.000999
+[25-07-07 22:30:17] [INFO] 
+--- Fold 5 | Epoch 3/100 ---
+[25-07-07 22:31:36] [INFO] train_loss: 0.9180 | train_acc: 0.8981 | train_f1: 0.8882 | val_loss: 1.1352 | val_acc: 0.8280 | val_f1: 0.7853 | lr: 0.000998
+[25-07-07 22:31:36] [INFO] 
+--- Fold 5 | Epoch 4/100 ---
+[25-07-07 22:32:53] [INFO] train_loss: 0.9302 | train_acc: 0.8854 | train_f1: 0.8741 | val_loss: 1.0155 | val_acc: 0.8471 | val_f1: 0.8303 | lr: 0.000996
+[25-07-07 22:32:53] [INFO] 
+--- Fold 5 | Epoch 5/100 ---
+[25-07-07 22:34:11] [INFO] train_loss: 0.9027 | train_acc: 0.8965 | train_f1: 0.8892 | val_loss: 0.8893 | val_acc: 0.8949 | val_f1: 0.8625 | lr: 0.000994
+[25-07-07 22:34:11] [INFO] 
+--- Fold 5 | Epoch 6/100 ---
+[25-07-07 22:35:29] [INFO] 💾 Fold 5 Best model updated! F1: 0.9124
+[25-07-07 22:35:29] [INFO] train_loss: 0.8666 | train_acc: 0.9116 | train_f1: 0.9040 | val_loss: 0.8457 | val_acc: 0.9204 | val_f1: 0.9124 | lr: 0.000991
+[25-07-07 22:35:29] [INFO] 
+--- Fold 5 | Epoch 7/100 ---
+[25-07-07 22:36:47] [INFO] train_loss: 0.8440 | train_acc: 0.9116 | train_f1: 0.9027 | val_loss: 0.9199 | val_acc: 0.8981 | val_f1: 0.8850 | lr: 0.000988
+[25-07-07 22:36:47] [INFO] 
+--- Fold 5 | Epoch 8/100 ---
+[25-07-07 22:38:05] [INFO] train_loss: 0.8500 | train_acc: 0.9212 | train_f1: 0.9172 | val_loss: 0.9108 | val_acc: 0.9204 | val_f1: 0.9071 | lr: 0.000984
+[25-07-07 22:38:05] [INFO] 
+--- Fold 5 | Epoch 9/100 ---
+[25-07-07 22:39:23] [INFO] train_loss: 0.8693 | train_acc: 0.9108 | train_f1: 0.9068 | val_loss: 0.8925 | val_acc: 0.9045 | val_f1: 0.8905 | lr: 0.000980
+[25-07-07 22:39:23] [INFO] 
+--- Fold 5 | Epoch 10/100 ---
+[25-07-07 22:40:42] [INFO] train_loss: 0.8459 | train_acc: 0.9228 | train_f1: 0.9200 | val_loss: 0.9339 | val_acc: 0.8949 | val_f1: 0.8799 | lr: 0.000976
+[25-07-07 22:40:42] [INFO] 
+--- Fold 5 | Epoch 11/100 ---
+[25-07-07 22:42:00] [INFO] train_loss: 0.8702 | train_acc: 0.9196 | train_f1: 0.9107 | val_loss: 0.9585 | val_acc: 0.8949 | val_f1: 0.8740 | lr: 0.000970
+[25-07-07 22:42:00] [INFO] 
+--- Fold 5 | Epoch 12/100 ---
+[25-07-07 22:43:18] [INFO] train_loss: 0.8451 | train_acc: 0.9244 | train_f1: 0.9189 | val_loss: 0.9512 | val_acc: 0.9108 | val_f1: 0.9001 | lr: 0.000965
+[25-07-07 22:43:18] [INFO] 
+--- Fold 5 | Epoch 13/100 ---
+[25-07-07 22:44:35] [INFO] train_loss: 0.8476 | train_acc: 0.9148 | train_f1: 0.9114 | val_loss: 0.8903 | val_acc: 0.9236 | val_f1: 0.9088 | lr: 0.000959
+[25-07-07 22:44:35] [INFO] 
+--- Fold 5 | Epoch 14/100 ---
+[25-07-07 22:45:54] [INFO] train_loss: 0.7948 | train_acc: 0.9498 | train_f1: 0.9479 | val_loss: 0.8603 | val_acc: 0.9076 | val_f1: 0.9040 | lr: 0.000952
+[25-07-07 22:45:54] [INFO] 
+--- Fold 5 | Epoch 15/100 ---
+[25-07-07 22:47:11] [INFO] train_loss: 0.8144 | train_acc: 0.9403 | train_f1: 0.9386 | val_loss: 0.9288 | val_acc: 0.8885 | val_f1: 0.8793 | lr: 0.000946
+[25-07-07 22:47:11] [INFO] 
+--- Fold 5 | Epoch 16/100 ---
+[25-07-07 22:48:29] [INFO] 🛑 Early stopping triggered at epoch 16 for Fold 5
+[25-07-07 22:48:29] [INFO] 🎯 Best F1 score: 0.9124
+[25-07-07 22:48:29] [INFO] 
+🎯 Fold 5 completed with early stopping! Best F1: 0.9124
+[25-07-07 22:48:29] [INFO] 
+============================================================
+[25-07-07 22:48:29] [INFO] 📊 K-FOLD CROSS VALIDATION RESULTS
+[25-07-07 22:48:29] [INFO] ============================================================
+[25-07-07 22:48:29] [INFO] 📈 Individual fold scores: ['0.9849', '0.9773', '0.9807', '0.9573', '0.9124']
+[25-07-07 22:48:29] [INFO] 🎯 Mean F1 Score: 0.9625
+[25-07-07 22:48:29] [INFO] 📏 Standard Deviation: 0.0268
+[25-07-07 22:48:29] [INFO] 📊 Score Range: 0.9625 ± 0.0268
+[25-07-07 22:48:29] [INFO] ⬇️ Min Score: 0.9124
+[25-07-07 22:48:29] [INFO] ⬆️ Max Score: 0.9849
+[25-07-07 22:48:29] [INFO] 
+🚀 Starting Ensemble Prediction...
+[25-07-07 22:48:30] [INFO] ✅ Loaded Fold 1 model
+[25-07-07 22:48:31] [INFO] ✅ Loaded Fold 2 model
+[25-07-07 22:48:33] [INFO] ✅ Loaded Fold 3 model
+[25-07-07 22:48:34] [INFO] ✅ Loaded Fold 4 model
+[25-07-07 22:48:35] [INFO] ✅ Loaded Fold 5 model
+[25-07-07 22:48:35] [INFO] 
+🔮 Running ensemble prediction with 5 models and TTA...
+[25-07-07 22:48:35] [INFO] 🔮 Predicting with Fold 1 model...
+[25-07-07 22:56:36] [INFO] 🔮 Predicting with Fold 2 model...
+[25-07-07 23:04:36] [INFO] 🔮 Predicting with Fold 3 model...
+[25-07-07 23:12:36] [INFO] 🔮 Predicting with Fold 4 model...
+[25-07-07 23:20:36] [INFO] 🔮 Predicting with Fold 5 model...
+[25-07-07 23:28:35] [INFO] 
+✅ Ensemble prediction completed and saved to ./output/pred_advanced_kfold_tta2_efnv2rwm.csv
+[25-07-07 23:28:35] [INFO] 📈 Final K-Fold CV Score: 0.9625 ± 0.0268

@@ -17,3 +17,4 @@ train.csv
 # *.csv
 *.pth
 .env
+augraphy_cache

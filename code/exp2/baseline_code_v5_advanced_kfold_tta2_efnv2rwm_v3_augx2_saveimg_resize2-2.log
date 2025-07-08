@@ -1,0 +1,1036 @@
+[25-07-08 14:41:35] [INFO] 완전한 재현성 설정이 활성화되었습니다.
+[25-07-08 14:41:35] [INFO] 🌱 Random seed set to 42
+[25-07-08 14:41:35] [INFO] 💻 Using device: cuda
+[25-07-08 14:41:35] [INFO] 📂 Data path: /root/dev/upstageailab-cv-classification-cv_1_fork/input/data
+[25-07-08 14:41:35] [INFO] 📂 Total training samples: 1570
+[25-07-08 14:41:35] [INFO] 📊 Class distribution: {0: 100, 1: 46, 2: 100, 3: 100, 4: 100, 5: 100, 6: 100, 7: 100, 8: 100, 9: 100, 10: 100, 11: 100, 12: 100, 13: 74, 14: 50, 15: 100, 16: 100}
+[25-07-08 14:41:35] [INFO] 
+🔄 Starting 5-Fold Cross Validation Training...
+[25-07-08 14:41:35] [INFO] 
+============================================================
+[25-07-08 14:41:35] [INFO] 🔥 FOLD 1/5
+[25-07-08 14:41:35] [INFO] ============================================================
+[25-07-08 14:41:35] [INFO] 📚 Train samples: 1256
+[25-07-08 14:41:35] [INFO] 📝 Validation samples: 314
+[25-07-08 14:41:35] [INFO] 📸 Augraphy pipeline initialized
+[25-07-08 14:41:35] [INFO] 📁 Augmented cache directory: /root/dev/upstageailab-cv-classification-cv_1_fork/input/data/train/img_cache
+[25-07-08 14:41:35] [INFO] 📈 Data augmented (원본 제외): 1256 → 3768 samples (증강 x3)
+[25-07-08 14:41:35] [INFO] 📸 Augraphy pipeline initialized
+[25-07-08 14:41:35] [INFO] 📁 Augmented cache directory: /root/dev/upstageailab-cv-classification-cv_1_fork/input/data/train/img_cache
+[25-07-08 14:41:35] [INFO] 📈 Data augmented (원본 제외): 314 → 942 samples (증강 x3)
+[25-07-08 14:41:36] [INFO] 🏗️ Model: efficientnetv2_rw_m
+[25-07-08 14:41:36] [INFO] 🔢 Number of parameters: 51,120,043
+[25-07-08 14:41:36] [INFO] 🚀 Starting Fold 1 training...
+[25-07-08 14:41:36] [INFO] 
+--- Fold 1 | Epoch 1/100 ---
+[25-07-08 14:45:48] [INFO] 💾 Fold 1 Best model updated! F1: 0.8730
+[25-07-08 14:45:48] [INFO] train_loss: 1.1170 | train_acc: 0.8100 | train_f1: 0.7959 | val_loss: 0.9029 | val_acc: 0.8875 | val_f1: 0.8730 | lr: 0.001000
+[25-07-08 14:45:48] [INFO] 
+📊 Epoch 1 Cache Statistics:
+[25-07-08 14:45:48] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:45:48] [INFO]    Current epoch requests: 3768
+[25-07-08 14:45:48] [INFO]    Original cache hits: 2512 (66.7%)
+[25-07-08 14:45:48] [INFO]    Original cache misses: 1256 (33.3%)
+[25-07-08 14:45:48] [INFO]    Augmented cache hits: 0 (0.0%)
+[25-07-08 14:45:48] [INFO]    Augmented cache misses: 3768 (100.0%)
+[25-07-08 14:45:48] [INFO]    Disk loads: 1256
+[25-07-08 14:45:48] [INFO]    Augmented saves: 3768
+[25-07-08 14:45:48] [INFO]    Augmentations applied: 3768
+[25-07-08 14:45:48] [INFO]    Original cache size: 1256
+[25-07-08 14:45:48] [INFO]    Augmented cache size: 3768
+[25-07-08 14:45:48] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:45:48] [INFO]    Current epoch requests: 942
+[25-07-08 14:45:48] [INFO]    Original cache hits: 628 (66.7%)
+[25-07-08 14:45:48] [INFO]    Original cache misses: 314 (33.3%)
+[25-07-08 14:45:48] [INFO]    Augmented cache hits: 0 (0.0%)
+[25-07-08 14:45:48] [INFO]    Augmented cache misses: 942 (100.0%)
+[25-07-08 14:45:48] [INFO]    Disk loads: 314
+[25-07-08 14:45:48] [INFO]    Augmented saves: 942
+[25-07-08 14:45:48] [INFO]    Augmentations applied: 942
+[25-07-08 14:45:48] [INFO]    Original cache size: 314
+[25-07-08 14:45:48] [INFO]    Augmented cache size: 942
+[25-07-08 14:45:48] [INFO] 
+--- Fold 1 | Epoch 2/100 ---
+[25-07-08 14:46:21] [INFO] 💾 Fold 1 Best model updated! F1: 0.9018
+[25-07-08 14:46:21] [INFO] train_loss: 0.8221 | train_acc: 0.9220 | train_f1: 0.9178 | val_loss: 0.8415 | val_acc: 0.9119 | val_f1: 0.9018 | lr: 0.000999
+[25-07-08 14:46:21] [INFO] 
+📊 Epoch 2 Cache Statistics:
+[25-07-08 14:46:21] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:46:21] [INFO]    Current epoch requests: 3768
+[25-07-08 14:46:21] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:46:21] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:46:21] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 14:46:21] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:46:21] [INFO]    Disk loads: 0
+[25-07-08 14:46:21] [INFO]    Augmented saves: 0
+[25-07-08 14:46:21] [INFO]    Augmentations applied: 0
+[25-07-08 14:46:21] [INFO]    Original cache size: 1256
+[25-07-08 14:46:21] [INFO]    Augmented cache size: 3768
+[25-07-08 14:46:21] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:46:21] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:46:21] [INFO]    Current epoch requests: 942
+[25-07-08 14:46:21] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:46:21] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:46:21] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 14:46:21] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:46:21] [INFO]    Disk loads: 0
+[25-07-08 14:46:21] [INFO]    Augmented saves: 0
+[25-07-08 14:46:21] [INFO]    Augmentations applied: 0
+[25-07-08 14:46:21] [INFO]    Original cache size: 314
+[25-07-08 14:46:21] [INFO]    Augmented cache size: 942
+[25-07-08 14:46:21] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:46:21] [INFO] 
+--- Fold 1 | Epoch 3/100 ---
+[25-07-08 14:46:54] [INFO] train_loss: 0.7738 | train_acc: 0.9467 | train_f1: 0.9448 | val_loss: 0.9125 | val_acc: 0.8938 | val_f1: 0.8885 | lr: 0.000998
+[25-07-08 14:46:54] [INFO] 
+📊 Epoch 3 Cache Statistics:
+[25-07-08 14:46:54] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:46:54] [INFO]    Current epoch requests: 3768
+[25-07-08 14:46:54] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:46:54] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:46:54] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 14:46:54] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:46:54] [INFO]    Disk loads: 0
+[25-07-08 14:46:54] [INFO]    Augmented saves: 0
+[25-07-08 14:46:54] [INFO]    Augmentations applied: 0
+[25-07-08 14:46:54] [INFO]    Original cache size: 1256
+[25-07-08 14:46:54] [INFO]    Augmented cache size: 3768
+[25-07-08 14:46:54] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:46:54] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:46:54] [INFO]    Current epoch requests: 942
+[25-07-08 14:46:54] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:46:54] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:46:54] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 14:46:54] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:46:54] [INFO]    Disk loads: 0
+[25-07-08 14:46:54] [INFO]    Augmented saves: 0
+[25-07-08 14:46:54] [INFO]    Augmentations applied: 0
+[25-07-08 14:46:54] [INFO]    Original cache size: 314
+[25-07-08 14:46:54] [INFO]    Augmented cache size: 942
+[25-07-08 14:46:54] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:46:54] [INFO] 
+--- Fold 1 | Epoch 4/100 ---
+[25-07-08 14:47:47] [INFO] train_loss: 0.7619 | train_acc: 0.9528 | train_f1: 0.9497 | val_loss: 0.8794 | val_acc: 0.8949 | val_f1: 0.8925 | lr: 0.000996
+[25-07-08 14:47:47] [INFO] 
+📊 Epoch 4 Cache Statistics:
+[25-07-08 14:47:47] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:47:47] [INFO]    Current epoch requests: 3768
+[25-07-08 14:47:47] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:47:47] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:47:47] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 14:47:47] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:47:47] [INFO]    Disk loads: 0
+[25-07-08 14:47:47] [INFO]    Augmented saves: 0
+[25-07-08 14:47:47] [INFO]    Augmentations applied: 0
+[25-07-08 14:47:47] [INFO]    Original cache size: 1256
+[25-07-08 14:47:47] [INFO]    Augmented cache size: 3768
+[25-07-08 14:47:47] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:47:47] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:47:47] [INFO]    Current epoch requests: 942
+[25-07-08 14:47:47] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:47:47] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:47:47] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 14:47:47] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:47:47] [INFO]    Disk loads: 0
+[25-07-08 14:47:47] [INFO]    Augmented saves: 0
+[25-07-08 14:47:47] [INFO]    Augmentations applied: 0
+[25-07-08 14:47:47] [INFO]    Original cache size: 314
+[25-07-08 14:47:47] [INFO]    Augmented cache size: 942
+[25-07-08 14:47:47] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:47:47] [INFO] 
+--- Fold 1 | Epoch 5/100 ---
+[25-07-08 14:48:49] [INFO] 💾 Fold 1 Best model updated! F1: 0.9094
+[25-07-08 14:48:49] [INFO] train_loss: 0.7194 | train_acc: 0.9719 | train_f1: 0.9691 | val_loss: 0.8971 | val_acc: 0.9119 | val_f1: 0.9094 | lr: 0.000994
+[25-07-08 14:48:49] [INFO] 
+📊 Epoch 5 Cache Statistics:
+[25-07-08 14:48:49] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:48:49] [INFO]    Current epoch requests: 3768
+[25-07-08 14:48:49] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:48:49] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:48:49] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 14:48:49] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:48:49] [INFO]    Disk loads: 0
+[25-07-08 14:48:49] [INFO]    Augmented saves: 0
+[25-07-08 14:48:49] [INFO]    Augmentations applied: 0
+[25-07-08 14:48:49] [INFO]    Original cache size: 1256
+[25-07-08 14:48:49] [INFO]    Augmented cache size: 3768
+[25-07-08 14:48:49] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:48:49] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:48:49] [INFO]    Current epoch requests: 942
+[25-07-08 14:48:49] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:48:49] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:48:49] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 14:48:49] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:48:49] [INFO]    Disk loads: 0
+[25-07-08 14:48:49] [INFO]    Augmented saves: 0
+[25-07-08 14:48:49] [INFO]    Augmentations applied: 0
+[25-07-08 14:48:49] [INFO]    Original cache size: 314
+[25-07-08 14:48:49] [INFO]    Augmented cache size: 942
+[25-07-08 14:48:49] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:48:49] [INFO] 
+--- Fold 1 | Epoch 6/100 ---
+[25-07-08 14:49:51] [INFO] train_loss: 0.7435 | train_acc: 0.9684 | train_f1: 0.9677 | val_loss: 0.9159 | val_acc: 0.8938 | val_f1: 0.8903 | lr: 0.000991
+[25-07-08 14:49:51] [INFO] 
+📊 Epoch 6 Cache Statistics:
+[25-07-08 14:49:51] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:49:51] [INFO]    Current epoch requests: 3768
+[25-07-08 14:49:51] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:49:51] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:49:51] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 14:49:51] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:49:51] [INFO]    Disk loads: 0
+[25-07-08 14:49:51] [INFO]    Augmented saves: 0
+[25-07-08 14:49:51] [INFO]    Augmentations applied: 0
+[25-07-08 14:49:51] [INFO]    Original cache size: 1256
+[25-07-08 14:49:51] [INFO]    Augmented cache size: 3768
+[25-07-08 14:49:51] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:49:51] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:49:51] [INFO]    Current epoch requests: 942
+[25-07-08 14:49:51] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:49:51] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:49:51] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 14:49:51] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:49:51] [INFO]    Disk loads: 0
+[25-07-08 14:49:51] [INFO]    Augmented saves: 0
+[25-07-08 14:49:51] [INFO]    Augmentations applied: 0
+[25-07-08 14:49:51] [INFO]    Original cache size: 314
+[25-07-08 14:49:51] [INFO]    Augmented cache size: 942
+[25-07-08 14:49:51] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:49:51] [INFO] 
+--- Fold 1 | Epoch 7/100 ---
+[25-07-08 14:50:52] [INFO] train_loss: 0.7384 | train_acc: 0.9689 | train_f1: 0.9673 | val_loss: 0.9484 | val_acc: 0.9002 | val_f1: 0.8909 | lr: 0.000988
+[25-07-08 14:50:52] [INFO] 
+📊 Epoch 7 Cache Statistics:
+[25-07-08 14:50:52] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:50:52] [INFO]    Current epoch requests: 3768
+[25-07-08 14:50:52] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:50:52] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:50:52] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 14:50:52] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:50:52] [INFO]    Disk loads: 0
+[25-07-08 14:50:52] [INFO]    Augmented saves: 0
+[25-07-08 14:50:52] [INFO]    Augmentations applied: 0
+[25-07-08 14:50:52] [INFO]    Original cache size: 1256
+[25-07-08 14:50:52] [INFO]    Augmented cache size: 3768
+[25-07-08 14:50:52] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:50:52] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:50:52] [INFO]    Current epoch requests: 942
+[25-07-08 14:50:52] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:50:52] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:50:52] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 14:50:52] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:50:52] [INFO]    Disk loads: 0
+[25-07-08 14:50:52] [INFO]    Augmented saves: 0
+[25-07-08 14:50:52] [INFO]    Augmentations applied: 0
+[25-07-08 14:50:52] [INFO]    Original cache size: 314
+[25-07-08 14:50:52] [INFO]    Augmented cache size: 942
+[25-07-08 14:50:52] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:50:52] [INFO] 
+--- Fold 1 | Epoch 8/100 ---
+[25-07-08 14:51:54] [INFO] 💾 Fold 1 Best model updated! F1: 0.9189
+[25-07-08 14:51:54] [INFO] train_loss: 0.7145 | train_acc: 0.9737 | train_f1: 0.9718 | val_loss: 0.8166 | val_acc: 0.9257 | val_f1: 0.9189 | lr: 0.000984
+[25-07-08 14:51:54] [INFO] 
+📊 Epoch 8 Cache Statistics:
+[25-07-08 14:51:54] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:51:54] [INFO]    Current epoch requests: 3768
+[25-07-08 14:51:54] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:51:54] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:51:54] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 14:51:54] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:51:54] [INFO]    Disk loads: 0
+[25-07-08 14:51:54] [INFO]    Augmented saves: 0
+[25-07-08 14:51:54] [INFO]    Augmentations applied: 0
+[25-07-08 14:51:54] [INFO]    Original cache size: 1256
+[25-07-08 14:51:54] [INFO]    Augmented cache size: 3768
+[25-07-08 14:51:54] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:51:54] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:51:54] [INFO]    Current epoch requests: 942
+[25-07-08 14:51:54] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:51:54] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:51:54] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 14:51:54] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:51:54] [INFO]    Disk loads: 0
+[25-07-08 14:51:54] [INFO]    Augmented saves: 0
+[25-07-08 14:51:54] [INFO]    Augmentations applied: 0
+[25-07-08 14:51:54] [INFO]    Original cache size: 314
+[25-07-08 14:51:54] [INFO]    Augmented cache size: 942
+[25-07-08 14:51:54] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:51:54] [INFO] 
+--- Fold 1 | Epoch 9/100 ---
+[25-07-08 14:52:55] [INFO] train_loss: 0.7146 | train_acc: 0.9764 | train_f1: 0.9749 | val_loss: 0.9497 | val_acc: 0.9002 | val_f1: 0.8915 | lr: 0.000980
+[25-07-08 14:52:55] [INFO] 
+📊 Epoch 9 Cache Statistics:
+[25-07-08 14:52:55] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:52:55] [INFO]    Current epoch requests: 3768
+[25-07-08 14:52:55] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:52:55] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:52:55] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 14:52:55] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:52:55] [INFO]    Disk loads: 0
+[25-07-08 14:52:55] [INFO]    Augmented saves: 0
+[25-07-08 14:52:55] [INFO]    Augmentations applied: 0
+[25-07-08 14:52:55] [INFO]    Original cache size: 1256
+[25-07-08 14:52:55] [INFO]    Augmented cache size: 3768
+[25-07-08 14:52:55] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:52:55] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:52:55] [INFO]    Current epoch requests: 942
+[25-07-08 14:52:55] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:52:55] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:52:55] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 14:52:55] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:52:55] [INFO]    Disk loads: 0
+[25-07-08 14:52:55] [INFO]    Augmented saves: 0
+[25-07-08 14:52:55] [INFO]    Augmentations applied: 0
+[25-07-08 14:52:55] [INFO]    Original cache size: 314
+[25-07-08 14:52:55] [INFO]    Augmented cache size: 942
+[25-07-08 14:52:55] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:52:55] [INFO] 
+--- Fold 1 | Epoch 10/100 ---
+[25-07-08 14:53:56] [INFO] train_loss: 0.7147 | train_acc: 0.9758 | train_f1: 0.9738 | val_loss: 0.8828 | val_acc: 0.9045 | val_f1: 0.8994 | lr: 0.000976
+[25-07-08 14:53:56] [INFO] 
+📊 Epoch 10 Cache Statistics:
+[25-07-08 14:53:56] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:53:56] [INFO]    Current epoch requests: 3768
+[25-07-08 14:53:56] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:53:56] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:53:56] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 14:53:56] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:53:56] [INFO]    Disk loads: 0
+[25-07-08 14:53:56] [INFO]    Augmented saves: 0
+[25-07-08 14:53:56] [INFO]    Augmentations applied: 0
+[25-07-08 14:53:56] [INFO]    Original cache size: 1256
+[25-07-08 14:53:56] [INFO]    Augmented cache size: 3768
+[25-07-08 14:53:56] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:53:56] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:53:56] [INFO]    Current epoch requests: 942
+[25-07-08 14:53:56] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:53:56] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:53:56] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 14:53:56] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:53:56] [INFO]    Disk loads: 0
+[25-07-08 14:53:56] [INFO]    Augmented saves: 0
+[25-07-08 14:53:56] [INFO]    Augmentations applied: 0
+[25-07-08 14:53:56] [INFO]    Original cache size: 314
+[25-07-08 14:53:56] [INFO]    Augmented cache size: 942
+[25-07-08 14:53:56] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:53:56] [INFO] 
+--- Fold 1 | Epoch 11/100 ---
+[25-07-08 14:54:58] [INFO] train_loss: 0.6851 | train_acc: 0.9862 | train_f1: 0.9861 | val_loss: 2.0845 | val_acc: 0.7527 | val_f1: 0.7610 | lr: 0.000970
+[25-07-08 14:54:58] [INFO] 
+📊 Epoch 11 Cache Statistics:
+[25-07-08 14:54:58] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:54:58] [INFO]    Current epoch requests: 3768
+[25-07-08 14:54:58] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:54:58] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:54:58] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 14:54:58] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:54:58] [INFO]    Disk loads: 0
+[25-07-08 14:54:58] [INFO]    Augmented saves: 0
+[25-07-08 14:54:58] [INFO]    Augmentations applied: 0
+[25-07-08 14:54:58] [INFO]    Original cache size: 1256
+[25-07-08 14:54:58] [INFO]    Augmented cache size: 3768
+[25-07-08 14:54:58] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:54:58] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:54:58] [INFO]    Current epoch requests: 942
+[25-07-08 14:54:58] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:54:58] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:54:58] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 14:54:58] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:54:58] [INFO]    Disk loads: 0
+[25-07-08 14:54:58] [INFO]    Augmented saves: 0
+[25-07-08 14:54:58] [INFO]    Augmentations applied: 0
+[25-07-08 14:54:58] [INFO]    Original cache size: 314
+[25-07-08 14:54:58] [INFO]    Augmented cache size: 942
+[25-07-08 14:54:58] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:54:58] [INFO] 
+--- Fold 1 | Epoch 12/100 ---
+[25-07-08 14:55:59] [INFO] train_loss: 0.7274 | train_acc: 0.9716 | train_f1: 0.9703 | val_loss: 0.9079 | val_acc: 0.8938 | val_f1: 0.8871 | lr: 0.000965
+[25-07-08 14:55:59] [INFO] 
+📊 Epoch 12 Cache Statistics:
+[25-07-08 14:55:59] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:55:59] [INFO]    Current epoch requests: 3768
+[25-07-08 14:55:59] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:55:59] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:55:59] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 14:55:59] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:55:59] [INFO]    Disk loads: 0
+[25-07-08 14:55:59] [INFO]    Augmented saves: 0
+[25-07-08 14:55:59] [INFO]    Augmentations applied: 0
+[25-07-08 14:55:59] [INFO]    Original cache size: 1256
+[25-07-08 14:55:59] [INFO]    Augmented cache size: 3768
+[25-07-08 14:55:59] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:55:59] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:55:59] [INFO]    Current epoch requests: 942
+[25-07-08 14:55:59] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:55:59] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:55:59] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 14:55:59] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:55:59] [INFO]    Disk loads: 0
+[25-07-08 14:55:59] [INFO]    Augmented saves: 0
+[25-07-08 14:55:59] [INFO]    Augmentations applied: 0
+[25-07-08 14:55:59] [INFO]    Original cache size: 314
+[25-07-08 14:55:59] [INFO]    Augmented cache size: 942
+[25-07-08 14:55:59] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:55:59] [INFO] 
+--- Fold 1 | Epoch 13/100 ---
+[25-07-08 14:57:01] [INFO] train_loss: 0.6933 | train_acc: 0.9851 | train_f1: 0.9837 | val_loss: 0.8793 | val_acc: 0.9140 | val_f1: 0.9119 | lr: 0.000959
+[25-07-08 14:57:01] [INFO] 
+📊 Epoch 13 Cache Statistics:
+[25-07-08 14:57:01] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:57:01] [INFO]    Current epoch requests: 3768
+[25-07-08 14:57:01] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:57:01] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:57:01] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 14:57:01] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:57:01] [INFO]    Disk loads: 0
+[25-07-08 14:57:01] [INFO]    Augmented saves: 0
+[25-07-08 14:57:01] [INFO]    Augmentations applied: 0
+[25-07-08 14:57:01] [INFO]    Original cache size: 1256
+[25-07-08 14:57:01] [INFO]    Augmented cache size: 3768
+[25-07-08 14:57:01] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:57:01] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:57:01] [INFO]    Current epoch requests: 942
+[25-07-08 14:57:01] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:57:01] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:57:01] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 14:57:01] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:57:01] [INFO]    Disk loads: 0
+[25-07-08 14:57:01] [INFO]    Augmented saves: 0
+[25-07-08 14:57:01] [INFO]    Augmentations applied: 0
+[25-07-08 14:57:01] [INFO]    Original cache size: 314
+[25-07-08 14:57:01] [INFO]    Augmented cache size: 942
+[25-07-08 14:57:01] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:57:01] [INFO] 
+--- Fold 1 | Epoch 14/100 ---
+[25-07-08 14:58:03] [INFO] train_loss: 0.6780 | train_acc: 0.9910 | train_f1: 0.9905 | val_loss: 0.8671 | val_acc: 0.9130 | val_f1: 0.9105 | lr: 0.000952
+[25-07-08 14:58:03] [INFO] 
+📊 Epoch 14 Cache Statistics:
+[25-07-08 14:58:03] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:58:03] [INFO]    Current epoch requests: 3768
+[25-07-08 14:58:03] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:58:03] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:58:03] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 14:58:03] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:58:03] [INFO]    Disk loads: 0
+[25-07-08 14:58:03] [INFO]    Augmented saves: 0
+[25-07-08 14:58:03] [INFO]    Augmentations applied: 0
+[25-07-08 14:58:03] [INFO]    Original cache size: 1256
+[25-07-08 14:58:03] [INFO]    Augmented cache size: 3768
+[25-07-08 14:58:03] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:58:03] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:58:03] [INFO]    Current epoch requests: 942
+[25-07-08 14:58:03] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:58:03] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:58:03] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 14:58:03] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:58:03] [INFO]    Disk loads: 0
+[25-07-08 14:58:03] [INFO]    Augmented saves: 0
+[25-07-08 14:58:03] [INFO]    Augmentations applied: 0
+[25-07-08 14:58:03] [INFO]    Original cache size: 314
+[25-07-08 14:58:03] [INFO]    Augmented cache size: 942
+[25-07-08 14:58:03] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:58:03] [INFO] 
+--- Fold 1 | Epoch 15/100 ---
+[25-07-08 14:59:04] [INFO] train_loss: 0.6762 | train_acc: 0.9878 | train_f1: 0.9874 | val_loss: 0.9729 | val_acc: 0.8726 | val_f1: 0.8593 | lr: 0.000946
+[25-07-08 14:59:04] [INFO] 
+📊 Epoch 15 Cache Statistics:
+[25-07-08 14:59:04] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:59:04] [INFO]    Current epoch requests: 3768
+[25-07-08 14:59:04] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:59:04] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:59:04] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 14:59:04] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:59:04] [INFO]    Disk loads: 0
+[25-07-08 14:59:04] [INFO]    Augmented saves: 0
+[25-07-08 14:59:04] [INFO]    Augmentations applied: 0
+[25-07-08 14:59:04] [INFO]    Original cache size: 1256
+[25-07-08 14:59:04] [INFO]    Augmented cache size: 3768
+[25-07-08 14:59:04] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:59:04] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 14:59:04] [INFO]    Current epoch requests: 942
+[25-07-08 14:59:04] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 14:59:04] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 14:59:04] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 14:59:04] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 14:59:04] [INFO]    Disk loads: 0
+[25-07-08 14:59:04] [INFO]    Augmented saves: 0
+[25-07-08 14:59:04] [INFO]    Augmentations applied: 0
+[25-07-08 14:59:04] [INFO]    Original cache size: 314
+[25-07-08 14:59:04] [INFO]    Augmented cache size: 942
+[25-07-08 14:59:04] [INFO]    Cache efficiency: 100.0%
+[25-07-08 14:59:04] [INFO] 
+--- Fold 1 | Epoch 16/100 ---
+[25-07-08 15:00:05] [INFO] train_loss: 0.7138 | train_acc: 0.9753 | train_f1: 0.9724 | val_loss: 0.8720 | val_acc: 0.9151 | val_f1: 0.9134 | lr: 0.000938
+[25-07-08 15:00:05] [INFO] 
+📊 Epoch 16 Cache Statistics:
+[25-07-08 15:00:05] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:00:05] [INFO]    Current epoch requests: 3768
+[25-07-08 15:00:05] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:00:05] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:00:05] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:00:05] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:00:05] [INFO]    Disk loads: 0
+[25-07-08 15:00:05] [INFO]    Augmented saves: 0
+[25-07-08 15:00:05] [INFO]    Augmentations applied: 0
+[25-07-08 15:00:05] [INFO]    Original cache size: 1256
+[25-07-08 15:00:05] [INFO]    Augmented cache size: 3768
+[25-07-08 15:00:05] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:00:05] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:00:05] [INFO]    Current epoch requests: 942
+[25-07-08 15:00:05] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:00:05] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:00:05] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:00:05] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:00:05] [INFO]    Disk loads: 0
+[25-07-08 15:00:05] [INFO]    Augmented saves: 0
+[25-07-08 15:00:05] [INFO]    Augmentations applied: 0
+[25-07-08 15:00:05] [INFO]    Original cache size: 314
+[25-07-08 15:00:05] [INFO]    Augmented cache size: 942
+[25-07-08 15:00:05] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:00:05] [INFO] 
+--- Fold 1 | Epoch 17/100 ---
+[25-07-08 15:01:06] [INFO] 💾 Fold 1 Best model updated! F1: 0.9200
+[25-07-08 15:01:06] [INFO] train_loss: 0.6913 | train_acc: 0.9862 | train_f1: 0.9861 | val_loss: 0.8380 | val_acc: 0.9225 | val_f1: 0.9200 | lr: 0.000930
+[25-07-08 15:01:06] [INFO] 
+📊 Epoch 17 Cache Statistics:
+[25-07-08 15:01:06] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:01:06] [INFO]    Current epoch requests: 3768
+[25-07-08 15:01:06] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:01:06] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:01:06] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:01:06] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:01:06] [INFO]    Disk loads: 0
+[25-07-08 15:01:06] [INFO]    Augmented saves: 0
+[25-07-08 15:01:06] [INFO]    Augmentations applied: 0
+[25-07-08 15:01:06] [INFO]    Original cache size: 1256
+[25-07-08 15:01:06] [INFO]    Augmented cache size: 3768
+[25-07-08 15:01:06] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:01:06] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:01:06] [INFO]    Current epoch requests: 942
+[25-07-08 15:01:06] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:01:06] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:01:06] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:01:06] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:01:06] [INFO]    Disk loads: 0
+[25-07-08 15:01:06] [INFO]    Augmented saves: 0
+[25-07-08 15:01:06] [INFO]    Augmentations applied: 0
+[25-07-08 15:01:06] [INFO]    Original cache size: 314
+[25-07-08 15:01:06] [INFO]    Augmented cache size: 942
+[25-07-08 15:01:06] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:01:06] [INFO] 
+--- Fold 1 | Epoch 18/100 ---
+[25-07-08 15:02:08] [INFO] train_loss: 0.6556 | train_acc: 0.9958 | train_f1: 0.9955 | val_loss: 0.8261 | val_acc: 0.9183 | val_f1: 0.9098 | lr: 0.000922
+[25-07-08 15:02:08] [INFO] 
+📊 Epoch 18 Cache Statistics:
+[25-07-08 15:02:08] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:02:08] [INFO]    Current epoch requests: 3768
+[25-07-08 15:02:08] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:02:08] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:02:08] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:02:08] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:02:08] [INFO]    Disk loads: 0
+[25-07-08 15:02:08] [INFO]    Augmented saves: 0
+[25-07-08 15:02:08] [INFO]    Augmentations applied: 0
+[25-07-08 15:02:08] [INFO]    Original cache size: 1256
+[25-07-08 15:02:08] [INFO]    Augmented cache size: 3768
+[25-07-08 15:02:08] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:02:08] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:02:08] [INFO]    Current epoch requests: 942
+[25-07-08 15:02:08] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:02:08] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:02:08] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:02:08] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:02:08] [INFO]    Disk loads: 0
+[25-07-08 15:02:08] [INFO]    Augmented saves: 0
+[25-07-08 15:02:08] [INFO]    Augmentations applied: 0
+[25-07-08 15:02:08] [INFO]    Original cache size: 314
+[25-07-08 15:02:08] [INFO]    Augmented cache size: 942
+[25-07-08 15:02:08] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:02:08] [INFO] 
+--- Fold 1 | Epoch 19/100 ---
+[25-07-08 15:03:09] [INFO] train_loss: 0.6800 | train_acc: 0.9878 | train_f1: 0.9877 | val_loss: 0.9349 | val_acc: 0.8949 | val_f1: 0.8870 | lr: 0.000914
+[25-07-08 15:03:09] [INFO] 
+📊 Epoch 19 Cache Statistics:
+[25-07-08 15:03:09] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:03:09] [INFO]    Current epoch requests: 3768
+[25-07-08 15:03:09] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:03:09] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:03:09] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:03:09] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:03:09] [INFO]    Disk loads: 0
+[25-07-08 15:03:09] [INFO]    Augmented saves: 0
+[25-07-08 15:03:09] [INFO]    Augmentations applied: 0
+[25-07-08 15:03:09] [INFO]    Original cache size: 1256
+[25-07-08 15:03:09] [INFO]    Augmented cache size: 3768
+[25-07-08 15:03:09] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:03:09] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:03:09] [INFO]    Current epoch requests: 942
+[25-07-08 15:03:09] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:03:09] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:03:09] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:03:09] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:03:09] [INFO]    Disk loads: 0
+[25-07-08 15:03:09] [INFO]    Augmented saves: 0
+[25-07-08 15:03:09] [INFO]    Augmentations applied: 0
+[25-07-08 15:03:09] [INFO]    Original cache size: 314
+[25-07-08 15:03:09] [INFO]    Augmented cache size: 942
+[25-07-08 15:03:09] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:03:09] [INFO] 
+--- Fold 1 | Epoch 20/100 ---
+[25-07-08 15:04:12] [INFO] train_loss: 0.7358 | train_acc: 0.9682 | train_f1: 0.9653 | val_loss: 1.1082 | val_acc: 0.8376 | val_f1: 0.8371 | lr: 0.000905
+[25-07-08 15:04:12] [INFO] 
+📊 Epoch 20 Cache Statistics:
+[25-07-08 15:04:12] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:04:12] [INFO]    Current epoch requests: 3768
+[25-07-08 15:04:12] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:04:12] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:04:12] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:04:12] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:04:12] [INFO]    Disk loads: 0
+[25-07-08 15:04:12] [INFO]    Augmented saves: 0
+[25-07-08 15:04:12] [INFO]    Augmentations applied: 0
+[25-07-08 15:04:12] [INFO]    Original cache size: 1256
+[25-07-08 15:04:12] [INFO]    Augmented cache size: 3768
+[25-07-08 15:04:12] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:04:12] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:04:12] [INFO]    Current epoch requests: 942
+[25-07-08 15:04:12] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:04:12] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:04:12] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:04:12] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:04:12] [INFO]    Disk loads: 0
+[25-07-08 15:04:12] [INFO]    Augmented saves: 0
+[25-07-08 15:04:12] [INFO]    Augmentations applied: 0
+[25-07-08 15:04:12] [INFO]    Original cache size: 314
+[25-07-08 15:04:12] [INFO]    Augmented cache size: 942
+[25-07-08 15:04:12] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:04:12] [INFO] 
+--- Fold 1 | Epoch 21/100 ---
+[25-07-08 15:05:43] [INFO] train_loss: 0.6774 | train_acc: 0.9894 | train_f1: 0.9892 | val_loss: 0.9063 | val_acc: 0.9130 | val_f1: 0.9022 | lr: 0.000895
+[25-07-08 15:05:43] [INFO] 
+📊 Epoch 21 Cache Statistics:
+[25-07-08 15:05:43] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:05:43] [INFO]    Current epoch requests: 3768
+[25-07-08 15:05:43] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:05:43] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:05:43] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:05:43] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:05:43] [INFO]    Disk loads: 0
+[25-07-08 15:05:43] [INFO]    Augmented saves: 0
+[25-07-08 15:05:43] [INFO]    Augmentations applied: 0
+[25-07-08 15:05:43] [INFO]    Original cache size: 1256
+[25-07-08 15:05:43] [INFO]    Augmented cache size: 3768
+[25-07-08 15:05:43] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:05:43] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:05:43] [INFO]    Current epoch requests: 942
+[25-07-08 15:05:43] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:05:43] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:05:43] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:05:43] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:05:43] [INFO]    Disk loads: 0
+[25-07-08 15:05:43] [INFO]    Augmented saves: 0
+[25-07-08 15:05:43] [INFO]    Augmentations applied: 0
+[25-07-08 15:05:43] [INFO]    Original cache size: 314
+[25-07-08 15:05:43] [INFO]    Augmented cache size: 942
+[25-07-08 15:05:43] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:05:43] [INFO] 
+--- Fold 1 | Epoch 22/100 ---
+[25-07-08 15:06:43] [INFO] train_loss: 0.6444 | train_acc: 0.9973 | train_f1: 0.9974 | val_loss: 0.8228 | val_acc: 0.9151 | val_f1: 0.9099 | lr: 0.000885
+[25-07-08 15:06:43] [INFO] 
+📊 Epoch 22 Cache Statistics:
+[25-07-08 15:06:43] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:06:43] [INFO]    Current epoch requests: 3768
+[25-07-08 15:06:43] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:06:43] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:06:43] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:06:43] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:06:43] [INFO]    Disk loads: 0
+[25-07-08 15:06:43] [INFO]    Augmented saves: 0
+[25-07-08 15:06:43] [INFO]    Augmentations applied: 0
+[25-07-08 15:06:43] [INFO]    Original cache size: 1256
+[25-07-08 15:06:43] [INFO]    Augmented cache size: 3768
+[25-07-08 15:06:43] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:06:43] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:06:43] [INFO]    Current epoch requests: 942
+[25-07-08 15:06:43] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:06:43] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:06:43] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:06:43] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:06:43] [INFO]    Disk loads: 0
+[25-07-08 15:06:43] [INFO]    Augmented saves: 0
+[25-07-08 15:06:43] [INFO]    Augmentations applied: 0
+[25-07-08 15:06:43] [INFO]    Original cache size: 314
+[25-07-08 15:06:43] [INFO]    Augmented cache size: 942
+[25-07-08 15:06:43] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:06:43] [INFO] 
+--- Fold 1 | Epoch 23/100 ---
+[25-07-08 15:07:21] [INFO] train_loss: 0.6568 | train_acc: 0.9947 | train_f1: 0.9946 | val_loss: 0.9118 | val_acc: 0.8960 | val_f1: 0.8926 | lr: 0.000875
+[25-07-08 15:07:21] [INFO] 
+📊 Epoch 23 Cache Statistics:
+[25-07-08 15:07:21] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:07:21] [INFO]    Current epoch requests: 3768
+[25-07-08 15:07:21] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:07:21] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:07:21] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:07:21] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:07:21] [INFO]    Disk loads: 0
+[25-07-08 15:07:21] [INFO]    Augmented saves: 0
+[25-07-08 15:07:21] [INFO]    Augmentations applied: 0
+[25-07-08 15:07:21] [INFO]    Original cache size: 1256
+[25-07-08 15:07:21] [INFO]    Augmented cache size: 3768
+[25-07-08 15:07:21] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:07:21] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:07:21] [INFO]    Current epoch requests: 942
+[25-07-08 15:07:21] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:07:21] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:07:21] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:07:21] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:07:21] [INFO]    Disk loads: 0
+[25-07-08 15:07:21] [INFO]    Augmented saves: 0
+[25-07-08 15:07:21] [INFO]    Augmentations applied: 0
+[25-07-08 15:07:21] [INFO]    Original cache size: 314
+[25-07-08 15:07:21] [INFO]    Augmented cache size: 942
+[25-07-08 15:07:21] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:07:21] [INFO] 
+--- Fold 1 | Epoch 24/100 ---
+[25-07-08 15:07:53] [INFO] train_loss: 0.7036 | train_acc: 0.9788 | train_f1: 0.9773 | val_loss: 0.8552 | val_acc: 0.9183 | val_f1: 0.9128 | lr: 0.000865
+[25-07-08 15:07:53] [INFO] 
+📊 Epoch 24 Cache Statistics:
+[25-07-08 15:07:53] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:07:53] [INFO]    Current epoch requests: 3768
+[25-07-08 15:07:53] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:07:53] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:07:53] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:07:53] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:07:53] [INFO]    Disk loads: 0
+[25-07-08 15:07:53] [INFO]    Augmented saves: 0
+[25-07-08 15:07:53] [INFO]    Augmentations applied: 0
+[25-07-08 15:07:53] [INFO]    Original cache size: 1256
+[25-07-08 15:07:53] [INFO]    Augmented cache size: 3768
+[25-07-08 15:07:53] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:07:53] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:07:53] [INFO]    Current epoch requests: 942
+[25-07-08 15:07:53] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:07:53] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:07:53] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:07:53] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:07:53] [INFO]    Disk loads: 0
+[25-07-08 15:07:53] [INFO]    Augmented saves: 0
+[25-07-08 15:07:53] [INFO]    Augmentations applied: 0
+[25-07-08 15:07:53] [INFO]    Original cache size: 314
+[25-07-08 15:07:53] [INFO]    Augmented cache size: 942
+[25-07-08 15:07:53] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:07:53] [INFO] 
+--- Fold 1 | Epoch 25/100 ---
+[25-07-08 15:08:26] [INFO] 💾 Fold 1 Best model updated! F1: 0.9279
+[25-07-08 15:08:26] [INFO] train_loss: 0.6477 | train_acc: 0.9958 | train_f1: 0.9957 | val_loss: 0.8000 | val_acc: 0.9321 | val_f1: 0.9279 | lr: 0.000854
+[25-07-08 15:08:26] [INFO] 
+📊 Epoch 25 Cache Statistics:
+[25-07-08 15:08:26] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:08:26] [INFO]    Current epoch requests: 3768
+[25-07-08 15:08:26] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:08:26] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:08:26] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:08:26] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:08:26] [INFO]    Disk loads: 0
+[25-07-08 15:08:26] [INFO]    Augmented saves: 0
+[25-07-08 15:08:26] [INFO]    Augmentations applied: 0
+[25-07-08 15:08:26] [INFO]    Original cache size: 1256
+[25-07-08 15:08:26] [INFO]    Augmented cache size: 3768
+[25-07-08 15:08:26] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:08:26] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:08:26] [INFO]    Current epoch requests: 942
+[25-07-08 15:08:26] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:08:26] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:08:26] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:08:26] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:08:26] [INFO]    Disk loads: 0
+[25-07-08 15:08:26] [INFO]    Augmented saves: 0
+[25-07-08 15:08:26] [INFO]    Augmentations applied: 0
+[25-07-08 15:08:26] [INFO]    Original cache size: 314
+[25-07-08 15:08:26] [INFO]    Augmented cache size: 942
+[25-07-08 15:08:26] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:08:26] [INFO] 
+--- Fold 1 | Epoch 26/100 ---
+[25-07-08 15:08:59] [INFO] train_loss: 0.6312 | train_acc: 0.9981 | train_f1: 0.9980 | val_loss: 0.8209 | val_acc: 0.9172 | val_f1: 0.9130 | lr: 0.000842
+[25-07-08 15:08:59] [INFO] 
+📊 Epoch 26 Cache Statistics:
+[25-07-08 15:08:59] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:08:59] [INFO]    Current epoch requests: 3768
+[25-07-08 15:08:59] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:08:59] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:08:59] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:08:59] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:08:59] [INFO]    Disk loads: 0
+[25-07-08 15:08:59] [INFO]    Augmented saves: 0
+[25-07-08 15:08:59] [INFO]    Augmentations applied: 0
+[25-07-08 15:08:59] [INFO]    Original cache size: 1256
+[25-07-08 15:08:59] [INFO]    Augmented cache size: 3768
+[25-07-08 15:08:59] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:08:59] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:08:59] [INFO]    Current epoch requests: 942
+[25-07-08 15:08:59] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:08:59] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:08:59] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:08:59] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:08:59] [INFO]    Disk loads: 0
+[25-07-08 15:08:59] [INFO]    Augmented saves: 0
+[25-07-08 15:08:59] [INFO]    Augmentations applied: 0
+[25-07-08 15:08:59] [INFO]    Original cache size: 314
+[25-07-08 15:08:59] [INFO]    Augmented cache size: 942
+[25-07-08 15:08:59] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:08:59] [INFO] 
+--- Fold 1 | Epoch 27/100 ---
+[25-07-08 15:09:32] [INFO] train_loss: 0.6753 | train_acc: 0.9870 | train_f1: 0.9857 | val_loss: 0.9700 | val_acc: 0.8875 | val_f1: 0.8830 | lr: 0.000831
+[25-07-08 15:09:32] [INFO] 
+📊 Epoch 27 Cache Statistics:
+[25-07-08 15:09:32] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:09:32] [INFO]    Current epoch requests: 3768
+[25-07-08 15:09:32] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:09:32] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:09:32] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:09:32] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:09:32] [INFO]    Disk loads: 0
+[25-07-08 15:09:32] [INFO]    Augmented saves: 0
+[25-07-08 15:09:32] [INFO]    Augmentations applied: 0
+[25-07-08 15:09:32] [INFO]    Original cache size: 1256
+[25-07-08 15:09:32] [INFO]    Augmented cache size: 3768
+[25-07-08 15:09:32] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:09:32] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:09:32] [INFO]    Current epoch requests: 942
+[25-07-08 15:09:32] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:09:32] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:09:32] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:09:32] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:09:32] [INFO]    Disk loads: 0
+[25-07-08 15:09:32] [INFO]    Augmented saves: 0
+[25-07-08 15:09:32] [INFO]    Augmentations applied: 0
+[25-07-08 15:09:32] [INFO]    Original cache size: 314
+[25-07-08 15:09:32] [INFO]    Augmented cache size: 942
+[25-07-08 15:09:32] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:09:32] [INFO] 
+--- Fold 1 | Epoch 28/100 ---
+[25-07-08 15:10:04] [INFO] train_loss: 0.6968 | train_acc: 0.9825 | train_f1: 0.9815 | val_loss: 0.8795 | val_acc: 0.9119 | val_f1: 0.9076 | lr: 0.000819
+[25-07-08 15:10:04] [INFO] 
+📊 Epoch 28 Cache Statistics:
+[25-07-08 15:10:04] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:10:04] [INFO]    Current epoch requests: 3768
+[25-07-08 15:10:04] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:10:04] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:10:04] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:10:04] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:10:04] [INFO]    Disk loads: 0
+[25-07-08 15:10:04] [INFO]    Augmented saves: 0
+[25-07-08 15:10:04] [INFO]    Augmentations applied: 0
+[25-07-08 15:10:04] [INFO]    Original cache size: 1256
+[25-07-08 15:10:04] [INFO]    Augmented cache size: 3768
+[25-07-08 15:10:04] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:10:04] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:10:04] [INFO]    Current epoch requests: 942
+[25-07-08 15:10:04] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:10:04] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:10:04] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:10:04] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:10:04] [INFO]    Disk loads: 0
+[25-07-08 15:10:04] [INFO]    Augmented saves: 0
+[25-07-08 15:10:04] [INFO]    Augmentations applied: 0
+[25-07-08 15:10:04] [INFO]    Original cache size: 314
+[25-07-08 15:10:04] [INFO]    Augmented cache size: 942
+[25-07-08 15:10:04] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:10:04] [INFO] 
+--- Fold 1 | Epoch 29/100 ---
+[25-07-08 15:10:37] [INFO] train_loss: 0.6327 | train_acc: 0.9992 | train_f1: 0.9991 | val_loss: 0.8229 | val_acc: 0.9214 | val_f1: 0.9203 | lr: 0.000807
+[25-07-08 15:10:37] [INFO] 
+📊 Epoch 29 Cache Statistics:
+[25-07-08 15:10:37] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:10:37] [INFO]    Current epoch requests: 3768
+[25-07-08 15:10:37] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:10:37] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:10:37] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:10:37] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:10:37] [INFO]    Disk loads: 0
+[25-07-08 15:10:37] [INFO]    Augmented saves: 0
+[25-07-08 15:10:37] [INFO]    Augmentations applied: 0
+[25-07-08 15:10:37] [INFO]    Original cache size: 1256
+[25-07-08 15:10:37] [INFO]    Augmented cache size: 3768
+[25-07-08 15:10:37] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:10:37] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:10:37] [INFO]    Current epoch requests: 942
+[25-07-08 15:10:37] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:10:37] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:10:37] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:10:37] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:10:37] [INFO]    Disk loads: 0
+[25-07-08 15:10:37] [INFO]    Augmented saves: 0
+[25-07-08 15:10:37] [INFO]    Augmentations applied: 0
+[25-07-08 15:10:37] [INFO]    Original cache size: 314
+[25-07-08 15:10:37] [INFO]    Augmented cache size: 942
+[25-07-08 15:10:37] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:10:37] [INFO] 
+--- Fold 1 | Epoch 30/100 ---
+[25-07-08 15:11:10] [INFO] train_loss: 0.6306 | train_acc: 0.9987 | train_f1: 0.9985 | val_loss: 0.8877 | val_acc: 0.9098 | val_f1: 0.9067 | lr: 0.000794
+[25-07-08 15:11:10] [INFO] 
+📊 Epoch 30 Cache Statistics:
+[25-07-08 15:11:10] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:11:10] [INFO]    Current epoch requests: 3768
+[25-07-08 15:11:10] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:11:10] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:11:10] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:11:10] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:11:10] [INFO]    Disk loads: 0
+[25-07-08 15:11:10] [INFO]    Augmented saves: 0
+[25-07-08 15:11:10] [INFO]    Augmentations applied: 0
+[25-07-08 15:11:10] [INFO]    Original cache size: 1256
+[25-07-08 15:11:10] [INFO]    Augmented cache size: 3768
+[25-07-08 15:11:10] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:11:10] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:11:10] [INFO]    Current epoch requests: 942
+[25-07-08 15:11:10] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:11:10] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:11:10] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:11:10] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:11:10] [INFO]    Disk loads: 0
+[25-07-08 15:11:10] [INFO]    Augmented saves: 0
+[25-07-08 15:11:10] [INFO]    Augmentations applied: 0
+[25-07-08 15:11:10] [INFO]    Original cache size: 314
+[25-07-08 15:11:10] [INFO]    Augmented cache size: 942
+[25-07-08 15:11:10] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:11:10] [INFO] 
+--- Fold 1 | Epoch 31/100 ---
+[25-07-08 15:12:03] [INFO] train_loss: 0.6905 | train_acc: 0.9825 | train_f1: 0.9817 | val_loss: 0.8831 | val_acc: 0.8992 | val_f1: 0.8912 | lr: 0.000781
+[25-07-08 15:12:03] [INFO] 
+📊 Epoch 31 Cache Statistics:
+[25-07-08 15:12:03] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:12:03] [INFO]    Current epoch requests: 3768
+[25-07-08 15:12:03] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:12:03] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:12:03] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:12:03] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:12:03] [INFO]    Disk loads: 0
+[25-07-08 15:12:03] [INFO]    Augmented saves: 0
+[25-07-08 15:12:03] [INFO]    Augmentations applied: 0
+[25-07-08 15:12:03] [INFO]    Original cache size: 1256
+[25-07-08 15:12:03] [INFO]    Augmented cache size: 3768
+[25-07-08 15:12:03] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:12:03] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:12:03] [INFO]    Current epoch requests: 942
+[25-07-08 15:12:03] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:12:03] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:12:03] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:12:03] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:12:03] [INFO]    Disk loads: 0
+[25-07-08 15:12:03] [INFO]    Augmented saves: 0
+[25-07-08 15:12:03] [INFO]    Augmentations applied: 0
+[25-07-08 15:12:03] [INFO]    Original cache size: 314
+[25-07-08 15:12:03] [INFO]    Augmented cache size: 942
+[25-07-08 15:12:03] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:12:03] [INFO] 
+--- Fold 1 | Epoch 32/100 ---
+[25-07-08 15:13:04] [INFO] train_loss: 0.6677 | train_acc: 0.9902 | train_f1: 0.9895 | val_loss: 0.9049 | val_acc: 0.8970 | val_f1: 0.8941 | lr: 0.000768
+[25-07-08 15:13:04] [INFO] 
+📊 Epoch 32 Cache Statistics:
+[25-07-08 15:13:04] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:13:04] [INFO]    Current epoch requests: 3768
+[25-07-08 15:13:04] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:13:04] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:13:04] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:13:04] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:13:04] [INFO]    Disk loads: 0
+[25-07-08 15:13:04] [INFO]    Augmented saves: 0
+[25-07-08 15:13:04] [INFO]    Augmentations applied: 0
+[25-07-08 15:13:04] [INFO]    Original cache size: 1256
+[25-07-08 15:13:04] [INFO]    Augmented cache size: 3768
+[25-07-08 15:13:04] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:13:04] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:13:04] [INFO]    Current epoch requests: 942
+[25-07-08 15:13:04] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:13:04] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:13:04] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:13:04] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:13:04] [INFO]    Disk loads: 0
+[25-07-08 15:13:04] [INFO]    Augmented saves: 0
+[25-07-08 15:13:04] [INFO]    Augmentations applied: 0
+[25-07-08 15:13:04] [INFO]    Original cache size: 314
+[25-07-08 15:13:04] [INFO]    Augmented cache size: 942
+[25-07-08 15:13:04] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:13:04] [INFO] 
+--- Fold 1 | Epoch 33/100 ---
+[25-07-08 15:14:05] [INFO] train_loss: 0.6477 | train_acc: 0.9944 | train_f1: 0.9937 | val_loss: 0.8619 | val_acc: 0.9066 | val_f1: 0.9054 | lr: 0.000755
+[25-07-08 15:14:05] [INFO] 
+📊 Epoch 33 Cache Statistics:
+[25-07-08 15:14:05] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:14:05] [INFO]    Current epoch requests: 3768
+[25-07-08 15:14:05] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:14:05] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:14:05] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:14:05] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:14:05] [INFO]    Disk loads: 0
+[25-07-08 15:14:05] [INFO]    Augmented saves: 0
+[25-07-08 15:14:05] [INFO]    Augmentations applied: 0
+[25-07-08 15:14:05] [INFO]    Original cache size: 1256
+[25-07-08 15:14:05] [INFO]    Augmented cache size: 3768
+[25-07-08 15:14:05] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:14:05] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:14:05] [INFO]    Current epoch requests: 942
+[25-07-08 15:14:05] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:14:05] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:14:05] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:14:05] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:14:05] [INFO]    Disk loads: 0
+[25-07-08 15:14:05] [INFO]    Augmented saves: 0
+[25-07-08 15:14:05] [INFO]    Augmentations applied: 0
+[25-07-08 15:14:05] [INFO]    Original cache size: 314
+[25-07-08 15:14:05] [INFO]    Augmented cache size: 942
+[25-07-08 15:14:05] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:14:05] [INFO] 
+--- Fold 1 | Epoch 34/100 ---
+[25-07-08 15:15:07] [INFO] train_loss: 0.6389 | train_acc: 0.9976 | train_f1: 0.9975 | val_loss: 0.8544 | val_acc: 0.9076 | val_f1: 0.9062 | lr: 0.000741
+[25-07-08 15:15:07] [INFO] 
+📊 Epoch 34 Cache Statistics:
+[25-07-08 15:15:07] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:15:07] [INFO]    Current epoch requests: 3768
+[25-07-08 15:15:07] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:15:07] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:15:07] [INFO]    Augmented cache hits: 3768 (100.0%)
+[25-07-08 15:15:07] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:15:07] [INFO]    Disk loads: 0
+[25-07-08 15:15:07] [INFO]    Augmented saves: 0
+[25-07-08 15:15:07] [INFO]    Augmentations applied: 0
+[25-07-08 15:15:07] [INFO]    Original cache size: 1256
+[25-07-08 15:15:07] [INFO]    Augmented cache size: 3768
+[25-07-08 15:15:07] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:15:07] [INFO] 📊 Dataset Cache Statistics:
+[25-07-08 15:15:07] [INFO]    Current epoch requests: 942
+[25-07-08 15:15:07] [INFO]    Original cache hits: 0 (0.0%)
+[25-07-08 15:15:07] [INFO]    Original cache misses: 0 (0.0%)
+[25-07-08 15:15:07] [INFO]    Augmented cache hits: 942 (100.0%)
+[25-07-08 15:15:07] [INFO]    Augmented cache misses: 0 (0.0%)
+[25-07-08 15:15:07] [INFO]    Disk loads: 0
+[25-07-08 15:15:07] [INFO]    Augmented saves: 0
+[25-07-08 15:15:07] [INFO]    Augmentations applied: 0
+[25-07-08 15:15:07] [INFO]    Original cache size: 314
+[25-07-08 15:15:07] [INFO]    Augmented cache size: 942
+[25-07-08 15:15:07] [INFO]    Cache efficiency: 100.0%
+[25-07-08 15:15:07] [INFO] 
+--- Fold 1 | Epoch 35/100 ---
+[25-07-08 15:16:08] [INFO] 🛑 Early stopping triggered at epoch 35 for Fold 1
+[25-07-08 15:16:08] [INFO] 🎯 Best F1 score: 0.9279
+[25-07-08 15:16:08] [INFO] 
+🎯 Fold 1 completed with early stopping! Best F1: 0.9279
+[25-07-08 15:16:08] [INFO] 
+============================================================
+[25-07-08 15:16:08] [INFO] 🔥 FOLD 2/5
+[25-07-08 15:16:08] [INFO] ============================================================
+[25-07-08 15:16:08] [INFO] 📚 Train samples: 1256
+[25-07-08 15:16:08] [INFO] 📝 Validation samples: 314
+[25-07-08 15:16:08] [INFO] 📸 Augraphy pipeline initialized
+[25-07-08 15:16:08] [INFO] 📁 Augmented cache directory: /root/dev/upstageailab-cv-classification-cv_1_fork/input/data/train/img_cache
+[25-07-08 15:16:08] [INFO] 📈 Data augmented (원본 제외): 1256 → 3768 samples (증강 x3)
+[25-07-08 15:16:08] [INFO] 📸 Augraphy pipeline initialized
+[25-07-08 15:16:08] [INFO] 📁 Augmented cache directory: /root/dev/upstageailab-cv-classification-cv_1_fork/input/data/train/img_cache
+[25-07-08 15:16:08] [INFO] 📈 Data augmented (원본 제외): 314 → 942 samples (증강 x3)
+[25-07-08 15:16:10] [INFO] 🏗️ Model: efficientnetv2_rw_m
+[25-07-08 15:16:10] [INFO] 🔢 Number of parameters: 51,120,043
+[25-07-08 15:16:10] [INFO] 🚀 Starting Fold 2 training...
+[25-07-08 15:16:10] [INFO] 
+--- Fold 2 | Epoch 1/100 ---

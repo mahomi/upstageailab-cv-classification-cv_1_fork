@@ -4,3 +4,9 @@
 # uv run code/exp2/baseline_code_v4_advanced_tta2_efnv2xl.py
 # uv run code/exp2/baseline_code_v5_advanced_kfold_tta2_efnv2l.py
 # uv run code/exp2/baseline_code_v4_advanced_tta2_efnv2xl_resize4.py
+
+#uv run code/exp2/baseline_code_v5_advanced_kfold_tta2_efnv2xl_v3seed.py
+uv run code/exp2/baseline_code_v5_advanced_kfold_tta2_efnv2xl_v3.py
+uv run code/exp2/baseline_code_v5_advanced_kfold_tta2_efnv2rwm_v3.py
+
+
