@@ -697,7 +697,7 @@ model_name = 'efficientnetv2_rw_m'  # 더 좋은 모델 사용
 # training config
 img_size = 320  # 이미지 크기 대폭 확대
 LR = 1e-3  # 더 낮은 학습률
-EPOCHS = 1 #100  # early stopping을 위해 더 많은 epoch 설정
+EPOCHS = 100  # early stopping을 위해 더 많은 epoch 설정
 BATCH_SIZE = 16  # 큰 모델에 맞춰 배치 크기 조정
 num_workers = 0
 weight_decay = 1e-4
@@ -705,7 +705,7 @@ label_smoothing = 0.1
 patience = 10  # early stopping patience
 
 # Data augmentation config
-AUGMENTATION_MULTIPLIER = 3 # 데이터 증강 배수 (기본값: 2배)
+AUGMENTATION_MULTIPLIER = 10 # 데이터 증강 배수 (기본값: 2배)
 # 예: AUGMENTATION_MULTIPLIER = 3이면 원본 데이터 1개당 증강된 데이터 2개가 추가되어 총 3배가 됩니다.
 # 원본 데이터는 그대로 유지되고, 추가로 증강된 데이터만 생성됩니다.
 
